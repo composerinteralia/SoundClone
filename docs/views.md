@@ -12,7 +12,7 @@
 ## Explore
 ![explore]
 
-[new-user]: ./wireframes/tracks_index.jpg
-[new-session]: ./wireframes/upload.jpg
-[notes]: ./wireframes/playlist.jpg
-[notebooks]: ./wireframes/explore.jpg
+[tracks_index]: ./wireframes/tracks_index.jpg
+[upload]: ./wireframes/upload.jpg
+[playlist]: ./wireframes/playlist.jpg
+[explore]: ./wireframes/explore.jpg
