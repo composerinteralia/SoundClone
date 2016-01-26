@@ -21,7 +21,7 @@ var App = React.createClass({
 var router = (
   <Router>
     <Route path="/" component={App}>
-      <Route path="users/:username" component={Profile}/>
+      <Route path="users/:id" component={Profile}/>
     </Route>
   </Router>
 );

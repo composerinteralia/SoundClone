@@ -1,6 +1,7 @@
 <%= link_to "Sign Up", new_user_url %>
 
 <h2>Sign In</h2>
+<%= flash[:errors].join("<br>").html_safe if flash[:errors] %>
 
 <form action="<%= session_url %>" method="post">
   <%= auth_token_input %>
