@@ -18,3 +18,19 @@
 
   <input type="submit" value="Sign In">
 </form>
+
+<form action="<%= session_url %>" method="post">
+  <%= auth_token_input %>
+
+  <label>
+    Username
+    <input type="hidden" name="user[username]" value="composerinteralia">
+  </label>
+
+  <label>
+    Password
+    <input type="hidden" name="user[password]" value="password">
+  </label>
+
+  <input type="submit" value="Guest">
+</form>
