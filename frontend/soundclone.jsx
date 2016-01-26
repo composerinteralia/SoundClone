@@ -3,12 +3,17 @@ var React = require('react'),
     ReactRouter = require('react-router'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
-    IndexRoute = ReactRouter.IndexRoute;
+    IndexRoute = ReactRouter.IndexRoute,
+    Navbar = require('./components/navbar'),
+    Profile = require('./components/profile');
 
 var App = React.createClass({
   render: function () {
     return (
-      <div>It works</div>
+      <div>
+        <Navbar />
+        {this.props.children}
+      </div>
     );
   }
 });
@@ -16,10 +21,14 @@ var App = React.createClass({
 var router = (
   <Router>
     <Route path="/" component={App}>
+      <Route path="users/:username" component={Profile}/>
     </Route>
   </Router>
 );
 
 document.addEventListener("DOMContentLoaded", function () {
-  ReactDOM.render(router, document.getElementById('root'));
+  var root = document.getElementById('root');
+  if (root) {
+    ReactDOM.render(router, root);
+  }
 });

@@ -8,11 +8,6 @@
 </head>
 <body>
 
-<% if signed_in? %>
-    <%= "Signed in as " << current_user.username %>
-    <%= button_to "Sign Out", session_url, :method => :delete %>
-<% end %>
-
 <%= flash[:errors].join("<br>").html_safe if flash[:errors] %>
 
 <%= yield %>

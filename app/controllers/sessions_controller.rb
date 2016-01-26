@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  def new
-  end
+  before_action :require_signed_out!, only: [:create, :new]
 
   def create
     user = User.find_by_credentials(
@@ -17,8 +16,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  def destroy
-    sign_out
-    redirect_to new_session_url
+  def new
   end
 end
