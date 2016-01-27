@@ -1,4 +1,4 @@
-html, body, div, main, nav, a, h1 {
+html, body, div, main, nav, a, h1, h2, form {
   border: 0;
   margin: 0;
   padding: 0;
@@ -16,6 +16,10 @@ ul {
   list-style: none;
 }
 
+input {
+
+}
+
 body {
   font-family: Arial;
   background: #f2f2f2;
@@ -31,16 +35,21 @@ body {
   background: #333;
   color: #ccc;
   font-size: 14px;
+  z-index: 1000;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
 }
 
 .navbar {
-  width: 1240px;
+  width: 960px;
   margin: auto;
 }
 
 .navbar a {
   display: block;
-  padding: 16px;
+  padding: 15px;
 }
 
 .navbar a:hover {
@@ -52,13 +61,13 @@ body {
 }
 
 .profile {
-  width: 1240px;
-  margin: auto;
+  width: 960px;
+  margin: 46px auto 0;
 }
 
 .profile-header {
   height: 260px;
-  background: linear-gradient(315deg, rgb(247, 247, 247) 0%, rgb(108, 108, 108) 100%);
+  background: linear-gradient(315deg, rgba(247, 247, 247, 0), rgba(108, 108, 108, 1));
 }
 
 .profile-username {
@@ -67,5 +76,51 @@ body {
   padding: 10px 5px;
   color: #fff;
   background: rgba(0,0,0,.8);
-  margin: 20px;
+  margin: 30px 20px;
+}
+
+.user-buttons {
+  display: block;
+  text-align: right;
+  margin: 5px;
+}
+
+.user-update-background {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(245, 245, 245, .9);
+  z-index: 1001;
+}
+
+.user-update {
+  background: #fff;
+  margin: 76px auto;
+  width: 800px;
+  padding: 25px
+}
+
+.user-update > h2 {
+  border-bottom: 1px solid #eee;
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+.user-update-form {
+  margin-top: 20px;
+}
+
+.user-update-form > label {
+  display: block;
+  font-size: 14px;
+}
+
+.user-update-form > input {
+  width: 250px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin: 5px 0 20px;
+  border-radius: 5px;
 }
