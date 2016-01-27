@@ -85,7 +85,7 @@ module.exports = {
   destroyTrack: function (track_id) {
     $.ajax({
       url: "api/tracks/" + track_id,
-      method: "destroy",
+      method: "delete",
       success: function (data) {
         ApiActions.receiveUsers([data]);
       }

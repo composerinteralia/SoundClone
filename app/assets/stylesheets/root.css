@@ -1,4 +1,4 @@
-html, body, div, main, nav, a, h1, h2, form, ul, li {
+html, body, div, main, nav, a, h1, h2, form, ul, li, input, textarea, button {
   border: 0;
   margin: 0;
   padding: 0;
@@ -21,10 +21,16 @@ body {
   background: #f2f2f2;
 }
 
-input, textarea {
-  border: 1px solid #ccc;
+input, textarea, button {
+  border: 1px solid #bbb;
   padding: 5px;
   border-radius: 5px;
+  background: transparent;
+}
+
+button {
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .group:after {
@@ -70,7 +76,7 @@ input, textarea {
 
 .profile-header {
   height: 260px;
-  background: linear-gradient(315deg, rgba(247, 247, 247, 0), rgba(108, 108, 108, 1));
+  background: linear-gradient(135deg, rgba(70, 50, 108, 1), rgba(0, 0, 0, 0));
 }
 
 .profile-username {
@@ -91,7 +97,7 @@ input, textarea {
 .profile-nav {
   display: block;
   text-align: right;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
 }
 
@@ -145,6 +151,44 @@ input, textarea {
   font-size: 24px;
 }
 
-.user-tracks-list > li {
+.user-track {
   margin: 10px 0;
+  display: block;
+  position: relative;
+}
+
+.user-track > button {
+  visibility: hidden;
+}
+
+.user-track:hover button {
+  visibility: visible;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  background: #fff;
+  top: 40px;
+  left: 50px;
+  border: 1px solid #ddd;
+  padding: 5px;
+  box-shadow: 0 1px 10px #aaa;
+  z-index: 100;
+}
+
+.popup.active {
+  display: block;
+}
+
+.popup-arrow {
+  position: absolute;
+  padding: 5px;
+  top: -5px;
+  transform: rotate(45deg);
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  display: block;
+  background: #fff;
+  z-index: 101;
 }
