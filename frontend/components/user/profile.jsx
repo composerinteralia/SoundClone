@@ -60,7 +60,6 @@ module.exports = React.createClass({
   },
 
   _updateUser: function (e) {
-    e.preventDefault();
     var modal = <UpdateUser user={this.state.user}/>;
     ModalActions.receiveModal(modal);
   }
