@@ -1,4 +1,4 @@
-var UserActions = require('../actions/user_actions');
+var ApiActions = require('../actions/api_actions');
 
 module.exports = {
   logout: function () {
@@ -15,7 +15,7 @@ module.exports = {
     $.ajax({
       url: "api/users/" + user_id,
       success: function (data) {
-        UserActions.receiveUsers([data]);
+        ApiActions.receiveUsers([data]);
       }
     });
   }

@@ -5,7 +5,7 @@
 * User
 
 ### Controllers
-* UsersController (create, new)
+* UsersController (create, new, show)
 * SessionsController (create, new, destroy)
 
 ### Views
@@ -16,12 +16,18 @@
 ## Flux
 ### Views (React Components)
 * Profile
+* Navbar
 
 ### Stores
+* User
 
 ### Actions
+* ApiActions.receiveUsers
 
 ### ApiUtil
+* ApiUtil.fetchUser
+* ApiUtil.updateUser
 
 ## Gems/Libraries
 * BCrypt (Gem)
+* Flux Dispatcher (npm)

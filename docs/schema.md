@@ -20,8 +20,8 @@ followee_id | integer   | not null, foreign key (references users), indexed
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-user_id     | integer   | not null, foreign key (references users), indexed, unique [title]
-title       | string    | not null
+user_id     | integer   | not null, foreign key (references users), indexed
+title       | string    | not null, indexed, unique [user_id]
 description | text      |
 image_url   | string    |
 audio_url   | string    | not null
@@ -33,6 +33,7 @@ column name | data type | details
 id          | integer   | not null, primary key
 user_id     | integer   | not null, foreign key (references users), indexed
 track_id    | integer   | not null, foreign key (references tracks), indexed
+(timestamps)|           |
 
 ## likes
 column name | data type | details

@@ -21,7 +21,7 @@
 * TrackDetail
 
 ### Stores
-* track
+* Track
 
 ### Actions
 * ApiActions.receiveAllTracks -> triggered by ApiUtil
@@ -41,4 +41,3 @@
 * ApiUtil.destroyTrack
 
 ## Gems/Libraries
-* Flux Dispatcher (npm)
