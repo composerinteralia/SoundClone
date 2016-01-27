@@ -5,8 +5,8 @@ var React = require('react'),
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     Navbar = require('./components/navbar'),
-    Profile = require('./components/profile'),
-    TracksIndex = require('./components/tracks_index');
+    Profile = require('./components/user/profile'),
+    TracksIndex = require('./components/track/index');
 
 var App = React.createClass({
   render: function () {

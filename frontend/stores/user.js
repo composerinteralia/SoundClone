@@ -5,14 +5,14 @@ var AppDispatcher = require('../dispatcher/dispatcher'),
 var _users = [],
     UserStore = new Store(AppDispatcher);
 
-var resetUsers = function (users) {
+var reset = function (users) {
   _users = users;
 };
 
 UserStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case UserConstants.USERS_RECEIVED:
-      resetUsers(payload.users);
+      reset(payload.users);
       UserStore.__emitChange();
   }
 };

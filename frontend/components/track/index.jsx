@@ -1,5 +1,5 @@
 var React = require('react'),
-    TrackIndexItem = require('./tracks_index_item');
+    TrackIndexItem = require('./index_item');
 
 module.exports = React.createClass({
   render: function () {
