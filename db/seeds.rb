@@ -53,5 +53,5 @@ guest_track1 = Track.create!(
 guest_track2 = Track.create!(
   user: guest,
   title: "Exordium",
-  dexcription: "My first composition for orchestra!"
+  description: "My first composition for orchestra!"
 )
