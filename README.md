@@ -1,6 +1,6 @@
 ## SoundClone
 
-<!-- [Link Goes Here](http://www.herokuapp.com) -->
+[Explore!](https://sound-clone.herokuapp.com/)
 
 ## Minimum Viable Product
 
