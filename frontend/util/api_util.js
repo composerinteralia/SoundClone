@@ -64,7 +64,7 @@ module.exports = {
     });
   },
 
-  // a little popup - are you sure?
+  // a little popup - "are you sure?""
   destroyTrack: function (track_id) {
     $.ajax({
       url: "api/tracks/" + track_id,

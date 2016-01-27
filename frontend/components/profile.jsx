@@ -52,7 +52,6 @@ module.exports = React.createClass({
     this.setState({ user: user });
   },
 
-    // move this stuff into a store - an entire flux cycle
   _toggleUpdateUser: function (e) {
     e.preventDefault();
     this.setState({ updateUser: !this.state.updateUser });

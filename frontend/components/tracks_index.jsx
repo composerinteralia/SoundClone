@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    TrackIndexItem = require('./tracks_index_item');
 
 module.exports = React.createClass({
   render: function () {
@@ -10,7 +11,7 @@ module.exports = React.createClass({
           {
             tracks.map(function (track) {
               return (
-                <li key={track.id} className="user-track">{track.title}</li>
+                <TrackIndexItem key={track.id} track={track} />
               );
             })
           }
