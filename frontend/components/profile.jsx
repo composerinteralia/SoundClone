@@ -49,7 +49,7 @@ module.exports = React.createClass({
 
   _onChange: function () {
     var user = UserStore.find(this.props.params.id);
-    this.setState({ user: user });
+    this.setState({ user: user, updateUser: false });
   },
 
   _toggleUpdateUser: function (e) {
