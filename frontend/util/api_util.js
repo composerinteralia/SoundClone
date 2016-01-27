@@ -1,4 +1,5 @@
-var ApiActions = require('../actions/api_actions');
+var ApiActions = require('../actions/api_actions'),
+    ModalActions = require('../actions/modal_actions');
 
 module.exports = {
   logout: function () {
@@ -7,6 +8,7 @@ module.exports = {
       method: "delete",
       success: function (data) {
         console.log('logged_out');
+        // this will eventually trigger a redirect
       }
     });
   },
@@ -27,6 +29,10 @@ module.exports = {
       data: { user: user },
       success: function (data) {
         ApiActions.receiveUsers([data]);
+        ModalActions.destroyModal();
+      },
+      error: function (data) {
+        // put the error message on the form
       }
     });
   },
@@ -41,7 +47,7 @@ module.exports = {
     });
   },
 
-  // for track show page
+  // also for track show page
   fetchSingleTrack: function (track_id) {
     $.ajax({
       url: "api/tracks/" + track_id,
@@ -63,7 +69,6 @@ module.exports = {
     });
   },
 
-  // update button partial
   updateTrack: function (track_id, track) {
     $.ajax({
       url: "api/tracks/" + track_id,
@@ -71,6 +76,7 @@ module.exports = {
       data: { track: track },
       success: function (data) {
         ApiActions.receiveUsers([data]);
+        ModalActions.destroyModal();
       }
     });
   },

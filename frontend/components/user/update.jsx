@@ -1,6 +1,7 @@
 var React = require('react'),
     LinkedState = require('react-addons-linked-state-mixin'),
-    ApiUtil = require('../util/api_util');
+    ApiUtil = require('../../util/api_util'),
+    ModalActions = require('../../actions/modal_actions');
 
 module.exports = React.createClass({
   mixins: [LinkedState],
@@ -12,9 +13,10 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <div className="user-update-background" onClick={this._onCancel}>
-        <div className="user-update-container" onClick={this._stopPropogation}>
+      <div className="modal" onClick={this._onCancel}>
+        <div className="modal-container" onClick={this._stopPropogation}>
           <h2>Edit your Profile</h2>
+
           <form className="user-update-form">
             <label htmlFor="username">Username</label>
             <input
@@ -29,8 +31,8 @@ module.exports = React.createClass({
               type="password"
               valueLink={this.linkState('password')}>
             </input>
-
           </form>
+
           <button onClick={this._onCancel}>Cancel</button>
           <button onClick={this._onSubmit}>Save Changes</button>
         </div>
@@ -42,7 +44,7 @@ module.exports = React.createClass({
     e.preventDefault();
 
     var params = this.state;
-    if (params.password === null) {
+    if (!params.password) {
       delete params.password;
     }
 
@@ -54,6 +56,6 @@ module.exports = React.createClass({
   },
 
   _onCancel: function (e) {
-    this.props.toggle(e);
+    ModalActions.destroyModal();
   }
 });

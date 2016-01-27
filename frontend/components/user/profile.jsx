@@ -1,44 +1,46 @@
 var React = require('react'),
-    UserStore = require('../stores/user'),
-    ApiUtil = require('../util/api_util'),
-    UpdateUser = require('./update_user');
+    UserStore = require('../../stores/user'),
+    ModalStore = require('../../stores/modal'),
+    ModalActions = require('../../actions/modal_actions'),
+    ApiUtil = require('../../util/api_util'),
+    UpdateUser = require('./update');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var user = UserStore.find(this.props.params.id);
-    return { user: user, updateUser: false };
+    var user = UserStore.find(this.props.params.id),
+        modal = ModalStore.fetch();
+
+    return { user: user, modal: modal };
   },
 
   componentDidMount: function () {
     this.onChangeToken = UserStore.addListener(this._onChange);
+    this.onModalToken = ModalStore.addListener(this._onModal);
+
     ApiUtil.fetchUser(this.props.params.id);
   },
 
   componentWillUnmount: function () {
     this.onChangeToken.remove();
+    this.onModalToken.remove();
   },
 
   render: function () {
-    var updateUserModal, user = this.state.user;
+    var user = this.state.user;
 
     if (typeof user === "undefined") {
       return <div>User not found!</div>;
     }
 
-    if (this.state.updateUser) {
-      updateUserModal =
-        <UpdateUser toggle={this._toggleUpdateUser} user={user}/>;
-    }
-
     return (
       <main className="profile">
-        {updateUserModal}
+        {this.state.modal}
         <header className="profile-header group">
           <h1 className="profile-username">{user.username}</h1>
         </header>
         <section className="profile-content">
           <nav className="profile-nav group">
-            <button className="update-user" onClick={this._toggleUpdateUser}>Edit</button>
+            <button className="update-user" onClick={this._updateUser}>Edit</button>
           </nav>
 
           { React.cloneElement(this.props.children,  { user: user }) }
@@ -49,11 +51,17 @@ module.exports = React.createClass({
 
   _onChange: function () {
     var user = UserStore.find(this.props.params.id);
-    this.setState({ user: user, updateUser: false });
+    this.setState({ user: user });
   },
 
-  _toggleUpdateUser: function (e) {
+  _onModal: function () {
+    var modal = ModalStore.fetch();
+    this.setState({ modal: modal });
+  },
+
+  _updateUser: function (e) {
     e.preventDefault();
-    this.setState({ updateUser: !this.state.updateUser });
+    var modal = <UpdateUser user={this.state.user}/>;
+    ModalActions.receiveModal(modal);
   }
 });

@@ -21,6 +21,12 @@ body {
   background: #f2f2f2;
 }
 
+input, textarea {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .group:after {
   content: "";
   display: block;
@@ -93,7 +99,7 @@ body {
   float: right;
 }
 
-.user-update-background {
+.modal {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -103,34 +109,31 @@ body {
   z-index: 1001;
 }
 
-.user-update-container {
+.modal-container {
   background: #fff;
   margin: 76px auto;
   width: 800px;
   padding: 25px
 }
 
-.user-update-container > h2 {
+.modal-container > h2 {
   border-bottom: 1px solid #eee;
   font-size: 20px;
   padding-bottom: 5px;
 }
 
-.user-update-form {
+.modal form {
   margin-top: 20px;
 }
 
-.user-update-form > label {
+.modal label {
   display: block;
   font-size: 14px;
 }
 
-.user-update-form > input {
+.modal input, .modal textarea {
   width: 250px;
-  border: 1px solid #ccc;
-  padding: 5px;
   margin: 5px 0 20px;
-  border-radius: 5px;
 }
 
 .user-tracks {
