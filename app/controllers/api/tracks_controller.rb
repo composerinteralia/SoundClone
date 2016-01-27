@@ -1,12 +1,12 @@
 class Api::TracksController < ApplicationController
-  # only loggin in users can create, destroy, update
-  # can only c, d, u your own tracks!
+  # only current_user can create, destroy, update tracks!
 
   def create
+    # will actually get user_id from current_user
     @track = Track.new(track_params)
+
     if @track.save
       @user = @track.user
-
       render 'api/users/show'
     else
       render json: @track.errors.full_messages
@@ -17,13 +17,14 @@ class Api::TracksController < ApplicationController
     @track = Track.find(params[:id])
 
     if @track.destroy
-      render json: { message: "Track successfully destroyed" }
+      @user = @track.user
+      render 'api/users/show'
     else
       render json: @track.errors.full_messages
     end
   end
 
-  # Index should be, for now, a specific user's tracks
+  # all the tracks (for 'explore')
   def index
     @tracks = Track.all
   end
@@ -37,7 +38,6 @@ class Api::TracksController < ApplicationController
 
     if @track.update(track_params)
       @user = @track.user
-
       render 'api/users/show'
     else
       render json: @track.errors.full_messages

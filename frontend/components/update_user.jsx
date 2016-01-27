@@ -6,13 +6,13 @@ module.exports = React.createClass({
 
   getInitialState: function () {
     var user = this.props.user;
-    return { username: user.username, password: null }
+    return { username: user.username, password: null };
   },
 
   render: function () {
     return (
       <div className="user-update-background" onClick={this._onCancel}>
-        <div className="user-update" onClick={this._stopPropogation}>
+        <div className="user-update-container" onClick={this._stopPropogation}>
           <h2>Edit your Profile</h2>
           <form className="user-update-form">
             <label htmlFor="username">Username</label>
@@ -47,6 +47,6 @@ module.exports = React.createClass({
   },
 
   _onCancel: function (e) {
-    this.props.toggle(e)
+    this.props.toggle(e);
   }
 });

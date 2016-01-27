@@ -1,4 +1,4 @@
-html, body, div, main, nav, a, h1, h2, form {
+html, body, div, main, nav, a, h1, h2, form, ul, li {
   border: 0;
   margin: 0;
   padding: 0;
@@ -59,6 +59,7 @@ body {
 .profile {
   width: 960px;
   margin: 46px auto 0;
+  background: #fff;
 }
 
 .profile-header {
@@ -75,10 +76,21 @@ body {
   margin: 30px 20px;
 }
 
-.user-buttons {
+.profile-content {
+  width: 920px;
+  min-height: 500px;
+  padding: 15px 20px;
+}
+
+.profile-nav {
   display: block;
   text-align: right;
-  margin: 5px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.update-user {
+  float: right;
 }
 
 .user-update-background {
@@ -87,18 +99,18 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(245, 245, 245, .9);
+  background: rgba(240, 240, 240, .7);
   z-index: 1001;
 }
 
-.user-update {
+.user-update-container {
   background: #fff;
   margin: 76px auto;
   width: 800px;
   padding: 25px
 }
 
-.user-update > h2 {
+.user-update-container > h2 {
   border-bottom: 1px solid #eee;
   font-size: 20px;
   padding-bottom: 5px;
@@ -119,4 +131,17 @@ body {
   padding: 5px;
   margin: 5px 0 20px;
   border-radius: 5px;
+}
+
+.user-tracks {
+  margin-top: 10px;
+}
+
+.user-tracks > h2 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.user-tracks-list > li {
+  margin: 10px 0;
 }
