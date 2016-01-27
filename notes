@@ -1,0 +1,17 @@
+Fix delete dialog
+
+create track (wait for auth -current user) - possibly create form and navbar button now
+Track show page
+
+fill out track table - including file upload
+fill out user table - including file upload
+
+Display errors on forms
+
+Auth!
+
+Sheep logo in navbar
+
+separate CSS files
+
+Explore - index all for now
