@@ -1,15 +1,16 @@
 class Api::TracksController < ApplicationController
-  # only current_user can create, destroy, update tracks!
+  before_action :require_signed_in!, only: [:create, :destroy, :update]
+  # can only create and destroy your own tracks!
 
   def create
-    # will actually get user_id from current_user
+    # will get user_id from current_user (wait for react auth)
     @track = Track.new(track_params)
 
     if @track.save
       @user = @track.user
       render 'api/users/show'
     else
-      render json: @track.errors.full_messages
+      render json: @track.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -20,7 +21,7 @@ class Api::TracksController < ApplicationController
       @user = @track.user
       render 'api/users/show'
     else
-      render json: @track.errors.full_messages
+      render json: @track.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -40,12 +41,12 @@ class Api::TracksController < ApplicationController
       @user = @track.user
       render 'api/users/show'
     else
-      render json: @track.errors.full_messages
+      render json: @track.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   private
   def track_params
-    params.require(:track).permit(:user_id, :title, :description)
+    params.require(:track).permit(:title, :description)
   end
 end

@@ -20,6 +20,17 @@ module.exports = {
     });
   },
 
+  updateUser: function (user_id, user) {
+    $.ajax({
+      url: "api/users/" + user_id,
+      method: "patch",
+      data: { user: user },
+      success: function (data) {
+        ApiActions.receiveUsers([data]);
+      }
+    });
+  },
+
   // don't actually need this right now, useful for 'explore'
   fetchAllTracks: function () {
     $.ajax({

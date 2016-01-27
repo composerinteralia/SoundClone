@@ -1,5 +1,6 @@
 var React = require('react'),
-    LinkedState = require('react-addons-linked-state-mixin');
+    LinkedState = require('react-addons-linked-state-mixin'),
+    ApiUtil = require('../util/api_util');
 
 module.exports = React.createClass({
   mixins: [LinkedState],
@@ -39,7 +40,13 @@ module.exports = React.createClass({
 
   _onSubmit: function (e) {
     e.preventDefault();
-    // API call with this.state
+
+    var params = this.state;
+    if (params.password === null) {
+      delete params.password;
+    }
+
+    ApiUtil.updateUser(this.props.user.id, params);
   },
 
   _stopPropogation: function (e) {
