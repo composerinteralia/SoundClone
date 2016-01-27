@@ -1,7 +1,7 @@
 var React = require('react'),
     UserStore = require('../stores/user'),
     ApiUtil = require('../util/api_util'),
-    UserUpdateForm = require('./user_update_form');
+    UpdateUser = require('./update_user');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -22,12 +22,12 @@ module.exports = React.createClass({
     var updateUserModal, user = this.state.user;
 
     if (typeof user === "undefined") {
-      return <div>Loading...</div>;
+      return <div>User not found!</div>;
     }
 
     if (this.state.updateUser) {
       updateUserModal =
-        <UserUpdateForm toggle={this._toggleUpdateUser} user={user}/>
+        <UpdateUser toggle={this._toggleUpdateUser} user={user}/>;
     }
 
     return (
@@ -36,9 +36,13 @@ module.exports = React.createClass({
         <header className="profile-header group">
           <h1 className="profile-username">{user.username}</h1>
         </header>
-        <div className="user-buttons">
-          <button className="update-user" onClick={this._toggleUpdateUser}>Edit</button>
-        </div>
+        <section className="profile-content">
+          <nav className="profile-nav group">
+            <button className="update-user" onClick={this._toggleUpdateUser}>Edit</button>
+          </nav>
+
+          { React.cloneElement(this.props.children,  { user: user }) }
+        </section>
       </main>
     );
   },
@@ -48,9 +52,9 @@ module.exports = React.createClass({
     this.setState({ user: user });
   },
 
+    // move this stuff into a store - an entire flux cycle
   _toggleUpdateUser: function (e) {
     e.preventDefault();
-
-    this.setState({ updateUser: !this.state.updateUser })
+    this.setState({ updateUser: !this.state.updateUser });
   }
 });
