@@ -69,7 +69,6 @@ module.exports = React.createClass({
   },
 
   _onSubmit: function (e) {
-    e.preventDefault();
     ApiUtil.updateTrack (this.props.trackId, this.state);
   },
 

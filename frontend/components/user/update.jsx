@@ -41,8 +41,6 @@ module.exports = React.createClass({
   },
 
   _onSubmit: function (e) {
-    e.preventDefault();
-
     var params = this.state;
     if (!params.password) {
       delete params.password;

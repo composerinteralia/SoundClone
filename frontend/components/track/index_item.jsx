@@ -4,8 +4,7 @@ var React = require('react'),
     UpdateTrack = require('./update');
 
 module.exports = React.createClass({
-  // this is definitely not the way to do this...
-
+  // delete buttons should close on any click outside the dialog box
   getInitialState: function () {
     return ({ deleting: false });
   },
@@ -34,23 +33,19 @@ module.exports = React.createClass({
   },
 
   _update: function (e) {
-    e.preventDefault();
     var modal = <UpdateTrack trackId={this.props.track.id} />;
     ModalActions.receiveModal(modal);
   },
 
   _delete: function (e) {
-    e.preventDefault();
     this.setState({ deleting: true });
   },
 
   _cancelDelete: function (e) {
-    e.preventDefault();
     this.setState({ deleting: false });
   },
 
   _reallyDelete: function (e) {
-    e.preventDefault();
     ApiUtil.destroyTrack(this.props.track.id);
   }
 
