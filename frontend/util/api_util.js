@@ -37,7 +37,6 @@ module.exports = {
     });
   },
 
-  // don't actually need this right now, useful for 'explore'
   fetchAllTracks: function () {
     $.ajax({
       url: "api/tracks",
@@ -47,7 +46,7 @@ module.exports = {
     });
   },
 
-  // also for track show page
+  // for edit and for track show page
   fetchSingleTrack: function (track_id) {
     $.ajax({
       url: "api/tracks/" + track_id,

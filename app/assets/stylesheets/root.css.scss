@@ -95,10 +95,11 @@ button {
   float: right;
 }
 
-.profile {
+.content {
   width: 960px;
   margin: 46px auto 0;
   background: #fff;
+  min-height: 800px;
 }
 
 .profile-header {
@@ -117,7 +118,6 @@ button {
 
 .profile-content {
   width: 920px;
-  min-height: 500px;
   padding: 15px 20px;
 }
 
@@ -196,7 +196,7 @@ button {
   display: none;
   position: absolute;
   background: #fff;
-  top: 40px;
+  top: 35px;
   left: 50px;
   border: 1px solid #ddd;
   padding: 5px;
@@ -212,6 +212,7 @@ button {
   position: absolute;
   padding: 5px;
   top: -5px;
+  left: 15px;
   transform: rotate(45deg);
   border-top: 1px solid #ddd;
   border-left: 1px solid #ddd;

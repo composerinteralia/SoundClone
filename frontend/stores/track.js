@@ -24,4 +24,8 @@ TrackStore.find = function (track_id) {
   });
 };
 
+TrackStore.all = function () {
+  return _tracks.slice();
+};
+
 module.exports = TrackStore;

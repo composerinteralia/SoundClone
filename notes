@@ -1,7 +1,11 @@
 Thursday:
-  Explore - index all for now
-  Basic play/pause button;
-  Add extra fields to forms
+  Work on track index items
+    -Add image
+    -username links to show page
+    -style
+    -play button
+
+    Work on forms - add extra elements and style
 
 Friday:
   Auth
@@ -14,3 +18,5 @@ Fix delete dialog! -> add to a dialog store, have index register to rerender (no
 Display errors on forms -> let me guess... error store!
 separate CSS files
 track - public/private
+keep navbar at the top
+user enter to submit form from last field
