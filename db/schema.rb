@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128155116) do
+ActiveRecord::Schema.define(version: 20160128160008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,10 @@ ActiveRecord::Schema.define(version: 20160128155116) do
     t.string   "track_art_content_type"
     t.integer  "track_art_file_size"
     t.datetime "track_art_updated_at"
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.integer  "audio_file_size"
+    t.datetime "audio_updated_at"
   end
 
   add_index "tracks", ["title", "user_id"], name: "index_tracks_on_title_and_user_id", unique: true, using: :btree
