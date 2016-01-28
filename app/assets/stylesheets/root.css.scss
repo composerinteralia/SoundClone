@@ -68,9 +68,27 @@ button {
   float: left;
   width: 50px;
   height: 46px;
-  background: asset-url('sheep-logo.png') no-repeat;
-  background-size: 85%;
   cursor: pointer;
+  padding: 0 15px;
+}
+
+.sheep-logo {
+  -webkit-transition: transform 1s;
+  transition: transform 1s;
+}
+
+.logo:hover .sheep-logo {
+  transform: translateX(-300px);
+  -webkit-transition: transform 10s;
+  transition: transform 10s;
+}
+
+.sheep-logo {
+  display: block;
+  height: 46px;
+  background: asset-url('sheep-logo.png') no-repeat;
+  background-size: 80%;
+  background-position: right;
 }
 
 .logout {
