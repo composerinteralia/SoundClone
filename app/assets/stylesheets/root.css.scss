@@ -64,6 +64,15 @@ button {
   color: #fff;
 }
 
+.logo {
+  float: left;
+  width: 50px;
+  height: 46px;
+  background: asset-url('sheep-logo.png') no-repeat;
+  background-size: 85%;
+  cursor: pointer;
+}
+
 .logout {
   float: right;
 }
