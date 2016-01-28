@@ -26,7 +26,7 @@ ModalStore.__onDispatch = function (payload) {
   }
 };
 
-ModalStore.fetch = function () {
+ModalStore.get = function () {
   return _modal;
 };
 

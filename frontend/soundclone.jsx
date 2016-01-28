@@ -5,6 +5,7 @@ var React = require('react'),
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
     Navbar = require('./components/navbar'),
+    Explore = require('./components/track/explore'),
     Profile = require('./components/user/profile'),
     TracksIndex = require('./components/track/index');
 
@@ -22,6 +23,7 @@ var App = React.createClass({
 var router = (
   <Router>
     <Route path="/" component={App}>
+      <IndexRoute component={Explore}/>
       <Route path="users/:id" component={Profile}>
         <IndexRoute component={TracksIndex}/>
       </Route>

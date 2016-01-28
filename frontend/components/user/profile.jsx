@@ -8,7 +8,7 @@ var React = require('react'),
 module.exports = React.createClass({
   getInitialState: function () {
     var user = UserStore.find(this.props.params.id),
-        modal = ModalStore.fetch();
+        modal = ModalStore.get();
 
     return { user: user, modal: modal };
   },
@@ -33,7 +33,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <main className="profile">
+      <main className="content">
         {this.state.modal}
         <header className="profile-header group">
           <h1 className="profile-username">{user.username}</h1>
@@ -55,7 +55,7 @@ module.exports = React.createClass({
   },
 
   _onModal: function () {
-    var modal = ModalStore.fetch();
+    var modal = ModalStore.get();
     this.setState({ modal: modal });
   },
 
