@@ -1,7 +1,7 @@
 Thursday:
-  Image and audio upload!
-  Update user and track tables
   Explore - index all for now
+  Basic play/pause button;
+  Add extra fields to forms
 
 Friday:
   Auth
@@ -10,8 +10,7 @@ Friday:
 Weekend:
   Track show page
 
-
-
-Fix delete dialog!
-Display errors on forms
+Fix delete dialog! -> add to a dialog store, have index register to rerender (not index item)
+Display errors on forms -> let me guess... error store!
 separate CSS files
+track - public/private
