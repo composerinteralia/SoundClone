@@ -11,17 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128143135) do
+ActiveRecord::Schema.define(version: 20160128155116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "tracks", force: :cascade do |t|
-    t.integer  "user_id",     null: false
-    t.string   "title",       null: false
+    t.integer  "user_id",                null: false
+    t.string   "title",                  null: false
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "track_art_file_name"
+    t.string   "track_art_content_type"
+    t.integer  "track_art_file_size"
+    t.datetime "track_art_updated_at"
   end
 
   add_index "tracks", ["title", "user_id"], name: "index_tracks_on_title_and_user_id", unique: true, using: :btree
