@@ -24,7 +24,6 @@ module.exports = React.createClass({
       return <div>Loading...</div>;
     }
 // use index_item, but conditionals for buttons
-
     return (
       <main className="content">
         {this.state.modal}

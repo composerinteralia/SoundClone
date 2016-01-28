@@ -1,14 +1,14 @@
 Thursday:
-  Work on track index items
-    -Add image
-    -username links to show page
-    -style
-    -play button
+  Button Plays track
 
-    Work on forms - add extra elements and style
+  Add simple index to Explore!
+  username links to show page (how to get username?)
+  Maybe I should be getting all tracks from the track store...
+
 
 Friday:
   Auth
+  Work on forms - add extra elements and style
   create track form and navbar button (similar to update track form?)
 
 Weekend:
@@ -16,7 +16,7 @@ Weekend:
 
 Fix delete dialog! -> add to a dialog store, have index register to rerender (not index item)
 Display errors on forms -> let me guess... error store!
-separate CSS files
+
 track - public/private
-keep navbar at the top
+separate CSS files
 user enter to submit form from last field
