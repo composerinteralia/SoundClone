@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_reader :password
   after_initialize :ensure_session_token
 
-  has_attached_file :profile_image, default_url: "sheep-logo.jpg"
+  has_attached_file :profile_image, default_url: "sheep.jpg"
   validates_attachment_content_type :profile_image,
                                     content_type: /\Aimage\/.*\Z/
 
