@@ -32,10 +32,14 @@ module.exports = React.createClass({
       return <div>User not found!</div>;
     }
 
+
     return (
       <main className="content">
         {this.state.modal}
         <header className="profile-header group">
+          <figure className="profile-image">
+            <img src={user.profile_image_url}/>
+          </figure>
           <h1 className="profile-username">{user.username}</h1>
         </header>
         <section className="profile-content">
