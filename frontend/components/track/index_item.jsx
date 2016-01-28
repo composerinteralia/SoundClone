@@ -1,4 +1,5 @@
 var React = require('react'),
+    Link = require('react-router').Link,
     ApiUtil = require('../../util/api_util'),
     ModalActions = require('../../actions/modal_actions'),
     UpdateTrack = require('./update');
@@ -24,7 +25,6 @@ module.exports = React.createClass({
 // pause button triggers action
 // play store
 // rerenders as play button
-
     return (
       <li className="track group">
         <figure className="track-image">
@@ -32,12 +32,16 @@ module.exports = React.createClass({
         </figure>
 
         <section className="track-detail-container">
+
           <div className="group">
             <div className="play-button">
               <div className="play-arrow"></div>
             </div>
+
             <div className="track-naming">
-              <p>Username goes here</p>
+              <Link className="track-username"
+                    to={"/users/" + track.user_id}>{track.username}
+              </Link>
               <p>{track.title}</p>
             </div>
           </div>
@@ -52,9 +56,16 @@ module.exports = React.createClass({
               <div className="popup-arrow"></div>
             </div>
           </div>
+
         </section>
       </li>
     );
+  },
+
+  _onUsernamClick: function (e) {
+    e.preventDefault();
+
+
   },
 
   _update: function (e) {

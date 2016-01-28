@@ -25,9 +25,8 @@ class Api::TracksController < ApplicationController
     end
   end
 
-  # all the tracks (for 'explore')
   def index
-    @tracks = Track.all
+    @tracks = Track.all.includes(:user)
   end
 
   def show

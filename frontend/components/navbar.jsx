@@ -1,4 +1,5 @@
 var React = require('react'),
+    Link = require('react-router').Link,
     ApiUtil = require('../util/api_util');
 
 module.exports = React.createClass({
@@ -9,6 +10,7 @@ module.exports = React.createClass({
           <div className="logo">
             <div className="sheep-logo"></div>
           </div>
+
           <a href="#" className="logout" onClick={this._logout}>Sign Out</a>
         </nav>
       </header>

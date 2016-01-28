@@ -97,8 +97,8 @@ img {
 
 .logo:hover .sheep-logo {
   transform: translateX(-300px);
-  -webkit-transition: transform 10s;
-  transition: transform 10s;
+  -webkit-transition: transform 8s;
+  transition: transform 8s;
 }
 
 .logout {
@@ -197,11 +197,11 @@ img {
 
 // tracks index
 
-.user-tracks {
+.tracks {
   margin-top: 10px;
 }
 
-.user-tracks > h2 {
+.tracks > h2 {
   font-weight: bold;
   font-size: 24px;
 }
@@ -225,8 +225,14 @@ img {
   font-size: 14px;
 }
 
-.track-naming p:first-child {
+.track-username {
+  font-size: 13px;
+  margin-bottom: 1px;
   color: #999;
+}
+
+.track-username:hover {
+  color: #000;
 }
 
 .play-button {

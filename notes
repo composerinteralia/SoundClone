@@ -1,10 +1,7 @@
 Thursday:
+  Navbar link to explore
   Button Plays track
-
-  Add simple index to Explore!
-  username links to show page (how to get username?)
-  Maybe I should be getting all tracks from the track store...
-
+  Clean up some CSS
 
 Friday:
   Auth
