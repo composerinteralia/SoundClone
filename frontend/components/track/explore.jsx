@@ -1,6 +1,7 @@
 var React = require('react'),
     TrackStore = require('../../stores/track'),
-    ApiUtil = require('../../util/api_util');
+    ApiUtil = require('../../util/api_util'),
+    TrackIndexItem = require('./index_item');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -23,21 +24,23 @@ module.exports = React.createClass({
     if (tracks === null) {
       return <div>Loading...</div>;
     }
-// use index_item, but conditionals for buttons
+// use index_item for now, but conditionals for buttons
+// fix css classes
     return (
-      <main className="content">
+      <main className="content profile-content">
         {this.state.modal}
-        <ul>
-          {
-            tracks.map(function (track) {
-              return (
-                <li key={track.id} className="user-track">
-                  {track.title}
-                </li>
-              );
-            })
-          }
-        </ul>
+        <section className="tracks">
+          <h2>Explore</h2>
+          <ul className="tracks-list">
+            {
+              tracks.map(function (track) {
+                return (
+                  <TrackIndexItem key={track.id} track={track} />
+                );
+              })
+            }
+          </ul>
+        </section>
       </main>
     );
   },
