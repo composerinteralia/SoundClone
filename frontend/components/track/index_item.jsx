@@ -2,7 +2,8 @@ var React = require('react'),
     Link = require('react-router').Link,
     ApiUtil = require('../../util/api_util'),
     ModalActions = require('../../actions/modal_actions'),
-    UpdateTrack = require('./update');
+    UpdateTrack = require('./update'),
+    AudioActions = require('../../actions/audio_actions');
 
 module.exports = React.createClass({
   // delete buttons should close on any click outside the dialog box - dialog store
@@ -18,13 +19,6 @@ module.exports = React.createClass({
       deleteClass = "popup active";
     }
 
-// click play button makes new audio element
-// triggers action
-// play store (only holds on at a time, remove old one from DOM)
-// rerenders as pause button
-// pause button triggers action
-// play store
-// rerenders as play button
     return (
       <li className="track group">
         <figure className="track-image">
@@ -34,7 +28,7 @@ module.exports = React.createClass({
         <section className="track-detail-container">
 
           <div className="group">
-            <div className="play-button">
+            <div className="play-button" onClick={this._playTrack}>
               <div className="play-arrow"></div>
             </div>
 
@@ -47,8 +41,8 @@ module.exports = React.createClass({
           </div>
 
           <div className="track-buttons">
-            <button onClick={this._update}>Edit</button>
-            <button onClick={this._delete}>Delete</button>
+            <button onClick={this._onUpdate}>Edit</button>
+            <button onClick={this._onDelete}>Delete</button>
             <div className={deleteClass}>
               <p>Are you sure you want to permanently delete this track?</p>
               <button onClick={this._cancelDelete}>Cancel</button>
@@ -62,18 +56,17 @@ module.exports = React.createClass({
     );
   },
 
-  _onUsernamClick: function (e) {
-    e.preventDefault();
-
-
+  _playTrack: function (e) {
+    e.preventDefault()
+    AudioActions.play(this.props.track.audio_url)
   },
 
-  _update: function (e) {
+  _onUpdate: function (e) {
     var modal = <UpdateTrack trackId={this.props.track.id} />;
     ModalActions.receiveModal(modal);
   },
 
-  _delete: function (e) {
+  _onDelete: function (e) {
     this.setState({ deleting: true });
   },
 

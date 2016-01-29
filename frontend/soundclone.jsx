@@ -7,9 +7,16 @@ var React = require('react'),
     Navbar = require('./components/navbar'),
     Explore = require('./components/track/explore'),
     Profile = require('./components/user/profile'),
-    TracksIndex = require('./components/track/index');
+    TracksIndex = require('./components/track/index'),
+    AudioActions = require('./actions/audio_actions'),
+    AudioStore = require('./stores/audio');
 
 var App = React.createClass({
+  componentWillMount: function () {
+    var audio = new Audio()
+    AudioActions.mount(audio)
+  },
+
   render: function () {
     return (
       <div>

@@ -1,15 +1,12 @@
-Thursday:
-  Navbar link to explore
-  Button Plays track
-  Clean up some CSS
+Auth
+Work on forms - add extra elements and style
+create track form and navbar button (similar to update track form?)
 
-Friday:
-  Auth
-  Work on forms - add extra elements and style
-  create track form and navbar button (similar to update track form?)
+Toggle play and pause button
 
-Weekend:
-  Track show page
+Navbar link to explore
+Clean up some CSS
+Track show page
 
 Fix delete dialog! -> add to a dialog store, have index register to rerender (not index item)
 Display errors on forms -> let me guess... error store!
@@ -17,3 +14,5 @@ Display errors on forms -> let me guess... error store!
 track - public/private
 separate CSS files
 user enter to submit form from last field
+
+navbar and modals f-ed up when resizing window...
