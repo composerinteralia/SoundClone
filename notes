@@ -1,22 +1,19 @@
+Fix naming of component _functions
+
 Forms -
-
-  add login modal
-
   Upload form (cf audio upload modal, and include images, audio, etc.)
-
   Recycle track and user forms where possible - make create user modal
 
-  Bug - enter to submit user form
+  Bug - enter to submit user form (also check login forms)
   validate audio type
   validate username has only letters, number, -
-
-use AWS audio for seeds?
 
 ----------------------------
 
 Play
   Toggle play and pause button
   Stop play of deleted tracks
+  Stop track play on signout?
 
 Explore
   gets its own index with thumbs

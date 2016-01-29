@@ -7,6 +7,10 @@ module.exports = React.createClass({
   mixins: [LinkState],
 
   getInitialState: function () {
+    // get user from current user!
+    // Buttons change a little if creating vs. updating
+    // ApiUtil action changes
+
     var user = this.props.user;
     return { username: user.username, password: null };
   },

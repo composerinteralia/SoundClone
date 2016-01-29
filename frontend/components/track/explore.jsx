@@ -24,7 +24,7 @@ module.exports = React.createClass({
     if (tracks === null) {
       return <div>Loading...</div>;
     }
-// use index_item for now, but conditionals for buttons
+    // use index_item for now... but Explore index will be distinct
     return (
       <main className="main content">
         {this.state.modal}

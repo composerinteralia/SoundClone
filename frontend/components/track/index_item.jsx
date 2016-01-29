@@ -68,25 +68,24 @@ module.exports = React.createClass({
     );
   },
 
-  _playTrack: function (e) {
-    e.preventDefault();
+  _playTrack: function () {
     AudioActions.play(this.props.track.audio_url);
   },
 
-  _onUpdate: function (e) {
+  _onUpdate: function () {
     var modal = <UpdateTrack trackId={this.props.track.id} />;
     ModalActions.receiveModal(modal);
   },
 
-  _onDelete: function (e) {
+  _onDelete: function () {
     this.setState({ deleting: true });
   },
 
-  _cancelDelete: function (e) {
+  _cancelDelete: function () {
     this.setState({ deleting: false });
   },
 
-  _reallyDelete: function (e) {
+  _reallyDelete: function () {
     ApiUtil.destroyTrack(this.props.track.id);
   }
 

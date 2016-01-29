@@ -13,12 +13,11 @@ module.exports = React.createClass({
 
   render: function() {
     return (
-      <div className="modal" onClick={this._onCancel}>
+      <div className="modal" onClick={this._cancel}>
         <div className="modal-container" onClick={this._stopPropogation}>
+          <h2>Log In</h2>
 
-
-          <form onSubmit={ this._onSubmit } className="login-form">
-            <h1>Logn In!</h1>
+          <form onSubmit={ this._submit } className="login-form">
 
             <label htmlFor="username">Username</label>
             <input
@@ -40,20 +39,11 @@ module.exports = React.createClass({
     );
   },
 
-  _onCancel: function () {
+  _cancel: function () {
     ModalActions.destroyModal();
   },
 
-  _onGuestSubmit: function () {
-    SessionsApiUtil.login(
-      { username: "secret-guest-account", password: "password" },
-      function () {
-        this.history.pushState({}, "/");
-      }.bind(this)
-    );
-  },
-
-  _onSubmit: function (e) {
+  _submit: function (e) {
     e.preventDefault();
 
     SessionsApiUtil.login(this.state, function () {
@@ -64,5 +54,4 @@ module.exports = React.createClass({
   _stopPropogation: function (e) {
     e.stopPropagation();
   }
-
 });

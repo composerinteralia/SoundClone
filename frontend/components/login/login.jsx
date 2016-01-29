@@ -31,23 +31,13 @@ module.exports = React.createClass({
 
             <div className="login-buttons">
               <button className="guest" onClick={this._guestLogin}>Guest</button>
-              <button className="sign-in" onClick={this._session} >Sign In</button>
+              <button className="sign-in" onClick={this._sessionModal} >Sign In</button>
               <button className="create">Create Account</button>
             </div>
           </div>
         </header>
       </main>
     );
-  },
-
-  _onModal: function () {
-    var modal = ModalStore.get();
-    this.setState({ modal: modal });
-  },
-
-  _session: function () {
-    var modal = <SessionForm />;
-    ModalActions.receiveModal(modal);
   },
 
   _guestLogin: function (e) {
@@ -59,5 +49,15 @@ module.exports = React.createClass({
         this.history.pushState({}, "/");
       }.bind(this)
     );
+  },
+
+  _onModal: function () {
+    var modal = ModalStore.get();
+    this.setState({ modal: modal });
+  },
+
+  _sessionModal: function () {
+    var modal = <SessionForm />;
+    ModalActions.receiveModal(modal);
   }
 });
