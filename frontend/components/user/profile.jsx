@@ -61,7 +61,7 @@ module.exports = React.createClass({
     this.setState({ modal: modal });
   },
 
-  _updateUser: function (e) {
+  _updateUser: function () {
     var modal = <UpdateUser user={this.state.user}/>;
     ModalActions.receiveModal(modal);
   }

@@ -1,10 +1,10 @@
 var React = require('react'),
-    LinkedState = require('react-addons-linked-state-mixin'),
+    LinkState = require('react-addons-linked-state-mixin'),
     ApiUtil = require('../../util/api_util'),
     ModalActions = require('../../actions/modal_actions');
 
 module.exports = React.createClass({
-  mixins: [LinkedState],
+  mixins: [LinkState],
 
   getInitialState: function () {
     var user = this.props.user;
@@ -40,7 +40,11 @@ module.exports = React.createClass({
     );
   },
 
-  _onSubmit: function (e) {
+  _onCancel: function () {
+    ModalActions.destroyModal();
+  },
+
+  _onSubmit: function () {
     var params = this.state;
     if (!params.password) {
       delete params.password;
@@ -51,9 +55,5 @@ module.exports = React.createClass({
 
   _stopPropogation: function (e) {
     e.stopPropagation();
-  },
-
-  _onCancel: function (e) {
-    ModalActions.destroyModal();
   }
 });

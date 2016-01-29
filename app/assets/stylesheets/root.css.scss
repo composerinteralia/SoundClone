@@ -25,7 +25,8 @@ body {
   font-size: 16px;
 }
 
-// maybe these aren't such a good idea
+// maybe these aren't such a good idea... I end up fighting them
+// maybe be specific -> modal buttons and track edit buttons
 input, textarea, button {
   border: 1px solid #ccc;
   padding: 4px 8px;
@@ -166,7 +167,7 @@ img {
 .login-buttons {
   float: right;
   color: #fff;
-  margin: 5px;
+  margin: 7px;
 }
 
 .sign-in, .guest {
@@ -314,13 +315,10 @@ img {
 }
 
 .play-arrow {
-  width: 0;
-	height: 0;
 	border-top: 8px solid transparent;
 	border-bottom: 8px solid transparent;
 	border-left: 12px solid #fff;
   margin: 9px 14px;
-  cursor: inherit;
 }
 
 .track-buttons {

@@ -1,7 +1,8 @@
 var React = require('react'),
     History = require('react-router').History,
     LinkState = require('react-addons-linked-state-mixin'),
-    SessionsApiUtil = require('../../util/sessions_api_util');
+    SessionsApiUtil = require('../../util/sessions_api_util'),
+    ModalActions = require('../../actions/modal_actions');
 
 module.exports = React.createClass({
   mixins: [History, LinkState],
@@ -11,37 +12,39 @@ module.exports = React.createClass({
   },
 
   render: function() {
-
     return (
-      <div>
-        <form onSubmit={ this._onSubmit } className="login-form">
-          <h1>Logn In!</h1>
+      <div className="modal" onClick={this._onCancel}>
+        <div className="modal-container" onClick={this._stopPropogation}>
 
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            type="text"
-            valueLink={this.linkState('username')} />
 
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            type="password"
-            valueLink={this.linkState('password')} />
+          <form onSubmit={ this._onSubmit } className="login-form">
+            <h1>Logn In!</h1>
 
-          <button>Log In!</button>
-        </form>
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              type="text"
+              valueLink={this.linkState('username')} />
 
-        <button onClick={this._onGuestSubmit} className="guest-login">
-          Guest
-        </button>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              valueLink={this.linkState('password')} />
+
+            <button>Log In!</button>
+          </form>
+
+        </div>
       </div>
     );
   },
 
-  _onGuestSubmit: function (e) {
-    e.preventDefault();
+  _onCancel: function () {
+    ModalActions.destroyModal();
+  },
 
+  _onGuestSubmit: function () {
     SessionsApiUtil.login(
       { username: "secret-guest-account", password: "password" },
       function () {
@@ -56,6 +59,10 @@ module.exports = React.createClass({
     SessionsApiUtil.login(this.state, function () {
       this.history.pushState({}, "/");
     }.bind(this));
+  },
+
+  _stopPropogation: function (e) {
+    e.stopPropagation();
   }
 
 });
