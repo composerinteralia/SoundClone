@@ -6,7 +6,7 @@ var _users = [],
     UserStore = new Store(AppDispatcher);
 
 var reset = function (users) {
-  _users = users;
+  _users = users.slice();
 };
 
 UserStore.__onDispatch = function (payload) {

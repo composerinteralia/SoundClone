@@ -34,7 +34,7 @@ module.exports = React.createClass({
         <div className="modal-container" onClick={this._stopPropogation}>
           <h2>Edit Track</h2>
 
-            <form className="track-update-form">
+            <form onSubmit={this._onSubmit} className="track-update-form">
               <label htmlFor="title">Title</label>
               <input
                 id="title"

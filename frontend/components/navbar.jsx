@@ -1,8 +1,11 @@
 var React = require('react'),
     Link = require('react-router').Link,
-    ApiUtil = require('../util/api_util');
+    History = require('react-router').History,
+    SessionsApiUtil = require('../util/sessions_api_util');
 
 module.exports = React.createClass({
+  mixins: [History],
+
   render: function () {
     return (
       <header className="nav">
@@ -19,8 +22,9 @@ module.exports = React.createClass({
 
   _logout: function (e) {
     e.preventDefault();
-
-    ApiUtil.logout();
+    SessionsApiUtil.logout(function () {
+      this.history.pushState({}, "/login");
+    }.bind(this));
   }
 
 });

@@ -4,7 +4,7 @@ class Api::TracksController < ApplicationController
 
   def create
     # will get user_id from current_user (wait for react auth)
-    @track = Track.new(track_params)
+    @track = currnet_user.tracks.new(track_params)
 
     if @track.save
       @user = @track.user
@@ -16,6 +16,7 @@ class Api::TracksController < ApplicationController
 
   def destroy
     @track = Track.find(params[:id])
+    # check if track is current user's track
 
     if @track.destroy
       @user = @track.user
@@ -35,6 +36,7 @@ class Api::TracksController < ApplicationController
 
   def update
     @track = Track.find(params[:id])
+    # check if track is current user's track
 
     if @track.update(track_params)
       @user = @track.user

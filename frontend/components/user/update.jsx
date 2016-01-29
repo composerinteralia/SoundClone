@@ -17,7 +17,7 @@ module.exports = React.createClass({
         <div className="modal-container" onClick={this._stopPropogation}>
           <h2>Edit your Profile</h2>
 
-          <form className="user-update-form">
+          <form onSubmit={this._onSubmit} className="user-update-form">
             <label htmlFor="username">Username</label>
             <input
               id="username"

@@ -2,20 +2,9 @@ var ApiActions = require('../actions/api_actions'),
     ModalActions = require('../actions/modal_actions');
 
 module.exports = {
-  logout: function () {
-    $.ajax({
-      url: "api/session",
-      method: "delete",
-      success: function (data) {
-        console.log('logged_out');
-        // this will eventually trigger a redirect
-      }
-    });
-  },
-
   fetchUser: function (user_id) {
     $.ajax({
-      url: "api/users/" + user_id,
+      url: "/api/users/" + user_id,
       success: function (data) {
         ApiActions.receiveUsers([data]);
       }
@@ -24,7 +13,7 @@ module.exports = {
 
   updateUser: function (user_id, user) {
     $.ajax({
-      url: "api/users/" + user_id,
+      url: "/api/users/" + user_id,
       method: "patch",
       data: { user: user },
       success: function (data) {
@@ -32,7 +21,7 @@ module.exports = {
         ModalActions.destroyModal();
       },
       error: function (data) {
-        // put the error message on the form
+        // put the error message on the form (here and elsewhere...)
       }
     });
   },
@@ -46,7 +35,6 @@ module.exports = {
     });
   },
 
-  // for edit and for track show page
   fetchSingleTrack: function (track_id) {
     $.ajax({
       url: "api/tracks/" + track_id,
@@ -70,7 +58,7 @@ module.exports = {
 
   updateTrack: function (track_id, track) {
     $.ajax({
-      url: "api/tracks/" + track_id,
+      url: "/api/tracks/" + track_id,
       method: "patch",
       data: { track: track },
       success: function (data) {
@@ -82,7 +70,7 @@ module.exports = {
 
   destroyTrack: function (track_id) {
     $.ajax({
-      url: "api/tracks/" + track_id,
+      url: "/api/tracks/" + track_id,
       method: "delete",
       success: function (data) {
         ApiActions.receiveUsers([data]);

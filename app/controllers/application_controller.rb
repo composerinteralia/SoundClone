@@ -27,10 +27,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_signed_in!
-    redirect_to new_session_url unless signed_in?
-  end
-
-  def require_signed_out!
-    redirect_to root_url unless signed_out?
+    render json: ["No way!"], status: 422 unless signed_in?
   end
 end

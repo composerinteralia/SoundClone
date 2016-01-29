@@ -7,10 +7,8 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var user = UserStore.find(this.props.params.id),
-        modal = ModalStore.get();
-
-    return { user: user, modal: modal };
+    var user = UserStore.find(this.props.params.id);
+    return { user: user, modal: null };
   },
 
   componentDidMount: function () {

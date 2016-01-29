@@ -1,18 +1,40 @@
-Auth
-Work on forms - add extra elements and style
-create track form and navbar button (similar to update track form?)
+Forms -
+  create main login page with two buttons
+  add login modal
 
-Toggle play and pause button
+  Upload form (cf audio upload modal, and include images, audio, etc.)
 
-Navbar link to explore
-Clean up some CSS
-Track show page
+  Recycle track and user forms where possible - make create user modal
+
+  Bug - enter to submit user form
+  validate audio type
+  validate username has only letters, number, -
+
+use AWS audio for seeds?
+
+----------------------------
+
+Play
+  Toggle play and pause button
+  Stop play of deleted tracks
+
+Explore
+  gets its own index with thumbs
+
+Navbar
+  upload link
+  logo links to stream (for now explore)
+  clone sheep!
+
+Track show
+  clicking on track name or image links here
+  add public/private
+
+Clean up CSS
 
 Fix delete dialog! -> add to a dialog store, have index register to rerender (not index item)
 Display errors on forms -> let me guess... error store!
 
-track - public/private
-separate CSS files
-user enter to submit form from last field
-
 navbar and modals f-ed up when resizing window...
+
+Message and FormError stores

@@ -4,37 +4,49 @@ var React = require('react'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute,
-    Navbar = require('./components/navbar'),
+
+    CurrentUserStore = require('./stores/current_user'),
+    SessionsApiUtil = require('./util/sessions_api_util'),
+
+    App = require('./components/app'),
     Explore = require('./components/track/explore'),
     Profile = require('./components/user/profile'),
     TracksIndex = require('./components/track/index'),
-    AudioActions = require('./actions/audio_actions'),
-    AudioStore = require('./stores/audio');
+    Login = require('./components/login');
 
-var App = React.createClass({
-  componentWillMount: function () {
-    var audio = new Audio()
-    AudioActions.mount(audio)
-  },
 
-  render: function () {
-    return (
-      <div>
-        <Navbar />
-        {this.props.children}
-      </div>
-    );
+var _ensureLoggedIn = function(nextState, replace, callback) {
+  if (CurrentUserStore.beenFetched()) {
+    _redirectIfNotLoggedIn();
+  } else {
+    SessionsApiUtil.fetchCurrentUser(_redirectIfNotLoggedIn);
   }
-});
+
+  function _redirectIfNotLoggedIn () {
+    if (!CurrentUserStore.isLoggedIn()) {
+      replace({}, "/login");
+    }
+    callback();
+  }
+};
+
+var _ensureLoggedOut = function (nextState, replace, callback) {
+  if (CurrentUserStore.isLoggedIn()) {
+    replace({}, "/");
+  }
+  callback();
+};
 
 var router = (
   <Router>
-    <Route path="/" component={App}>
-      <IndexRoute component={Explore}/>
-      <Route path="users/:id" component={Profile}>
-        <IndexRoute component={TracksIndex}/>
+    <Route path="/" component={ App } onEnter={_ensureLoggedIn} >
+      <IndexRoute component={ Explore } />
+      <Route path="users/:id" component={ Profile } >
+        <IndexRoute component={ TracksIndex } />
       </Route>
     </Route>
+
+    <Route path="/login" component={ Login } onEnter={_ensureLoggedOut} />
   </Router>
 );
 
