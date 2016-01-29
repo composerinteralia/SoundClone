@@ -8,12 +8,12 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <header className="nav">
-        <nav className="navbar group">
-          <div className="logo">
+      <header className="navbar">
+        <nav className="group">
+          <figure className="logo">
             <div className="sheep"></div>
             <div className="sheep clone"></div>
-          </div>
+          </figure>
 
           <a href="#" className="logout" onClick={this._logout}>Sign Out</a>
         </nav>

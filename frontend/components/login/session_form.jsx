@@ -1,7 +1,7 @@
 var React = require('react'),
     History = require('react-router').History,
     LinkState = require('react-addons-linked-state-mixin'),
-    SessionsApiUtil = require('../util/sessions_api_util');
+    SessionsApiUtil = require('../../util/sessions_api_util');
 
 module.exports = React.createClass({
   mixins: [History, LinkState],

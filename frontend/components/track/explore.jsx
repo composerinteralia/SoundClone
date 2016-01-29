@@ -25,9 +25,8 @@ module.exports = React.createClass({
       return <div>Loading...</div>;
     }
 // use index_item for now, but conditionals for buttons
-// fix css classes
     return (
-      <main className="content profile-content">
+      <main className="main content">
         {this.state.modal}
         <section className="tracks">
           <h2>Explore</h2>

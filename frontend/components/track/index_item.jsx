@@ -3,7 +3,8 @@ var React = require('react'),
     ApiUtil = require('../../util/api_util'),
     ModalActions = require('../../actions/modal_actions'),
     UpdateTrack = require('./update'),
-    AudioActions = require('../../actions/audio_actions');
+    AudioActions = require('../../actions/audio_actions'),
+    CurrentUserStore = require('../../stores/current_user');
 
 module.exports = React.createClass({
   // delete buttons should close on any click outside the dialog box - dialog store
@@ -12,11 +13,10 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var track = this.props.track;
+    var buttons, track = this.props.track;
 
-    var deleteClass = "popup";
-    if (this.state.deleting) {
-      deleteClass = "popup active";
+    if (CurrentUserStore.currentUser().id === track.user_id) {
+        buttons = this._trackButtons();
     }
 
     return (
@@ -40,25 +40,37 @@ module.exports = React.createClass({
             </div>
           </div>
 
-          <div className="track-buttons">
-            <button onClick={this._onUpdate}>Edit</button>
-            <button onClick={this._onDelete}>Delete</button>
-            <div className={deleteClass}>
-              <p>Are you sure you want to permanently delete this track?</p>
-              <button onClick={this._cancelDelete}>Cancel</button>
-              <button onClick={this._reallyDelete}>Delete</button>
-              <div className="popup-arrow"></div>
-            </div>
-          </div>
+          {buttons}
 
         </section>
       </li>
     );
   },
 
+  _trackButtons: function () {
+    var deleteClass = "popup";
+    if (this.state.deleting) {
+      deleteClass = "popup active";
+    }
+
+    return (
+      <div className="track-buttons">
+        <button onClick={this._onUpdate}>Edit</button>
+        <button onClick={this._onDelete}>Delete</button>
+
+        <div className={deleteClass}>
+          <p>Are you sure you want to permanently delete this track?</p>
+          <button onClick={this._cancelDelete}>Cancel</button>
+          <button onClick={this._reallyDelete}>Delete</button>
+          <div className="popup-arrow"></div>
+        </div>
+      </div>
+    );
+  },
+
   _playTrack: function (e) {
-    e.preventDefault()
-    AudioActions.play(this.props.track.audio_url)
+    e.preventDefault();
+    AudioActions.play(this.props.track.audio_url);
   },
 
   _onUpdate: function (e) {

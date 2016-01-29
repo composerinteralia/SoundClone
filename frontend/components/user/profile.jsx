@@ -32,7 +32,7 @@ module.exports = React.createClass({
 
 
     return (
-      <main className="content">
+      <main className="main">
         {this.state.modal}
         <header className="profile-header group">
           <figure className="profile-image">
@@ -40,7 +40,7 @@ module.exports = React.createClass({
           </figure>
           <h1 className="profile-username">{user.username}</h1>
         </header>
-        <section className="profile-content">
+        <section className="content">
           <nav className="profile-nav group">
             <button className="update-user" onClick={this._updateUser}>Edit</button>
           </nav>

@@ -12,7 +12,7 @@ var React = require('react'),
     Explore = require('./components/track/explore'),
     Profile = require('./components/user/profile'),
     TracksIndex = require('./components/track/index'),
-    Login = require('./components/login');
+    Login = require('./components/login/login');
 
 
 var _ensureLoggedIn = function(nextState, replace, callback) {
