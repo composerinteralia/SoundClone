@@ -31,10 +31,18 @@ var _ensureLoggedIn = function(nextState, replace, callback) {
 };
 
 var _ensureLoggedOut = function (nextState, replace, callback) {
-  if (CurrentUserStore.isLoggedIn()) {
-    replace({}, "/");
+  if (CurrentUserStore.beenFetched()) {
+    _redirectIfLoggedIn();
+  } else {
+    SessionsApiUtil.fetchCurrentUser(_redirectIfLoggedIn);
   }
-  callback();
+
+  function _redirectIfLoggedIn () {
+    if (CurrentUserStore.isLoggedIn()) {
+      replace({}, "/");
+    }
+    callback();
+  }
 };
 
 var router = (

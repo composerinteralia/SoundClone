@@ -11,7 +11,8 @@ module.exports = React.createClass({
       <header className="nav">
         <nav className="navbar group">
           <div className="logo">
-            <div className="sheep-logo"></div>
+            <div className="sheep"></div>
+            <div className="sheep clone"></div>
           </div>
 
           <a href="#" className="logout" onClick={this._logout}>Sign Out</a>

@@ -85,18 +85,21 @@ img {
   padding: 0 15px;
 }
 
-.sheep-logo {
+.sheep {
   display: block;
   height: 46px;
   background: asset-url('sheep-logo.png') no-repeat;
   background-size: 80%;
   background-position: right;
-  -webkit-transition: transform 1s;
-  transition: transform 1s;
+  transform: rotateZ();
 }
 
-.logo:hover .sheep-logo {
-  transform: translateX(-300px);
+.sheep.clone {
+  transform: translateY(-46px);
+}
+
+.logo:hover .clone {
+  transform: translate(-1000px, -46px);
   -webkit-transition: transform 8s;
   transition: transform 8s;
 }
