@@ -47,6 +47,12 @@ module.exports = React.createClass({
                 id="description"
                 valueLink={this.linkState('description')}>
               </textarea>
+
+              <input
+                type="submit"
+                className="hidden-submit"
+                tabIndex="-1" >
+              </input>
             </form>
 
           <button onClick={this._cancel}>Cancel</button>
@@ -72,7 +78,7 @@ module.exports = React.createClass({
     this.setState({ title: title, description: description });
   },
 
-  _submit: function (e) {
+  _submit: function () {
     ApiUtil.updateTrack (this.props.trackId, this.state);
   },
 

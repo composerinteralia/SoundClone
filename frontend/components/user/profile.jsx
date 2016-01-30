@@ -70,7 +70,7 @@ module.exports = React.createClass({
   },
 
   _updateUser: function () {
-    var modal = <UpdateUser user={this.state.user}/>;
+    var modal = <UpdateUser />;
     ModalActions.receiveModal(modal);
   }
 });

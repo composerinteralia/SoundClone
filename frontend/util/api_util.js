@@ -1,5 +1,6 @@
 var ApiActions = require('../actions/api_actions'),
-    ModalActions = require('../actions/modal_actions');
+    ModalActions = require('../actions/modal_actions'),
+    CurrentUserActions = require('../actions/current_user_actions');
 
 module.exports = {
   fetchUser: function (user_id) {
@@ -18,6 +19,7 @@ module.exports = {
       data: { user: user },
       success: function (data) {
         ApiActions.receiveUsers([data]);
+        CurrentUserActions.receiveCurrentUser(data);
         ModalActions.destroyModal();
       },
       error: function (data) {

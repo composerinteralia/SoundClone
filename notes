@@ -1,10 +1,7 @@
-Fix naming of component _functions
-
 Forms -
   Upload form (cf audio upload modal, and include images, audio, etc.)
   Recycle track and user forms where possible - make create user modal
 
-  Bug - enter to submit user form (also check login forms)
   validate audio type
   validate username has only letters, number, -
 
@@ -28,12 +25,6 @@ Track show
   clicking on track name or image links here
   add public/private
 
-Clean up CSS
-**** buttons
+Display errors on forms -> let me guess... error store?
 
-Fix delete dialog! -> add to a dialog store, have index register to rerender (not index item)
-Display errors on forms -> let me guess... error store!
-
-**** navbar and modals f-ed up when resizing window...
-
-Message and FormError stores
+navbar and modals f-ed up when resizing window...

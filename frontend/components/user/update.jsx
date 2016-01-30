@@ -1,18 +1,26 @@
 var React = require('react'),
     LinkState = require('react-addons-linked-state-mixin'),
     ApiUtil = require('../../util/api_util'),
-    ModalActions = require('../../actions/modal_actions');
+    ModalActions = require('../../actions/modal_actions'),
+    CurrentUserStore = require('../../stores/current_user');
 
 module.exports = React.createClass({
   mixins: [LinkState],
 
   getInitialState: function () {
-    // get user from current user!
     // Buttons change a little if creating vs. updating
     // ApiUtil action changes
 
-    var user = this.props.user;
+    var user = CurrentUserStore.currentUser();
     return { username: user.username, password: null };
+  },
+
+  componentDidMount: function () {
+    this.onChangeToken = CurrentUserStore.addListener(this._onChange);
+  },
+
+  componentWillUnmount: function () {
+    this.onChangeToken.remove()
   },
 
   render: function () {
@@ -35,6 +43,12 @@ module.exports = React.createClass({
               type="password"
               valueLink={this.linkState('password')}>
             </input>
+
+            <input
+              type="submit"
+              className="hidden-submit"
+              tabIndex="-1" >
+            </input>
           </form>
 
           <button onClick={this._cancel}>Cancel</button>
@@ -54,10 +68,15 @@ module.exports = React.createClass({
       delete params.password;
     }
 
-    ApiUtil.updateUser(this.props.user.id, params);
+    ApiUtil.updateUser(CurrentUserStore.currentUser().id, params);
   },
 
   _stopPropogation: function (e) {
     e.stopPropagation();
+  },
+
+  _onChange: function () {
+    var user = CurrentUserStore.currentUser();
+    this.setState({ username: user.username, password: null });
   }
 });
