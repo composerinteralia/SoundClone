@@ -17,11 +17,11 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <div className="modal" onClick={this._onCancel}>
+      <div className="modal" onClick={this._cancel}>
         <div className="modal-container" onClick={this._stopPropogation}>
           <h2>Edit your Profile</h2>
 
-          <form onSubmit={this._onSubmit} className="user-update-form">
+          <form onSubmit={this._submit} className="user-update-form">
             <label htmlFor="username">Username</label>
             <input
               id="username"
@@ -37,18 +37,18 @@ module.exports = React.createClass({
             </input>
           </form>
 
-          <button onClick={this._onCancel}>Cancel</button>
-          <button onClick={this._onSubmit}>Save Changes</button>
+          <button onClick={this._cancel}>Cancel</button>
+          <button onClick={this._submit}>Save Changes</button>
         </div>
       </div>
     );
   },
 
-  _onCancel: function () {
+  _cancel: function () {
     ModalActions.destroyModal();
   },
 
-  _onSubmit: function () {
+  _submit: function () {
     var params = this.state;
     if (!params.password) {
       delete params.password;

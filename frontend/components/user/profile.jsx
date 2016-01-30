@@ -1,5 +1,6 @@
 var React = require('react'),
     UserStore = require('../../stores/user'),
+    CurrentUserStore = require('../../stores/current_user'),
     ModalStore = require('../../stores/modal'),
     ModalActions = require('../../actions/modal_actions'),
     ApiUtil = require('../../util/api_util'),
@@ -30,6 +31,13 @@ module.exports = React.createClass({
       return <div>User not found!</div>;
     }
 
+    var editButton;
+    if (CurrentUserStore.currentUser().id === user.id) {
+        editButton =
+          <button className="update-user" onClick={this._updateUser}>
+            Edit
+          </button>
+    }
 
     return (
       <main className="main">
@@ -42,7 +50,7 @@ module.exports = React.createClass({
         </header>
         <section className="content">
           <nav className="profile-nav group">
-            <button className="update-user" onClick={this._updateUser}>Edit</button>
+            {editButton}
           </nav>
 
           { React.cloneElement(this.props.children,  { user: user }) }

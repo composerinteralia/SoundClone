@@ -55,8 +55,8 @@ module.exports = React.createClass({
 
     return (
       <div className="track-buttons">
-        <button onClick={this._onUpdate}>Edit</button>
-        <button onClick={this._onDelete}>Delete</button>
+        <button onClick={this._update}>Edit</button>
+        <button onClick={this._delete}>Delete</button>
 
         <div className={deleteClass}>
           <p>Are you sure you want to permanently delete this track?</p>
@@ -72,12 +72,12 @@ module.exports = React.createClass({
     AudioActions.play(this.props.track.audio_url);
   },
 
-  _onUpdate: function () {
+  _update: function () {
     var modal = <UpdateTrack trackId={this.props.track.id} />;
     ModalActions.receiveModal(modal);
   },
 
-  _onDelete: function () {
+  _delete: function () {
     this.setState({ deleting: true });
   },
 

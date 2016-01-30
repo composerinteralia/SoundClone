@@ -17,6 +17,7 @@ Play
 
 Explore
   gets its own index with thumbs
+  (filter out current_user in the index)
 
 Navbar
   upload link
@@ -28,10 +29,11 @@ Track show
   add public/private
 
 Clean up CSS
+**** buttons
 
 Fix delete dialog! -> add to a dialog store, have index register to rerender (not index item)
 Display errors on forms -> let me guess... error store!
 
-navbar and modals f-ed up when resizing window...
+**** navbar and modals f-ed up when resizing window...
 
 Message and FormError stores

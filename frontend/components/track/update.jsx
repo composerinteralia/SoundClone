@@ -30,11 +30,11 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <div className="modal" onClick={this._onCancel}>
+      <div className="modal" onClick={this._cancel}>
         <div className="modal-container" onClick={this._stopPropogation}>
           <h2>Edit Track</h2>
 
-            <form onSubmit={this._onSubmit} className="track-update-form">
+            <form onSubmit={this._submit} className="track-update-form">
               <label htmlFor="title">Title</label>
               <input
                 id="title"
@@ -49,11 +49,15 @@ module.exports = React.createClass({
               </textarea>
             </form>
 
-          <button onClick={this._onCancel}>Cancel</button>
-          <button onClick={this._onSubmit}>Save Changes</button>
+          <button onClick={this._cancel}>Cancel</button>
+          <button onClick={this._submit}>Save Changes</button>
         </div>
       </div>
     );
+  },
+
+  _cancel: function (e) {
+    ModalActions.destroyModal();
   },
 
   _onChange: function () {
@@ -68,15 +72,11 @@ module.exports = React.createClass({
     this.setState({ title: title, description: description });
   },
 
-  _onSubmit: function (e) {
+  _submit: function (e) {
     ApiUtil.updateTrack (this.props.trackId, this.state);
   },
 
   _stopPropogation: function (e) {
     e.stopPropagation();
-  },
-
-  _onCancel: function (e) {
-    ModalActions.destroyModal();
   }
 });
