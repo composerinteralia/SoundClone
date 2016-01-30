@@ -19,7 +19,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this.onDialogToken.destroy();
+    this.onDialogToken.remove();
   },
 
   render: function () {

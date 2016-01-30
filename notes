@@ -1,30 +1,27 @@
-Forms -
+1.) Forms -
   Upload form (cf audio upload modal, and include images, audio, etc.)
+    validate audio type
   Recycle track and user forms where possible - make create user modal
 
-  validate audio type
-  validate username has only letters, number, -
+2.) Navbar
+  my profile link
+  upload link
+  Explore link
+  logo links to stream (for now explore)
 
-----------------------------
-
-Play
-  Toggle play and pause button
+3.) Play
+  Toggle play and pause button (similar to dialog)
   Stop play of deleted tracks
   Stop track play on signout?
 
-Explore
+4.) Explore
   gets its own index with thumbs
   (filter out current_user in the index)
 
-Navbar
-  upload link
-  logo links to stream (for now explore)
-  clone sheep!
-
-Track show
+5.) Track show
   clicking on track name or image links here
   add public/private
 
+validate username has only letters, number, -
 Display errors on forms -> let me guess... error store?
-
 navbar and modals f-ed up when resizing window...
