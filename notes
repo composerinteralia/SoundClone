@@ -4,10 +4,8 @@
   Recycle track and user forms where possible - make create user modal
 
 2.) Navbar
-  my profile link
   upload link
-  Explore link
-  logo links to stream (for now explore)
+  highlight link for current path
 
 3.) Play
   Toggle play and pause button (similar to dialog)

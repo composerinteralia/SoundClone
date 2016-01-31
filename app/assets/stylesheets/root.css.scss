@@ -2,7 +2,7 @@
 
 html, body, div, main, nav, a, h1, h2, p,
 form, ul, li, input, textarea, button, figure,
-img, section {
+img, section, span {
   border: 0;
   margin: 0;
   padding: 0;
@@ -23,7 +23,7 @@ ul {
 body {
   font-family: Arial;
   background: #f2f2f2;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 img {
@@ -63,7 +63,6 @@ button:hover {
 .navbar {
   background: #333;
   color: #ccc;
-  font-size: 14px;
   z-index: 1000;
   position: fixed;
   width: 100%;
@@ -77,19 +76,20 @@ button:hover {
 
 .navbar a {
   display: block;
-  padding: 15px;
+  float: left;
 }
 
 .navbar a:hover {
   color: #fff;
+  background: #222;
 }
 
 .logo {
   float: left;
   width: 50px;
   height: 46px;
-  cursor: pointer;
   padding: 0 15px;
+  background: linear-gradient(90deg, rgb(45, 45, 45), rgb(60, 60, 60));
 }
 
 .sheep {
@@ -107,12 +107,31 @@ button:hover {
 
 .logo:hover .clone {
   transform: translate(-1000px, -46px);
-  -webkit-transition: transform 8s;
-  transition: transform 8s;
+  -webkit-transition: transform 7s;
+  transition: transform 7s;
 }
 
-.logout {
+.explore, .logout {
+  padding: 15px 25px;
+}
+
+.navbar-right {
   float: right;
+}
+
+.current-user-profile {
+  vertical-align: center;
+  padding: 8px 10px;
+}
+
+.current-user-profile span {
+  float: left;
+  padding: 6.5px 0 6.5px 10px;
+}
+
+.navbar-thumb {
+  float: left;
+  height: 30px
 }
 
 // general
