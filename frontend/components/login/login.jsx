@@ -3,6 +3,7 @@ var React = require('react'),
     ModalStore = require('../../stores/modal'),
     ModalActions = require('../../actions/modal_actions'),
     SessionForm = require('./session_form'),
+    NewUserForm = require('../user/new_form'),
     SessionsApiUtil = require('../../util/sessions_api_util');
 
 module.exports = React.createClass({
@@ -30,9 +31,18 @@ module.exports = React.createClass({
             <span className="soundclone">SOUNDCLONE</span>
 
             <div className="login-buttons">
-              <button className="guest" onClick={this._guestLogin}>Guest</button>
-              <button className="sign-in" onClick={this._sessionModal} >Sign In</button>
-              <button className="create">Create Account</button>
+              <button className="guest" onClick={this._guestLogin}>
+                Guest
+              </button>
+
+              <button className="sign-in" onClick={this._sessionModal} >
+                Sign In
+              </button>
+
+              <button className="create" onClick={this._newUserModal}>
+                Create Account
+              </button>
+
             </div>
           </div>
         </header>
@@ -58,6 +68,11 @@ module.exports = React.createClass({
 
   _sessionModal: function () {
     var modal = <SessionForm />;
+    ModalActions.receiveModal(modal);
+  },
+
+  _newUserModal: function () {
+    var modal = <NewUserForm />
     ModalActions.receiveModal(modal);
   }
 });

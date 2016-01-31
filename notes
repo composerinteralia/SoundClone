@@ -1,12 +1,8 @@
-Questions:
-  Why don't my images show up in production??? Oregon?
-  Will we Reflow?
-
 1.) Forms -
   Upload form (cf audio upload modal, and include images, audio, etc.)
     link in navbar
     validate audio type
-  Recycle track and user forms where possible - make create user modal
+  Add fname, lname, bio, and profile_image to user creation
 
 2.) Explore
   gets its own index with thumbs

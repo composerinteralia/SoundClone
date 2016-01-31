@@ -9,6 +9,9 @@ module.exports = {
       success: function (currentUser) {
         CurrentUserActions.receiveCurrentUser(currentUser);
         if (success) success();
+      },
+      error: function (data) {
+        console.log(data)
       }
     });
   },
@@ -20,6 +23,9 @@ module.exports = {
       success: function (emptyObject) {
         CurrentUserActions.receiveCurrentUser(emptyObject);
         if (callback) callback();
+      },
+      error: function (data) {
+        console.log(data)
       }
     });
   },
@@ -31,6 +37,9 @@ module.exports = {
       success: function (currentUser) {
         CurrentUserActions.receiveCurrentUser(currentUser);
         if (callback) callback(currentUser);
+      },
+      error: function (data) {
+        console.log(data)
       }
     });
   }

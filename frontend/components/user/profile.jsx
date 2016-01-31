@@ -4,7 +4,7 @@ var React = require('react'),
     ModalStore = require('../../stores/modal'),
     ModalActions = require('../../actions/modal_actions'),
     ApiUtil = require('../../util/api_util'),
-    UpdateUser = require('./update');
+    UpdateUserForm = require('./update_form');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -74,7 +74,7 @@ module.exports = React.createClass({
   },
 
   _updateUser: function () {
-    var modal = <UpdateUser />;
+    var modal = <UpdateUserForm />;
     ModalActions.receiveModal(modal);
   }
 });

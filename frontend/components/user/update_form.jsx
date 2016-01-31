@@ -8,8 +8,6 @@ module.exports = React.createClass({
   mixins: [LinkState],
 
   getInitialState: function () {
-    // Buttons change if creating vs. updating
-
     var user = CurrentUserStore.currentUser();
     return { username: user.username, password: null };
   },
@@ -67,8 +65,7 @@ module.exports = React.createClass({
       delete params.password;
     }
 
-    // Api util changes, depending on create vs. update
-    ApiUtil.updateUser(CurrentUserStore.currentUser().id, params);
+    ApiUtil.updateUser(params);
   },
 
   _stopPropogation: function (e) {
