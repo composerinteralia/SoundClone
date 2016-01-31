@@ -27,7 +27,7 @@ class Api::TracksController < ApplicationController
   end
 
   def index
-    @tracks = Track.all.includes(:user)
+    @tracks = Track.all.where.not(user: current_user).includes(:user)
   end
 
   def show

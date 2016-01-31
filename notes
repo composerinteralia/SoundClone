@@ -16,7 +16,6 @@
 
 4.) Explore
   gets its own index with thumbs
-  (filter out current_user in the index)
 
 5.) Track show
   clicking on track name or image links here
@@ -25,3 +24,5 @@
 validate username has only letters, number, -
 Display errors on forms -> let me guess... error store?
 navbar and modals f-ed up when resizing window...
+
+Let users choose background color (extra column in table)
