@@ -20,7 +20,7 @@ guest = User.create!(
 ella = User.create!(
   username: "Ella Bella",
   password: "1qaz2WSX3edc",
-  profile_image: File.open("app/assets/images/ella.jpg")
+  profile_image: File.open("app/assets/images/ellabella.jpg")
 )
 
 mozart = User.create!(
