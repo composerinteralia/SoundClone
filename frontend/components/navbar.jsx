@@ -17,6 +17,8 @@ module.exports = React.createClass({
             <div className="sheep"></div>
             <div className="sheep clone"></div>
           </Link>
+
+          <Link to="/" className="stream">Stream</Link>
           <Link to="/" className="explore">Explore</Link>
 
           <div className="navbar-right group">

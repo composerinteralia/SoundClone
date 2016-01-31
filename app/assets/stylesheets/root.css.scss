@@ -34,7 +34,7 @@ img {
 
 input, textarea, button {
   border: 1px solid #ccc;
-  padding: 4px 8px;
+  padding: 5px 8px;
   font-size: 13px;
   border-radius: 4px;
 }
@@ -85,10 +85,10 @@ button.cancel {
 
 .navbar a:hover {
   color: #fff;
-  background: #222;
+  background: #111;
 }
 
-.logo {
+.navbar a.logo {
   float: left;
   width: 50px;
   height: 46px;
@@ -115,8 +115,12 @@ button.cancel {
   transition: transform 7s;
 }
 
-.explore, .logout {
+.stream, .explore, .logout {
   padding: 15px 25px;
+}
+
+.stream, .explore {
+  border-right: 1px solid #111;
 }
 
 .navbar-right {
@@ -128,7 +132,7 @@ button.cancel {
   padding: 8px 10px;
 }
 
-.current-user-profile span {
+.current-user-profile > span {
   float: left;
   padding: 6.5px 0 6.5px 10px;
 }
@@ -209,13 +213,13 @@ button.cancel {
 
 .create {
   background: #f50;
-  border: none;
+  border: 1px solid #f50;
   font-size: 14px;
 }
 
 .create:hover {
-  border: none;
-  background: #d50;
+  border: 1px solid #e41;
+  background: #e42;
 }
 
 // profile
