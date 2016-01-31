@@ -4,12 +4,12 @@ class Track < ActiveRecord::Base
                                     content_type: /\Aimage\/.*\Z/
 
   # Later no default url - just validate presence, and only allow certain types of audio
-  has_attached_file :audio, default_url: "revision.wav"
-  validates_attachment_content_type :track_art,
+  has_attached_file :audio, default_url: "etude1.wav"
+  validates_attachment_content_type :audio,
                                     content_type: /\Aaudio\/.*\Z/
 
   validates :user, :title, presence: true
-  validates :title, uniqueness: { scope: :user_id }
+  validates :title, uniqueness: { scope: :user }
 
   belongs_to :user
 end

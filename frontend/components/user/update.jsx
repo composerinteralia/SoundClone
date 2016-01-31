@@ -50,7 +50,7 @@ module.exports = React.createClass({
             </input>
           </form>
 
-          <button onClick={this._cancel}>Cancel</button>
+          <button className="cancel" onClick={this._cancel}>Cancel</button>
           <button onClick={this._submit}>Save Changes</button>
         </div>
       </div>

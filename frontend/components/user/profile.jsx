@@ -24,6 +24,10 @@ module.exports = React.createClass({
     this.onModalToken.remove();
   },
 
+  componentWillReceiveProps: function (newProps) {
+    ApiUtil.fetchUser(newProps.params.id);
+  },
+
   render: function () {
     var user = this.state.user;
 

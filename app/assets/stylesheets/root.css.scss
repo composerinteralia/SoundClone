@@ -47,6 +47,10 @@ button:hover {
   border: 1px solid #999;
 }
 
+button.cancel {
+  border: none;
+}
+
 .hidden-submit {
   position: absolute;
   left: -9999px;
@@ -131,7 +135,9 @@ button:hover {
 
 .navbar-thumb {
   float: left;
-  height: 30px
+  height: 30px;
+  width: 30px;
+  overflow: hidden;
 }
 
 // general
@@ -211,6 +217,8 @@ button:hover {
   border: none;
   background: #d50;
 }
+
+// profile
 
 .profile-header {
   height: 200px;
@@ -368,19 +376,19 @@ button:hover {
   display: block;
   position: absolute;
   background: #fff;
-  top: 40px;
-  left: 35px;
+  top: -15px;
+  left: 50px;
   width: 300px;
   border: 1px solid #ddd;
   padding: 5px;
-  box-shadow: 0 1px 10px #aaa;
+  box-shadow: 1px 1px 8px #ccc;
   z-index: 100;
 }
 
 .popup-arrow {
   position: absolute;
   padding: 5px;
-  top: -5px;
+  top: -6px;
   left: 15px;
   transform: rotate(45deg);
   border-top: 1px solid #ddd;

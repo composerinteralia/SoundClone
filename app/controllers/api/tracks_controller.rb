@@ -27,7 +27,11 @@ class Api::TracksController < ApplicationController
   end
 
   def index
-    @tracks = Track.all.where.not(user: current_user).includes(:user)
+    @tracks =
+      Track.all
+        .where.not(user: current_user)
+        .order('updated_at DESC')
+        .includes(:user)
   end
 
   def show

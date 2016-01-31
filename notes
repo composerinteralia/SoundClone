@@ -1,26 +1,28 @@
 1.) Forms -
   Upload form (cf audio upload modal, and include images, audio, etc.)
+    link in navbar
     validate audio type
   Recycle track and user forms where possible - make create user modal
 
-2.) Navbar
-  upload link
-  highlight link for current path
+2.) Explore
+  gets its own index with thumbs
 
-3.) Play
+3.) Track show
+  clicking on track name or image links here
+  add public/private
+
+-----------------
+
+4.) Play
   Toggle play and pause button (similar to dialog)
   Stop play of deleted tracks
   Stop track play on signout?
 
-4.) Explore
-  gets its own index with thumbs
-
-5.) Track show
-  clicking on track name or image links here
-  add public/private
-
-validate username has only letters, number, -
-Display errors on forms -> let me guess... error store?
-navbar and modals f-ed up when resizing window...
-
-Let users choose background color (extra column in table)
+Assorted:
+  Use smaller photos for seeds (use paperclip to save different sizes)
+  Highlight current tab in navbar
+  validate username has only letters, number, -
+  Display errors on forms -> let me guess... error store?
+  navbar and modals f-ed up when resizing window...
+  Edit and Delete icons
+  Let users choose background color (extra column in table)
