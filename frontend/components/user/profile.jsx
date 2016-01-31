@@ -42,13 +42,13 @@ module.exports = React.createClass({
             Edit
           </button>
     }
-
+    
     return (
       <main className="main">
         {this.state.modal}
         <header className="profile-header group">
           <figure className="profile-image">
-            <img src={user.profile_image_url}/>
+            <img src={user.profileImageUrl}/>
           </figure>
           <h1 className="profile-username">{user.username}</h1>
         </header>

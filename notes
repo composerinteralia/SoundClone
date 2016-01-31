@@ -2,7 +2,8 @@
   Upload form (cf audio upload modal, and include images, audio, etc.)
     link in navbar
     validate audio type
-  Add fname, lname, bio, and profile_image to user creation
+
+Add more seed data
 
 2.) Explore
   gets its own index with thumbs
@@ -19,10 +20,12 @@
   Stop track play on signout?
 
 Assorted:
+  Display errors on forms -> let me guess... error store?
   Use smaller photos for seeds (use paperclip to save different sizes)
+  paperclip cropping?
   Highlight current tab in navbar
   validate username has only letters, number, -
-  Display errors on forms -> let me guess... error store?
   navbar and modals f-ed up when resizing window...
   Edit and Delete icons
   Let users choose background color (extra column in table)
+  Guest account edit f#$%s up guest login button

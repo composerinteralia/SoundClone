@@ -24,7 +24,7 @@ module.exports = React.createClass({
           <div className="navbar-right group">
             <Link to={"/users/" + currentUser.id} className="current-user-profile">
               <div className="navbar-thumb">
-                <img src={currentUser.profile_image_url}/>
+                <img src={currentUser.profileImageUrl}/>
               </div>
               {currentUser.username}
             </Link>

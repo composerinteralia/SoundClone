@@ -3,11 +3,13 @@ var ApiActions = require('../actions/api_actions'),
     CurrentUserActions = require('../actions/current_user_actions');
 
 module.exports = {
-  createUser: function (user, success) {
+  createUser: function (formData, success) {
     $.ajax({
       url: "/api/users",
       method: "post",
-      data: {user: user},
+      processData: false,
+      contentType: false,
+      data: formData,
       success: function (data) {
         CurrentUserActions.receiveCurrentUser(data);
         ModalActions.destroyModal();
@@ -31,11 +33,13 @@ module.exports = {
     });
   },
 
-  updateUser: function (user) {
+  updateUser: function (formData) {
     $.ajax({
       url: "/api/user",
       method: "patch",
-      data: { user: user },
+      processData: false,
+      contentType: false,
+      data: formData,
       success: function (data) {
         ApiActions.receiveUsers([data]);
         CurrentUserActions.receiveCurrentUser(data);
