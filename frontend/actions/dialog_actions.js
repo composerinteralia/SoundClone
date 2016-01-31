@@ -10,7 +10,7 @@ module.exports = {
     });
   },
 
-  destroyDialog: function () {
+  clearDialog: function () {
     AppDispatcher.dispatch({
       actionType: DialogConstants.DIALOG_DESTROYED,
     });

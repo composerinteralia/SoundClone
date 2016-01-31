@@ -20,6 +20,7 @@ module.exports = React.createClass({
 
   componentWillUnmount: function () {
     this.onDialogToken.remove();
+    DialogActions.clearDialog();
   },
 
   render: function () {
@@ -93,7 +94,7 @@ module.exports = React.createClass({
   },
 
   _cancelDelete: function () {
-    DialogActions.destroyDialog();
+    DialogActions.clearDialog();
   },
 
   _reallyDelete: function () {
