@@ -10,8 +10,7 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var dialog = DialogStore.find(this.props.track.id);
-    return ({ dialog: dialog });
+    return ({ dialog: null });
   },
 
   componentDidMount: function () {
@@ -20,7 +19,6 @@ module.exports = React.createClass({
 
   componentWillUnmount: function () {
     this.onDialogToken.remove();
-    DialogActions.clearDialog();
   },
 
   render: function () {
