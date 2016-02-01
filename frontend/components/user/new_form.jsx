@@ -23,7 +23,7 @@ module.exports = React.createClass({
     var image;
 
     if (this.state.image_url) {
-      image = <img src={this.state.image_url} />
+      image = (<img src={this.state.image_url} />);
     }
 
     return (
@@ -92,13 +92,13 @@ module.exports = React.createClass({
     var file = e.currentTarget.files[0];
 
     reader.onloadend = function () {
-      this.setState({imageFile: file, imageUrl: reader.result})
+      this.setState({imageFile: file, imageUrl: reader.result});
     }.bind(this);
 
     if (file) {
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
     } else {
-      this.setState({imageFile: null, imageUrl: ""})
+      this.setState({imageFile: null, imageUrl: ""});
     }
   },
 
@@ -107,14 +107,14 @@ module.exports = React.createClass({
 
     var formData = new FormData();
 
-    formData.append("user[username]", this.state.username)
-    formData.append("user[password]", this.state.password)
-    formData.append("user[fname]", this.state.fname)
-    formData.append("user[lname]", this.state.lname)
-    formData.append("user[bio]", this.state.bio)
+    formData.append("user[username]", this.state.username);
+    formData.append("user[password]", this.state.password);
+    formData.append("user[fname]", this.state.fname);
+    formData.append("user[lname]", this.state.lname);
+    formData.append("user[bio]", this.state.bio);
 
     if (this.state.imageFile) {
-      formData.append("user[profile_image]", this.state.imageFile)
+      formData.append("user[profile_image]", this.state.imageFile);
     }
 
     ApiUtil.createUser(formData, function () {

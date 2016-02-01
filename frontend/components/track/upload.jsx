@@ -34,9 +34,9 @@ module.exports = React.createClass({
 
     if (file) {
       var modal = <NewTrackForm audio={file} />;
-      ModalActions.receiveModal(modal)
+      ModalActions.receiveModal(modal);
     } else {
-      this.setState({audioFile: null})
+      this.setState({audioFile: null});
     }
   },
 

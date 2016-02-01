@@ -1,6 +1,5 @@
 Play
   Stop play of deleted tracks
-  Stop track play on signout?
 
   Player
     disable prev and next if no prev or next track

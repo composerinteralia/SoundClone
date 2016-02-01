@@ -42,7 +42,6 @@ module.exports = {
       contentType: false,
       data: formData,
       success: function (data) {
-        ApiActions.receiveUsers([data]);
         CurrentUserActions.receiveCurrentUser(data);
         ModalActions.destroyModal();
       },
@@ -127,7 +126,6 @@ module.exports = {
       url: "/api/tracks/" + trackId,
       method: "delete",
       success: function (data) {
-        data
         ApiActions.removeTrack(data);
         DialogActions.clearDialog();
       },

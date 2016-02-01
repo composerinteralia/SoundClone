@@ -374,6 +374,17 @@ height: 50px;
   margin-right: 4px;
 }
 
+.wave {
+  position: relative;
+  width: 400px;
+  height: 80px;
+  content: "";
+}
+
+canvas {
+  height: 120px;
+}
+
 .track-buttons {
   position: relative;
   font-size: 14px;

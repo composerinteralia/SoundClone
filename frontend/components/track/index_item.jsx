@@ -11,28 +11,30 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var playing = (AudioStore.track === this.props.track);
-    return ({ dialog: null, playing: playing });
+    // var playing = (AudioStore.track === this.props.track);
+    return ({ dialog: null, startTime: 0 });
   },
 
   componentDidMount: function () {
     this.dialogToken = DialogStore.addListener(this._onDialog);
-    this.trackChangeToken = AudioStore.addListener(this._onTrackChange);
+    // this.trackChangeToken = AudioStore.addListener(this._onTrackChange);
+
+    this._initWavesurfer();
   },
 
   componentWillUnmount: function () {
     this.dialogToken.remove();
-    this.trackChangeToken.remove();
+    // this.trackChangeToken.remove();
   },
 
   render: function () {
-    var pausePlay, trackButtons, track = this.props.track;
+    var pausePlay, trackButtons, duration, track = this.props.track;
 
     if (CurrentUserStore.currentUser().id === track.user_id) {
       trackButtons = this._trackButtons();
     }
 
-    if (this.state.playing && !AudioStore.paused()) {
+    if (this.wavesurfer && this.wavesurfer.isPlaying()) {
       playPauseButton = (
         <div className="play-button" onClick={this._pauseTrack}>
           <div className="pause-line left"></div>
@@ -64,6 +66,7 @@ module.exports = React.createClass({
                 to={"/users/" + track.user_id}>{track.username}
               </Link>
               <p>{track.title}</p>
+              <div className={ "wave wave-" + this.props.track.id }></div>
             </div>
           </div>
 
@@ -86,11 +89,22 @@ module.exports = React.createClass({
   },
 
   _playTrack: function () {
-    AudioActions.play(this.props.track);
+    this.wavesurfer.playPause(this.state.startTime);
+    this.setState({ startTime: 0 });
+
+// when you click on another play button
+    // stop the old wavesurfer
+    // start a new one
+
+    // pass along to audio store?
+
+    // AudioActions.play(this.props.track);
   },
 
   _pauseTrack: function () {
-    AudioActions.pause();
+    this.wavesurfer.playPause();
+    this.setState({ startTime: this.wavesurfer.getCurrentTime() });
+    // AudioActions.pause()
   },
 
   _update: function () {
@@ -129,6 +143,22 @@ module.exports = React.createClass({
   _onTrackChange: function () {
     var playing = (AudioStore.track() === this.props.track);
     this.setState({ playing: playing });
+  },
+
+  _initWavesurfer: function () {
+    this.wavesurfer = Object.create(WaveSurfer);
+    var container = ".wave-" + this.props.track.id;
+
+    this.wavesurfer.init({
+      container: $(container)[0],
+      waveColor: '#888',
+      progressColor: '#f50',
+      barWidth: 2,
+      cursorWidth: 0,
+      backend: 'MediaElement'
+    });
+
+    this.wavesurfer.load(this.props.track.audio_url);
   }
 
 });
