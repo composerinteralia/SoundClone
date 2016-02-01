@@ -1,7 +1,7 @@
 var React = require('react'),
-    AudioStore = require('../stores/audio'),
-    TrackStore = require('../stores/track'),
-    AudioActions = require('../actions/audio_actions');
+    // AudioStore = require('../stores/audio'),
+    TrackStore = require('../stores/track');
+    // AudioActions = require('../actions/audio_actions');
 
 module.exports = React.createClass({
   getInitialState: function () {

@@ -5,7 +5,7 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return ({ tracks: TrackStore.all()});
+    return ({ tracks: []});
   },
 
   componentDidMount: function () {

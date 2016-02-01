@@ -4,27 +4,29 @@ var React = require('react'),
     ModalActions = require('../../actions/modal_actions'),
     DialogActions = require('../../actions/dialog_actions'),
     UpdateTrackForm = require('./update_form'),
-    AudioActions = require('../../actions/audio_actions'),
-    AudioStore = require('../../stores/audio'),
+    PlayerActions = require('../../actions/player_actions'),
+    PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
     DialogStore = require('../../stores/dialog');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    // var playing = (AudioStore.track === this.props.track);
-    return ({ dialog: null, startTime: 0 });
+    var playing = (PlayerStore.trackId() === this.props.track.id);
+    return ({ dialog: null, playing: playing });
   },
 
   componentDidMount: function () {
     this.dialogToken = DialogStore.addListener(this._onDialog);
-    // this.trackChangeToken = AudioStore.addListener(this._onTrackChange);
+    this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
 
     this._initWavesurfer();
   },
 
   componentWillUnmount: function () {
     this.dialogToken.remove();
-    // this.trackChangeToken.remove();
+    this.playerChangeToken.remove();
+
+    PlayerActions.removeWavesurfer(this.props.track.id);
   },
 
   render: function () {
@@ -34,7 +36,7 @@ module.exports = React.createClass({
       trackButtons = this._trackButtons();
     }
 
-    if (this.wavesurfer && this.wavesurfer.isPlaying()) {
+    if (this.state.playing && PlayerStore.isPlaying()) {
       playPauseButton = (
         <div className="play-button" onClick={this._pauseTrack}>
           <div className="pause-line left"></div>
@@ -89,22 +91,11 @@ module.exports = React.createClass({
   },
 
   _playTrack: function () {
-    this.wavesurfer.playPause(this.state.startTime);
-    this.setState({ startTime: 0 });
-
-// when you click on another play button
-    // stop the old wavesurfer
-    // start a new one
-
-    // pass along to audio store?
-
-    // AudioActions.play(this.props.track);
+    PlayerActions.play(this.props.track.id);
   },
 
   _pauseTrack: function () {
-    this.wavesurfer.playPause();
-    this.setState({ startTime: this.wavesurfer.getCurrentTime() });
-    // AudioActions.pause()
+    PlayerActions.pause();
   },
 
   _update: function () {
@@ -140,10 +131,15 @@ module.exports = React.createClass({
     this.setState({ dialog: dialog });
   },
 
-  _onTrackChange: function () {
-    var playing = (AudioStore.track() === this.props.track);
+  _onPlayerChange: function () {
+    var playing = (PlayerStore.trackId() === this.props.track.id);
     this.setState({ playing: playing });
   },
+
+  // _onTrackChange: function () {
+  //   var playing = (AudioStore.track().id === this.props.track.id);
+  //   this.setState({ playing: playing });
+  // },
 
   _initWavesurfer: function () {
     this.wavesurfer = Object.create(WaveSurfer);
@@ -159,6 +155,14 @@ module.exports = React.createClass({
     });
 
     this.wavesurfer.load(this.props.track.audio_url);
+
+    setTimeout(function () {
+      PlayerActions.receiveWavesurfer({
+        trackId: this.props.track.id,
+        wavesurfer: this.wavesurfer
+      });
+    }.bind(this), 0);
+
   }
 
 });
