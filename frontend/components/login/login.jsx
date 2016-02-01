@@ -72,7 +72,7 @@ module.exports = React.createClass({
   },
 
   _newUserModal: function () {
-    var modal = <NewUserForm />
+    var modal = (<NewUserForm />);
     ModalActions.receiveModal(modal);
   }
 });

@@ -37,10 +37,11 @@ module.exports = React.createClass({
 
     var editButton;
     if (CurrentUserStore.currentUser().id === user.id) {
-        editButton =
+        editButton = (
           <button className="update-user" onClick={this._updateUser}>
             Edit
           </button>
+        );
     }
 
     return (
@@ -57,7 +58,7 @@ module.exports = React.createClass({
             {editButton}
           </nav>
 
-          { React.cloneElement(this.props.children,  { user: user }) }
+          { this.props.children }
         </section>
       </main>
     );

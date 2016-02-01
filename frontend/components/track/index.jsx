@@ -1,9 +1,24 @@
 var React = require('react'),
-    TrackIndexItem = require('./index_item');
+    TrackIndexItem = require('./index_item'),
+    TrackStore = require('../../stores/track'),
+    ApiUtil = require('../../util/api_util');
 
 module.exports = React.createClass({
+  getInitialState: function () {
+    return ({ tracks: TrackStore.all()});
+  },
+
+  componentDidMount: function () {
+    this.onChangeToken = TrackStore.addListener(this._onChange);
+    ApiUtil.fetchUserTracks(this.props.params.id);
+  },
+
+  componentWillUnmount: function () {
+    this.onChangeToken.remove();
+  },
+
   render: function () {
-    var tracks = this.props.user.tracks;
+    var tracks = this.state.tracks;
     return (
       <div className="tracks">
         <h2>Tracks</h2>
@@ -18,5 +33,9 @@ module.exports = React.createClass({
         </ul>
       </div>
     );
+  },
+
+  _onChange: function () {
+    this.setState({ tracks: TrackStore.all()});
   }
 });

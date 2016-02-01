@@ -1,8 +1,14 @@
 Play
-  Toggle play and pause button (similar to dialog)
   Stop play of deleted tracks
   Stop track play on signout?
+
   Player
+    disable prev and next if no prev or next track
+
+  keep track of play in the store
+  setinterval 1000
+  pause stops interval
+  play resumes with "#t=  " added to src
 
 Explore
   gets its own index with thumbs
@@ -42,6 +48,7 @@ Assorted
   Edit and Delete icons
   Reset guest account on logout?
   validate username has only letters, number, -
-  navbar and modals f-ed up when resizing window...
+  navbar and modals f-ed up when resizing window... (media query)
+  more efficient FormData appending?
 
   Let users choose background color (extra column in table)

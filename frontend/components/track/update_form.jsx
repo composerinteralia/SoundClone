@@ -27,7 +27,7 @@ module.exports = React.createClass({
 
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
-    ApiUtil.fetchSingleTrack(this.props.trackId);
+    // ApiUtil.fetchSingleTrack(this.props.trackId);
   },
 
   componentWillUnmount: function () {
@@ -37,7 +37,7 @@ module.exports = React.createClass({
   render: function () {
     var image;
     if (this.state.imageUrl) {
-      image = <img src={this.state.imageUrl} />
+      image = (<img src={this.state.imageUrl} />);
     }
 
     return (
@@ -107,13 +107,13 @@ module.exports = React.createClass({
     var file = e.currentTarget.files[0];
 
     reader.onloadend = function () {
-      this.setState({imageFile: file, imageUrl: reader.result})
+      this.setState({imageFile: file, imageUrl: reader.result});
     }.bind(this);
 
     if (file) {
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
     } else {
-      this.setState({imageFile: null, imageUrl: ""})
+      this.setState({imageFile: null, imageUrl: ""});
     }
   },
 
@@ -122,10 +122,10 @@ module.exports = React.createClass({
 
     var formData = new FormData();
 
-    formData.append("track[title]", this.state.title)
-    formData.append("track[description]", this.state.description)
+    formData.append("track[title]", this.state.title);
+    formData.append("track[description]", this.state.description);
     if (this.state.imageFile) {
-      formData.append("track[track_art]", this.state.imageFile)
+      formData.append("track[track_art]", this.state.imageFile);
     }
 
     ApiUtil.updateTrack (this.props.trackId, formData);

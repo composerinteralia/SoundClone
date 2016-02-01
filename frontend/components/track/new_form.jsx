@@ -2,7 +2,7 @@ var React = require('react'),
     History = require('react-router').History,
     LinkedState = require('react-addons-linked-state-mixin'),
     ApiUtil = require('../../util/api_util'),
-    ModalActions = require('../../actions/modal_actions')
+    ModalActions = require('../../actions/modal_actions'),
     CurrentUserStore = require('../../stores/current_user');
 
 module.exports = React.createClass({
@@ -20,7 +20,7 @@ module.exports = React.createClass({
   render: function () {
     var image;
     if (this.state.imageUrl) {
-      image = <img src={this.state.imageUrl} />
+      image = (<img src={this.state.imageUrl} />);
     }
 
     return (
@@ -32,7 +32,7 @@ module.exports = React.createClass({
               <div className="form-image">
                 {image}
               </div>
-              
+
               <label htmlFor="track-art">Track Image</label>
               <input id="track-art" type="file" onChange={this._imageUpload} />
 
@@ -74,13 +74,13 @@ module.exports = React.createClass({
     var file = e.currentTarget.files[0];
 
     reader.onloadend = function () {
-      this.setState({imageFile: file, imageUrl: reader.result})
+      this.setState({imageFile: file, imageUrl: reader.result});
     }.bind(this);
 
     if (file) {
-      reader.readAsDataURL(file)
+      reader.readAsDataURL(file);
     } else {
-      this.setState({imageFile: null, imageUrl: ""})
+      this.setState({imageFile: null, imageUrl: ""});
     }
   },
 
@@ -89,15 +89,15 @@ module.exports = React.createClass({
 
     var formData = new FormData();
 
-    formData.append("track[title]", this.state.title)
-    formData.append("track[description]", this.state.description)
-    formData.append("track[audio]", this.props.audio)
+    formData.append("track[title]", this.state.title);
+    formData.append("track[description]", this.state.description);
+    formData.append("track[audio]", this.props.audio);
     if (this.state.imageFile) {
-      formData.append("track[track_art]", this.state.imageFile)
+      formData.append("track[track_art]", this.state.imageFile);
     }
 
     ApiUtil.createTrack (formData, function () {
-      this.history.pushState({}, "/users/" + CurrentUserStore.currentUser().id)
+      this.history.pushState({}, "/users/" + CurrentUserStore.currentUser().id);
       // redirect to track show page
     }.bind(this));
   },

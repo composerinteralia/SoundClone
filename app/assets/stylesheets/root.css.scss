@@ -361,6 +361,19 @@ height: 50px;
   margin: 9px 14px;
 }
 
+.pause-line {
+  float:left;
+  margin-top: 9px;
+  height: 18px;
+  width: 5px;
+  background: #fff;
+}
+
+.pause-line.left {
+  margin-left: 11px;
+  margin-right: 4px;
+}
+
 .track-buttons {
   position: relative;
   font-size: 14px;
@@ -408,4 +421,32 @@ height: 50px;
   display: block;
   background: #fff;
   z-index: 101;
+}
+
+// player
+
+.player {
+  background: #333;
+  color: #ccc;
+  z-index: 1000;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.player-body {
+  width: 960px;
+  margin: auto;
+}
+
+.controls {
+  float: left;
+}
+
+.controls > * {
+  float: left;
+}
+
+.track-info {
+  float: right;
 }

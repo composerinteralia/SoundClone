@@ -1,5 +1,6 @@
 var ApiActions = require('../actions/api_actions'),
     ModalActions = require('../actions/modal_actions'),
+    DialogActions = require('../actions/dialog_actions'),
     CurrentUserActions = require('../actions/current_user_actions');
 
 module.exports = {
@@ -13,10 +14,10 @@ module.exports = {
       success: function (data) {
         CurrentUserActions.receiveCurrentUser(data);
         ModalActions.destroyModal();
-        if (success) success()
+        if (success) success();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -28,7 +29,7 @@ module.exports = {
         ApiActions.receiveUsers([data]);
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -46,19 +47,31 @@ module.exports = {
         ModalActions.destroyModal();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
 
-  fetchAllTracks: function () {
+  fetchExploreTracks: function () {
     $.ajax({
-      url: "api/tracks",
+      url: "api/tracks/explore",
       success: function (data) {
         ApiActions.receiveTracks(data);
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
+      }
+    });
+  },
+
+  fetchUserTracks: function (userId) {
+    $.ajax({
+      url: "api/users/" + userId + "/tracks",
+      success: function (data) {
+        ApiActions.receiveTracks(data);
+      },
+      error: function (data) {
+        console.log(data);
       }
     });
   },
@@ -70,7 +83,7 @@ module.exports = {
         ApiActions.receiveTracks([data]);
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -83,11 +96,11 @@ module.exports = {
       contentType: false,
       data: formData,
       success: function (data) {
-        ApiActions.receiveUsers([data]);
+        ApiActions.receiveSingleTrack(data);
         if (success) success();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -100,11 +113,11 @@ module.exports = {
       contentType: false,
       data: formData,
       success: function (data) {
-        ApiActions.receiveUsers([data]);
+        ApiActions.receiveSingleTrack(data);
         ModalActions.destroyModal();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -114,10 +127,12 @@ module.exports = {
       url: "/api/tracks/" + trackId,
       method: "delete",
       success: function (data) {
-        ApiActions.receiveUsers([data]);
+        data
+        ApiActions.removeTrack(data);
+        DialogActions.clearDialog();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   }

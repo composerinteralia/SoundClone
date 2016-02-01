@@ -7,8 +7,8 @@ var _dialogs = {},
 
 var reset = function (trackId, dialog) {
   _dialogs = {};
-  _dialogs[trackId] = dialog
-}
+  _dialogs[trackId] = dialog;
+};
 
 DialogStore.__onDispatch = function (payload) {
   switch (payload.actionType) {

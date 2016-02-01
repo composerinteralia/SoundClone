@@ -5,8 +5,7 @@ class Api::TracksController < ApplicationController
     @track = current_user.tracks.new(track_params)
 
     if @track.save
-      @user = @track.user
-      render 'api/users/show'
+      render :show
     else
       render json: @track.errors.full_messages, status: :unprocessable_entity
     end
@@ -18,19 +17,28 @@ class Api::TracksController < ApplicationController
     if @track.user_id != current_user.id
       render json: ["Not yours!"], status: :unprocessable_entity
     elsif @track.destroy
-      @user = @track.user
-      render 'api/users/show'
+      render :show
     else
       render json: @track.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def index
+    user = User.find(params[:user_id])
+    @tracks =
+      user.tracks
+        .order('updated_at DESC')
+        .includes(:user)
+  end
+
+  def explore
     @tracks =
       Track.all
         .where.not(user: current_user)
         .order('updated_at DESC')
         .includes(:user)
+
+    render :index
   end
 
   def show
@@ -43,8 +51,7 @@ class Api::TracksController < ApplicationController
     if @track.user_id != current_user.id
       render json: ["Not yours!"], status: :unprocessable_entity
     elsif @track.update(track_params)
-      @user = @track.user
-      render 'api/users/show'
+      render :show
     else
       render json: @track.errors.full_messages, status: :unprocessable_entity
     end

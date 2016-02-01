@@ -8,7 +8,7 @@ module.exports = React.createClass({
   mixins: [History],
 
   render: function () {
-    var currentUser = CurrentUserStore.currentUser()
+    var currentUser = CurrentUserStore.currentUser();
 
     return (
       <header className="navbar">

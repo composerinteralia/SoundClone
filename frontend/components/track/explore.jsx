@@ -11,7 +11,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
 
-    ApiUtil.fetchAllTracks();
+    ApiUtil.fetchExploreTracks();
   },
 
   componentWillUnmount: function () {

@@ -9,10 +9,10 @@ module.exports = {
     });
   },
 
-  play: function (src) {
+  play: function (track) {
     AppDispatcher.dispatch({
       actionType: AudioConstants.PLAYED,
-      src: src
+      track: track
     });
   },
 

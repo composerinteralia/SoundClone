@@ -5,27 +5,46 @@ var React = require('react'),
     DialogActions = require('../../actions/dialog_actions'),
     UpdateTrackForm = require('./update_form'),
     AudioActions = require('../../actions/audio_actions'),
+    AudioStore = require('../../stores/audio'),
     CurrentUserStore = require('../../stores/current_user'),
     DialogStore = require('../../stores/dialog');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return ({ dialog: null });
+    var playing = (AudioStore.track === this.props.track);
+    return ({ dialog: null, playing: playing });
   },
 
   componentDidMount: function () {
-    this.onDialogToken = DialogStore.addListener(this._onDialog);
+    this.dialogToken = DialogStore.addListener(this._onDialog);
+    this.trackChangeToken = AudioStore.addListener(this._onTrackChange);
   },
 
   componentWillUnmount: function () {
-    this.onDialogToken.remove();
+    this.dialogToken.remove();
+    this.trackChangeToken.remove();
   },
 
   render: function () {
-    var buttons, track = this.props.track;
+    var pausePlay, trackButtons, track = this.props.track;
 
     if (CurrentUserStore.currentUser().id === track.user_id) {
-        buttons = this._trackButtons();
+      trackButtons = this._trackButtons();
+    }
+
+    if (this.state.playing && !AudioStore.paused()) {
+      playPauseButton = (
+        <div className="play-button" onClick={this._pauseTrack}>
+          <div className="pause-line left"></div>
+          <div className="pause-line"></div>
+        </div>
+      );
+    } else {
+      playPauseButton = (
+        <div className="play-button" onClick={this._playTrack}>
+          <div className="play-arrow"></div>
+        </div>
+      );
     }
 
     return (
@@ -37,9 +56,7 @@ module.exports = React.createClass({
         <section className="track-detail-container">
 
           <div className="group">
-            <div className="play-button" onClick={this._playTrack}>
-              <div className="play-arrow"></div>
-            </div>
+            {playPauseButton}
 
             <div className="track-naming">
               <Link
@@ -50,7 +67,7 @@ module.exports = React.createClass({
             </div>
           </div>
 
-          {buttons}
+          {trackButtons}
 
         </section>
       </li>
@@ -69,7 +86,11 @@ module.exports = React.createClass({
   },
 
   _playTrack: function () {
-    AudioActions.play(this.props.track.audio_url);
+    AudioActions.play(this.props.track);
+  },
+
+  _pauseTrack: function () {
+    AudioActions.pause();
   },
 
   _update: function () {
@@ -78,17 +99,18 @@ module.exports = React.createClass({
   },
 
   _delete: function () {
-    var dialog =
+    var dialog = (
       <div className="popup">
         <p>Are you sure you want to permanently delete this track?</p>
         <button className="cancel" onClick={this._cancelDelete}>Cancel</button>
         <button onClick={this._reallyDelete}>Delete</button>
         <div className="popup-arrow"></div>
       </div>
+    );
 
     var trackId = this.props.track.id;
 
-    DialogActions.receiveDialog(trackId, dialog)
+    DialogActions.receiveDialog(trackId, dialog);
   },
 
   _cancelDelete: function () {
@@ -101,7 +123,12 @@ module.exports = React.createClass({
 
   _onDialog: function () {
     var dialog = DialogStore.find(this.props.track.id);
-    this.setState({ dialog: dialog })
+    this.setState({ dialog: dialog });
+  },
+
+  _onTrackChange: function () {
+    var playing = (AudioStore.track() === this.props.track);
+    this.setState({ playing: playing });
   }
 
 });
