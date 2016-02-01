@@ -17,7 +17,7 @@ module.exports = React.createClass({
       lname: user.lname,
       bio: user.bio,
       imageFile: null,
-      imageUrl: user.profileImageUrl
+      imageUrl: user.profile_image_url
     };
   },
 
@@ -38,13 +38,13 @@ module.exports = React.createClass({
             </div>
             <input type="file" onChange={this._imageUpload} />
 
-            <label htmlFor="username">Username <span>*</span></label>
+            <label htmlFor="username">Username</label>
             <input
               id="username"
               type="text"
               valueLink={this.linkState('username')} />
 
-            <label htmlFor="password">Password <span>*</span></label>
+            <label htmlFor="password">Password</label>
             <input
               id="password"
               type="password"

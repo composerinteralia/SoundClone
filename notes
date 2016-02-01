@@ -1,41 +1,49 @@
-1.) Forms -
-  Upload form (cf audio upload modal, and include images, audio, etc.)
-    link in navbar
-
-    Display errors on forms
-      -- submit function triggers action to clear message store
-      -- ajax errors trigger action to send messages to store
-      -- modals listen to the message store (this.state.errors)
-      -- Error component passed this.state.errors as props
-      -- ul with li of props (list-style bullet)
-
 More seed data
 
-
-2.) Explore
-  gets its own index with thumbs
-
-3.) Track show
-  clicking on track name or image links here
-  add public/private
-
------------------
-
-4.) Play
+Play
   Toggle play and pause button (similar to dialog)
   Stop play of deleted tracks
   Stop track play on signout?
-
   Player
 
-Assorted:
-  Use smaller photos for seeds (use paperclip to save different sizes)
-  paperclip cropping?
-  validate audio type
+Explore
+  gets its own index with thumbs
+
+Track show
+  clicking on track name or image links here
+  create redirects here
+  add public/private
+
+Profile
+  Add fname, lname, bio
+
+Display errors on forms
+  -- submit function triggers action to clear message store
+  -- ajax errors trigger action to send messages to store
+  -- modals listen to the message store (this.state.errors)
+  -- Error component passed this.state.errors as props
+  -- ul with li of props (list-style bullet)
+
+-----------------
+
+Audio
+  Spinner while waiting for upload to complete?
+  validate type
+  get rid of default
+
+image
+  paperclip image sizes
+  cropping?
+
+nav
   Highlight current tab in navbar
+  redirect to user's desired location after login
+  scroll to top whenever you navigate to new page
+
+Assorted
+  Edit and Delete icons
+  Reset guest account on logout?
   validate username has only letters, number, -
   navbar and modals f-ed up when resizing window...
-  Edit and Delete icons
+
   Let users choose background color (extra column in table)
-  Guest account edit f#$%s up guest login button
-  redirect to user's desired location after login

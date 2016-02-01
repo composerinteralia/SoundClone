@@ -21,9 +21,9 @@ module.exports = {
     });
   },
 
-  fetchUser: function (user_id) {
+  fetchUser: function (userId) {
     $.ajax({
-      url: "/api/users/" + user_id,
+      url: "/api/users/" + userId,
       success: function (data) {
         ApiActions.receiveUsers([data]);
       },
@@ -63,9 +63,9 @@ module.exports = {
     });
   },
 
-  fetchSingleTrack: function (track_id) {
+  fetchSingleTrack: function (trackId) {
     $.ajax({
-      url: "api/tracks/" + track_id,
+      url: "api/tracks/" + trackId,
       success: function (data) {
         ApiActions.receiveTracks([data]);
       },
@@ -75,13 +75,16 @@ module.exports = {
     });
   },
 
-  createTrack: function (track) {
+  createTrack: function (formData, success) {
     $.ajax({
       url: "api/tracks",
       method: "post",
-      data: { track: track },
+      processData: false,
+      contentType: false,
+      data: formData,
       success: function (data) {
         ApiActions.receiveUsers([data]);
+        if (success) success();
       },
       error: function (data) {
         console.log(data)
@@ -89,11 +92,13 @@ module.exports = {
     });
   },
 
-  updateTrack: function (track_id, track) {
+  updateTrack: function (trackId, formData) {
     $.ajax({
-      url: "/api/tracks/" + track_id,
+      url: "/api/tracks/" + trackId,
       method: "patch",
-      data: { track: track },
+      processData: false,
+      contentType: false,
+      data: formData,
       success: function (data) {
         ApiActions.receiveUsers([data]);
         ModalActions.destroyModal();
@@ -104,9 +109,9 @@ module.exports = {
     });
   },
 
-  destroyTrack: function (track_id) {
+  destroyTrack: function (trackId) {
     $.ajax({
-      url: "/api/tracks/" + track_id,
+      url: "/api/tracks/" + trackId,
       method: "delete",
       success: function (data) {
         ApiActions.receiveUsers([data]);

@@ -1,37 +1,20 @@
 var React = require('react'),
+    History = require('react-router').History,
     LinkedState = require('react-addons-linked-state-mixin'),
     ApiUtil = require('../../util/api_util'),
-    ModalActions = require('../../actions/modal_actions'),
-    TrackStore = require('../../stores/track');
+    ModalActions = require('../../actions/modal_actions')
+    CurrentUserStore = require('../../stores/current_user');
 
 module.exports = React.createClass({
-  mixins: [LinkedState],
+  mixins: [History, LinkedState],
 
   getInitialState: function () {
-    var title = "", description = "", imageUrl = "";
-    var track = TrackStore.find(this.props.trackId);
-
-    if (track) {
-      title = track.title;
-      description = track.description;
-      imageUrl = track.image_url;
-    }
-
     return {
-      title: title,
-      description: description,
+      title: "",
+      description: "",
       imageFile: null,
-      imageUrl: imageUrl
+      imageUrl: ""
     };
-  },
-
-  componentDidMount: function () {
-    this.onChangeToken = TrackStore.addListener(this._onChange);
-    ApiUtil.fetchSingleTrack(this.props.trackId);
-  },
-
-  componentWillUnmount: function () {
-    this.onChangeToken.remove();
   },
 
   render: function () {
@@ -43,7 +26,7 @@ module.exports = React.createClass({
     return (
       <div className="modal" onClick={this._cancel}>
         <div className="modal-container" onClick={this._stopPropogation}>
-          <h2>Edit Track</h2>
+          <h2>Create Track</h2>
 
             <form onSubmit={this._submit} className="track-update-form">
               <div className="form-image">
@@ -51,7 +34,7 @@ module.exports = React.createClass({
               </div>
               <input type="file" onChange={this._imageUpload} />
 
-              <label htmlFor="title">Title</label>
+              <label htmlFor="title">Title <span>*</span></label>
               <input
                 id="title"
                 type="text"
@@ -72,7 +55,7 @@ module.exports = React.createClass({
             </form>
 
           <button className="cancel" onClick={this._cancel}>Cancel</button>
-          <button onClick={this._submit}>Save Changes</button>
+          <button onClick={this._submit}>Save Track</button>
         </div>
       </div>
     );
@@ -80,24 +63,6 @@ module.exports = React.createClass({
 
   _cancel: function (e) {
     ModalActions.destroyModal();
-  },
-
-  _onChange: function () {
-    var title = "", description = "";
-    var track = TrackStore.find(this.props.trackId);
-
-    if (track) {
-      title = track.title;
-      description = track.description;
-      imageUrl = track.image_url;
-    }
-
-    this.setState({
-      title: title,
-      description: description,
-      imageFile: null,
-      imageUrl: imageUrl
-    });
   },
 
   _imageUpload: function (e) {
@@ -124,11 +89,15 @@ module.exports = React.createClass({
 
     formData.append("track[title]", this.state.title)
     formData.append("track[description]", this.state.description)
+    formData.append("track[audio]", this.props.audio)
     if (this.state.imageFile) {
       formData.append("track[track_art]", this.state.imageFile)
     }
 
-    ApiUtil.updateTrack (this.props.trackId, formData);
+    ApiUtil.createTrack (formData, function () {
+      this.history.pushState({}, "/users/" + CurrentUserStore.currentUser().id)
+      // redirect to track show page
+    }.bind(this));
   },
 
   _stopPropogation: function (e) {

@@ -22,8 +22,8 @@ module.exports = React.createClass({
   render: function () {
     var image;
 
-    if (this.state.imageUrl) {
-      image = <img src={this.state.imageUrl} />
+    if (this.state.image_url) {
+      image = <img src={this.state.image_url} />
     }
 
     return (

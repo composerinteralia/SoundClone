@@ -10,6 +10,7 @@ var React = require('react'),
 
     App = require('./components/app'),
     Explore = require('./components/track/explore'),
+    Upload = require('./components/track/upload'),
     Profile = require('./components/user/profile'),
     TracksIndex = require('./components/track/index'),
     Login = require('./components/login/login');
@@ -49,6 +50,7 @@ var router = (
   <Router>
     <Route path="/" component={ App } onEnter={_ensureLoggedIn} >
       <IndexRoute component={ Explore } />
+      <Route path="upload" component={ Upload } />
       <Route path="users/:id" component={ Profile } >
         <IndexRoute component={ TracksIndex } />
       </Route>

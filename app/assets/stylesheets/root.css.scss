@@ -116,11 +116,8 @@ button.cancel {
   transition: transform 7s;
 }
 
-.stream, .explore, .logout {
-  padding: 15px 25px;
-}
-
 .stream, .explore {
+  padding: 15px 25px;
   border-right: 1px solid #111;
 }
 
@@ -130,12 +127,16 @@ button.cancel {
 
 .current-user-profile {
   vertical-align: center;
-  padding: 8px 10px;
+  padding: 8px 15px;
 }
 
 .current-user-profile > span {
   float: left;
   padding: 6.5px 0 6.5px 10px;
+}
+
+.upload, .logout {
+  padding: 15px 15px;
 }
 
 .navbar-thumb {

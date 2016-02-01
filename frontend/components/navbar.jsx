@@ -22,9 +22,10 @@ module.exports = React.createClass({
           <Link to="/" className="explore">Explore</Link>
 
           <div className="navbar-right group">
+            <Link to="/upload" className="upload">Upload</Link>
             <Link to={"/users/" + currentUser.id} className="current-user-profile">
               <div className="navbar-thumb">
-                <img src={currentUser.profileImageUrl}/>
+                <img src={currentUser.profile_image_url}/>
               </div>
               {currentUser.username}
             </Link>
