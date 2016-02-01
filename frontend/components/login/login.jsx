@@ -54,7 +54,7 @@ module.exports = React.createClass({
     e.preventDefault();
 
     SessionsApiUtil.login(
-      { username: "Best Guest", password: "password" },
+      { username: "composerinteralia", password: "password" },
       function () {
         this.history.pushState({}, "/");
       }.bind(this)

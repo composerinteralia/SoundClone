@@ -229,7 +229,7 @@ button.cancel {
 .profile-header {
   height: 200px;
   padding: 30px;
-  background: linear-gradient(135deg, rgba(70, 50, 108, 1), rgba(0, 0, 0, 0));
+  background: linear-gradient(135deg, rgba(60, 60, 100, 1), rgba(0, 0, 0, 0));
 }
 
 .profile-image {
@@ -244,6 +244,7 @@ button.cancel {
   font-size: 24px;
   padding: 10px 5px;
   color: #fff;
+  border-radius: 3px;
   background: rgba(0,0,0,.8);
   margin-left: 30px;
 }

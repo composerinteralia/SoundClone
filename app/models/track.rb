@@ -4,7 +4,7 @@ class Track < ActiveRecord::Base
                                     content_type: /\Aimage\/.*\Z/
 
   # Later no default url - just validate presence, and only allow certain types of audio
-  has_attached_file :audio, default_url: "etude1.wav"
+  has_attached_file :audio, default_url: "stag-roar.mp3"
   validates_attachment_content_type :audio,
                                     content_type: /\Aaudio\/.*\Z/
 

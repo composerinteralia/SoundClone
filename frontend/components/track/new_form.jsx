@@ -32,7 +32,9 @@ module.exports = React.createClass({
               <div className="form-image">
                 {image}
               </div>
-              <input type="file" onChange={this._imageUpload} />
+              
+              <label htmlFor="track-art">Track Image</label>
+              <input id="track-art" type="file" onChange={this._imageUpload} />
 
               <label htmlFor="title">Title <span>*</span></label>
               <input

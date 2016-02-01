@@ -3,7 +3,7 @@ var React = require('react'),
     ApiUtil = require('../../util/api_util'),
     ModalActions = require('../../actions/modal_actions'),
     DialogActions = require('../../actions/dialog_actions'),
-    UpdateTrack = require('./update'),
+    UpdateTrackForm = require('./update_form'),
     AudioActions = require('../../actions/audio_actions'),
     CurrentUserStore = require('../../stores/current_user'),
     DialogStore = require('../../stores/dialog');
@@ -73,7 +73,7 @@ module.exports = React.createClass({
   },
 
   _update: function () {
-    var modal = <UpdateTrack trackId={this.props.track.id} />;
+    var modal = <UpdateTrackForm trackId={this.props.track.id} />;
     ModalActions.receiveModal(modal);
   },
 
