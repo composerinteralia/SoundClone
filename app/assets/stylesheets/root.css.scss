@@ -54,6 +54,7 @@ button.cancel {
 .hidden-submit {
   position: absolute;
   left: -9999px;
+  display: none;
 }
 
 .group:after {
@@ -257,7 +258,7 @@ button.cancel {
   float: right;
 }
 
-// modal
+// forms
 
 .modal {
   position: fixed;
@@ -294,6 +295,11 @@ button.cancel {
 .modal input, .modal textarea {
   width: 250px;
   margin: 5px 0 20px;
+}
+
+.form-image {
+width: 50px;
+height: 50px;
 }
 
 // tracks index

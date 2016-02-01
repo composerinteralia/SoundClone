@@ -32,10 +32,10 @@ module.exports = React.createClass({
           <h2>Create Account</h2>
 
           <form onSubmit={this._submit} className="user-form">
-            <div>
+            <div className="form-image">
               {image}
-              <input type="file" onChange={this._imageUpload} />
             </div>
+            <input type="file" onChange={this._imageUpload} />
 
             <label htmlFor="username">Username <span>*</span></label>
             <input

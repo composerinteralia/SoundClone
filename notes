@@ -1,9 +1,16 @@
 1.) Forms -
   Upload form (cf audio upload modal, and include images, audio, etc.)
     link in navbar
-    validate audio type
 
-Add more seed data
+    Display errors on forms
+      -- submit function triggers action to clear message store
+      -- ajax errors trigger action to send messages to store
+      -- modals listen to the message store (this.state.errors)
+      -- Error component passed this.state.errors as props
+      -- ul with li of props (list-style bullet)
+
+More seed data
+
 
 2.) Explore
   gets its own index with thumbs
@@ -19,13 +26,16 @@ Add more seed data
   Stop play of deleted tracks
   Stop track play on signout?
 
+  Player
+
 Assorted:
-  Display errors on forms -> let me guess... error store?
   Use smaller photos for seeds (use paperclip to save different sizes)
   paperclip cropping?
+  validate audio type
   Highlight current tab in navbar
   validate username has only letters, number, -
   navbar and modals f-ed up when resizing window...
   Edit and Delete icons
   Let users choose background color (extra column in table)
   Guest account edit f#$%s up guest login button
+  redirect to user's desired location after login
