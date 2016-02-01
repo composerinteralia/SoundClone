@@ -1,13 +1,9 @@
 Play
   Stop play of deleted tracks
+  Keep playing while navigating!
 
-  Player
+ReImplement player
     disable prev and next if no prev or next track
-
-  keep track of play in the store
-  setinterval 1000
-  pause stops interval
-  play resumes with "#t=  " added to src
 
 Explore
   gets its own index with thumbs
@@ -45,9 +41,9 @@ nav
 
 Assorted
   Edit and Delete icons
-  Reset guest account on logout?
+  Reset guest tracks on logout?
   validate username has only letters, number, -
   navbar and modals f-ed up when resizing window... (media query)
   more efficient FormData appending?
 
-  Let users choose background color (extra column in table)
+Background image or color choice?
