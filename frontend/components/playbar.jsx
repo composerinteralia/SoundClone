@@ -5,12 +5,15 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var track = TrackStore.find(PlayerStore.trackId());
-    return { track: track };
+    return { track: PlayerStore.track(), time: PlayerStore.currentTime };
   },
 
   componentDidMount: function () {
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
+
+    this.counter = setInterval(function () {
+      this.setState({ time: PlayerStore.currentTime() });
+    }.bind(this), 1000);
   },
 
   componentWillUnmount: function () {
@@ -33,6 +36,11 @@ module.exports = React.createClass({
 
             <i className="fa fa-step-forward playback-button"
               onClick={this._playNext}></i>
+          </div>
+
+          <div>
+            {this.state.time}
+
           </div>
 
           <div className="track-info group">
@@ -59,8 +67,7 @@ module.exports = React.createClass({
   },
 
   _onPlayerChange: function () {
-    var track = TrackStore.find(PlayerStore.trackId());
-    this.setState({ track: track });
+    this.setState({ track: PlayerStore.track() });
   },
 
   _playTrack: function () {

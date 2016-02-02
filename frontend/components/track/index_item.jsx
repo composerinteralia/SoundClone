@@ -11,7 +11,11 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var playing = (PlayerStore.trackId() === this.props.track.id);
+    var playing =
+      (PlayerStore.track() &&
+      (PlayerStore.track().id === this.props.track.id)
+    );
+
     return ({ dialog: null, playing: playing });
   },
 
@@ -139,7 +143,11 @@ module.exports = React.createClass({
   },
 
   _onPlayerChange: function () {
-    var playing = (PlayerStore.trackId() === this.props.track.id);
+    var playing =
+      (PlayerStore.track() &&
+      (PlayerStore.track().id === this.props.track.id)
+    );
+
     this.setState({ playing: playing });
   },
 
@@ -160,7 +168,7 @@ module.exports = React.createClass({
 
     setTimeout(function () {
       PlayerActions.receiveWavesurfer({
-        trackId: this.props.track.id,
+        track: this.props.track,
         wavesurfer: this.wavesurfer
       });
     }.bind(this), 0);

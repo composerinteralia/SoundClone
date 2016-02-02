@@ -23,10 +23,9 @@ module.exports = {
     });
   },
 
-  pause: function (trackId) {
+  pause: function () {
     AppDispatcher.dispatch({
-      actionType: PlayerConstants.PAUSED,
-      trackId: trackId
+      actionType: PlayerConstants.PAUSED
     });
   },
 
