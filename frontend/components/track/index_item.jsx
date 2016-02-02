@@ -26,7 +26,9 @@ module.exports = React.createClass({
     this.dialogToken.remove();
     this.playerChangeToken.remove();
 
-    PlayerActions.removeWavesurfer(this.props.track.id);
+    setTimeout(function () {
+      PlayerActions.removeWavesurfer(this.props.track.id);
+    }.bind(this), 0);
   },
 
   render: function () {

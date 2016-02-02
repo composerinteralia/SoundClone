@@ -1,19 +1,22 @@
 var React = require('react'),
+    PlayerActions = require('../actions/player_actions'),
+    PlayerStore = require('../stores/player'),
     // AudioStore = require('../stores/audio'),
     TrackStore = require('../stores/track');
     // AudioActions = require('../actions/audio_actions');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { track: AudioStore.track() };
+    var track = TrackStore.find(PlayerStore.trackId());
+    return { track: track };
   },
 
   componentDidMount: function () {
-    this.trackChangeToken = AudioStore.addListener(this._onTrackChange);
+    this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
   },
 
   componentWillUnmount: function () {
-    this.trackChangeToken.remove();
+    this.playerChangeToken.remove();
   },
 
   render: function () {
@@ -39,42 +42,41 @@ module.exports = React.createClass({
   },
 
   _playPauseButton: function () {
-    if (AudioStore.paused()) {
-
-      return (
-        <div className="play-button" onClick={this._playTrack}>
-          <div className="play-arrow"></div>
-        </div>
-      );
-
-    } else {
-
+    if (PlayerStore.isPlaying()) {
       return (
         <div className="play-button" onClick={this._pauseTrack}>
           <div className="pause-line left"></div>
           <div className="pause-line"></div>
         </div>
       );
+
+    } else {
+      return (
+        <div className="play-button" onClick={this._playTrack}>
+          <div className="play-arrow"></div>
+        </div>
+      );
     }
   },
 
-  _onTrackChange: function () {
-    this.setState({ track: AudioStore.track() });
+  _onPlayerChange: function () {
+    var track = TrackStore.find(PlayerStore.trackId());
+    this.setState({ track: track });
   },
 
   _playTrack: function () {
-    AudioActions.play(this.state.track);
+    PlayerActions.play(this.state.track.id);
   },
 
   _pauseTrack: function () {
-    AudioActions.pause();
+    PlayerActions.pause();
   },
 
   _playNext: function () {
     var nextTrack = TrackStore.next(this.state.track);
 
     if (nextTrack) {
-      AudioActions.play(nextTrack);
+      PlayerActions.play(nextTrack.id);
     }
   },
 
@@ -82,7 +84,7 @@ module.exports = React.createClass({
     var prevTrack = TrackStore.prev(this.state.track);
 
     if (prevTrack) {
-      AudioActions.play(prevTrack);
+      PlayerActions.play(prevTrack.id);
     }
   }
 });

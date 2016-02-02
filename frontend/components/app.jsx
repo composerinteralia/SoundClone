@@ -1,6 +1,6 @@
 var React = require('react'),
     Navbar = require('./navbar');
-    // Playbar = require('./playbar');
+    Playbar = require('./playbar');
 
 module.exports = React.createClass({
   render: function () {
@@ -8,7 +8,7 @@ module.exports = React.createClass({
       <div>
         <Navbar />
         {this.props.children}
-
+        <Playbar />
       </div>
     );
   }
