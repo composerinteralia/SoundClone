@@ -2,41 +2,26 @@ var AppDispatcher = require('../dispatcher/dispatcher'),
     Store = require('flux/utils').Store,
     PlayerConstants = require('../constants/player_constants');
 
-var _wavesurfers = [],
-    // _wavesurfers = {}
+var _wavesurfers = {},
     _currentWavesurfer = null,
     PlayerStore = new Store(AppDispatcher);
 
 var add = function (wavesurfer) {
-  // _wavesurfers[wavesurfer.track.id] = wavesurfer
-  _wavesurfers.push(wavesurfer);
+  _wavesurfers[wavesurfer.track.id] = wavesurfer;
 };
 
 var findWavesurfer = function (trackId) {
-  // _wavesurfers[trackId]
-  return _wavesurfers.find(function (wavesurfer) {
-    return wavesurfer.track.id === trackId;
-  });
+  return _wavesurfers[trackId];
 };
 
 var remove = function (trackId) {
-  // delete _wavesurfers[trackId]
-  if (_currentWavesurfer && _currentWavesurfer.track.id === trackId) return;
-  var wavesurfer = findWavesurfer(trackId);
-
-  if (wavesurfer) {
-    var index = _wavesurfers.indexOf(wavesurfer);
-
-    _wavesurfers.splice(index, 1);
-  }
-
+  delete _wavesurfers[trackId];
 };
 
 var play = function (trackId) {
-  //refactor
   if (!_currentWavesurfer) {
     _currentWavesurfer = findWavesurfer(trackId);
-  } else if (_currentWavesurfer && _currentWavesurfer.track.id !== trackId) {
+  } else if (_currentWavesurfer.track.id !== trackId) {
     _currentWavesurfer.wavesurfer.pause();
     _currentWavesurfer = findWavesurfer(trackId);
   }
@@ -51,9 +36,6 @@ var pause = function () {
 var destroy = function (trackId) {
   if (_currentWavesurfer.track.id === trackId) {
     _currentWavesurfer.wavesurfer.stop();
-
-    var index = _wavesurfers.indexOf(_currentWavesurfer);
-    _wavesurfers.splice(index, 1);
   }
 };
 
