@@ -32,6 +32,7 @@ module.exports = React.createClass({
             <span className="soundclone">SOUNDCLONE</span>
 
             <div className="login-buttons">
+
               <button className="guest" onClick={this._guestLogin}>
                 Guest
               </button>

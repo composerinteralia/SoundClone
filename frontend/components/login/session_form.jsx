@@ -17,6 +17,8 @@ module.exports = React.createClass({
         <div className="modal-container" onClick={this._stopPropogation}>
           <h2>Log In</h2>
 
+          <a href="/auth/facebook">Login with Facebook</a>
+
           <form onSubmit={ this._submit } className="login-form">
 
             <label htmlFor="username">Username</label>
