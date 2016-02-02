@@ -1,7 +1,8 @@
 var React = require('react'),
     Link = require('react-router').Link,
     PlayerActions = require('../../actions/player_actions'),
-    PlayerStore = require('../../stores/player');
+    PlayerStore = require('../../stores/player'),
+    CurrentUserStore = require('../../stores/current_user');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -28,7 +29,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var pausePlay, track = this.props.track;
+    var playPauseButton, username, track = this.props.track;
 
     if (this.state.playing && PlayerStore.isPlaying()) {
       playPauseButton = (
@@ -56,7 +57,8 @@ module.exports = React.createClass({
           <p className="track-title">{track.title}</p>
           <Link
             className="track-username"
-            to={"/users/" + track.user_id}>{track.username}
+            to={"/users/" + track.user_id}>
+            {track.username}
           </Link>
         </section>
 

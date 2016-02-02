@@ -4,7 +4,8 @@ var React = require('react'),
     ModalActions = require('../../actions/modal_actions'),
     SessionForm = require('./session_form'),
     NewUserForm = require('../user/new_form'),
-    SessionsApiUtil = require('../../util/sessions_api_util');
+    SessionsApiUtil = require('../../util/sessions_api_util'),
+    Explore = require('../track/explore');
 
 module.exports = React.createClass({
   mixins: [History],
@@ -46,6 +47,7 @@ module.exports = React.createClass({
             </div>
           </div>
         </header>
+        <Explore />
       </main>
     );
   },
