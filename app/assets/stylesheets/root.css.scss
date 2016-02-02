@@ -471,6 +471,36 @@ canvas {
   margin-right: 20px;
 }
 
+.progress {
+  float: left;
+  padding: 14px 60px;
+  font-size: 12px;
+}
+
+.progress > * {
+  float: left;
+}
+
+.elapsed {
+  color: #f50;
+}
+
+.progress-timeline {
+  width: 350px;
+  height: 1px;
+  background: #ccc;
+  position: relative;
+  margin: 7px 10px;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #f50;
+  height: 1px;
+}
+
 .track-info {
   float: right;
 }

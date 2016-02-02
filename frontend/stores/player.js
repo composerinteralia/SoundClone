@@ -8,10 +8,6 @@ var _wavesurfers = [],
     PlayerStore = new Store(AppDispatcher);
 
 var add = function (wavesurfer) {
-  // if (_currentWavesurfer && !_currentWavesurfer.wavesurfer.isPlaying()) {
-  //   _currentWavesurfer.wavesurfer.play();
-  // }
-console.log(_currentWavesurfer)
   // _wavesurfers[wavesurfer.track.id] = wavesurfer
   _wavesurfers.push(wavesurfer);
 };
@@ -93,8 +89,11 @@ PlayerStore.isPlaying = function () {
 };
 
 PlayerStore.currentTime = function () {
-  var time = _currentWavesurfer.wavesurfer.getCurrentTime();
-  return Math.round(time);
+  return _currentWavesurfer && _currentWavesurfer.wavesurfer.getCurrentTime();
+};
+
+PlayerStore.totalTime = function () {
+  return _currentWavesurfer && _currentWavesurfer.wavesurfer.getDuration();
 };
 
 module.exports = PlayerStore;

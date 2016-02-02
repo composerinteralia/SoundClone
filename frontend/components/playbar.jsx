@@ -3,6 +3,17 @@ var React = require('react'),
     PlayerStore = require('../stores/player'),
     TrackStore = require('../stores/track');
 
+var formatSecondsAsTime = function (secs) {
+        secs = Math.round(secs);
+
+    		var min = Math.floor(secs / 60 );
+    		var sec = secs - (min * 60);
+
+    		if (sec < 10)  { sec  = "0" + sec; }
+
+        return min + ':' + sec;
+};
+
 module.exports = React.createClass({
   getInitialState: function () {
     return { track: PlayerStore.track(), time: PlayerStore.currentTime };
@@ -13,17 +24,22 @@ module.exports = React.createClass({
 
     this.counter = setInterval(function () {
       this.setState({ time: PlayerStore.currentTime() });
-    }.bind(this), 1000);
+    }.bind(this), 60);
   },
 
   componentWillUnmount: function () {
     this.playerChangeToken.remove();
+
+    clearInterval(this.counter);
   },
 
   render: function () {
     if (!this.state.track) {
       return <div></div>;
     }
+
+    var totalTime = PlayerStore.totalTime();
+    var position = (350 / totalTime) * this.state.time;
 
     return (
       <section className="playbar">
@@ -38,9 +54,19 @@ module.exports = React.createClass({
               onClick={this._playNext}></i>
           </div>
 
-          <div>
-            {this.state.time}
+          <div className="progress">
+            <span className="elapsed">
+              {formatSecondsAsTime(this.state.time)}
+            </span>
 
+            <div className="progress-timeline">
+              <div
+                className="progress-bar"
+                style={{'width': position + 'px' }}>
+              </div>
+            </div>
+
+            <span>{formatSecondsAsTime(totalTime)}</span>
           </div>
 
           <div className="track-info group">
