@@ -1,7 +1,7 @@
 Play
   Keep playing while navigating!
   disable prev and next if no prev or next track
-  keyboard listeners
+  keyboard listeners, playbar listeners
 
 Explore
   gets its own index with thumbs

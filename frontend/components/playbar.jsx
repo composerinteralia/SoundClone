@@ -42,7 +42,7 @@ module.exports = React.createClass({
     var position = (350 / totalTime) * this.state.time;
 
     return (
-      <section className="playbar">
+      <footer className="playbar">
         <div className="playbar-body group">
           <div className="controls">
             <i className="fa fa-step-backward playback-button"
@@ -76,7 +76,7 @@ module.exports = React.createClass({
             <p className="playbar-title">{this.state.track.title}</p>
           </div>
         </div>
-      </section>
+      </footer>
     );
   },
 

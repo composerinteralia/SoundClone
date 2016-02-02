@@ -19,7 +19,7 @@ module.exports = React.createClass({
           </Link>
 
           <Link to="/" className="stream">Stream</Link>
-          <Link to="/" className="explore">Explore</Link>
+          <Link to="/explore" className="explore">Explore</Link>
 
           <div className="navbar-right group">
             <Link to="/upload" className="upload">Upload</Link>

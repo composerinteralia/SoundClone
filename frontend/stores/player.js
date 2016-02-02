@@ -36,6 +36,7 @@ var pause = function () {
 var destroy = function (trackId) {
   if (_currentWavesurfer.track.id === trackId) {
     _currentWavesurfer.wavesurfer.stop();
+    _currentWavesurfer = null;
   }
 };
 

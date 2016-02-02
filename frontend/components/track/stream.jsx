@@ -1,7 +1,7 @@
 var React = require('react'),
     TrackStore = require('../../stores/track'),
     ApiUtil = require('../../util/api_util'),
-    ExploreIndexItem = require('./explore_index_item');
+    TrackIndexItem = require('./index_item');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -11,6 +11,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
 
+    // once I have followers... fetch stream tracks
     ApiUtil.fetchExploreTracks();
   },
 
@@ -29,12 +30,12 @@ module.exports = React.createClass({
       <main className="main content">
         {this.state.modal}
         <section className="tracks">
-          <h2>Explore</h2>
-          <ul className="group">
+          <h2>Stream</h2>
+          <ul className="tracks-list">
             {
               tracks.map(function (track) {
                 return (
-                  <ExploreIndexItem key={track.id} track={track} />
+                  <TrackIndexItem key={track.id} track={track} />
                 );
               })
             }

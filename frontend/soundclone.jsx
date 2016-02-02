@@ -9,6 +9,7 @@ var React = require('react'),
     SessionsApiUtil = require('./util/sessions_api_util'),
 
     App = require('./components/app'),
+    Stream = require('./components/track/stream'),
     Explore = require('./components/track/explore'),
     Upload = require('./components/track/upload'),
     Profile = require('./components/user/profile'),
@@ -49,7 +50,8 @@ var _ensureLoggedOut = function (nextState, replace, callback) {
 var router = (
   <Router>
     <Route path="/" component={ App } onEnter={_ensureLoggedIn} >
-      <IndexRoute component={ Explore } />
+      <IndexRoute component={ Stream } />
+      <Route path="explore" component={ Explore } />
       <Route path="upload" component={ Upload } />
       <Route path="users/:id" component={ Profile } >
         <IndexRoute component={ TracksIndex } />

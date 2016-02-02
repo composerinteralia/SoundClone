@@ -36,7 +36,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var pausePlay, trackButtons, duration, track = this.props.track;
+    var pausePlay, trackButtons, track = this.props.track;
 
     if (CurrentUserStore.currentUser().id === track.user_id) {
       trackButtons = this._trackButtons();

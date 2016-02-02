@@ -353,6 +353,30 @@ height: 50px;
   color: #000;
 }
 
+.track-buttons {
+  position: relative;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.track-button {
+  float:left;
+  visibility: hidden;
+}
+
+.track:hover .track-button {
+  visibility: visible;
+}
+
+.track-image {
+  width: 150px;
+  height: 150px;
+  float: left;
+  overflow: hidden;
+}
+
+// play buttons
+
 .play-button {
   float: left;
   height: 36px;
@@ -383,6 +407,8 @@ height: 50px;
   margin-right: 4px;
 }
 
+// wavesurfer
+
 .wave {
   position: relative;
   width: 400px;
@@ -394,26 +420,40 @@ canvas {
   height: 120px;
 }
 
-.track-buttons {
-  position: relative;
-  font-size: 14px;
-  margin-top: 30px;
+.hidden-wave {
+  display: none;
 }
 
-.track-button {
-  float:left;
-  visibility: hidden;
-}
+// explore
 
-.track:hover .track-button {
-  visibility: visible;
-}
-
-.track-image {
-  width: 150px;
-  height: 150px;
+.explore-item {
   float: left;
+  padding: 20px 10px;
+}
+
+.explore-image {
+  position: relative;
+  margin: auto;
+  width: 133px;
+  height: 133px;
   overflow: hidden;
+}
+
+.play-button-explore {
+  position: absolute;
+  top: 45px;
+  left: 45px;
+  display: none;
+}
+
+.explore-item:hover .play-button-explore {
+  display: block;
+}
+
+.explore-info {
+  text-align: center;
+  display: block;
+  margin-top: 5px;
 }
 
 // dialog
