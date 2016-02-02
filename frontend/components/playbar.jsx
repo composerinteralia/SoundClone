@@ -1,9 +1,7 @@
 var React = require('react'),
     PlayerActions = require('../actions/player_actions'),
     PlayerStore = require('../stores/player'),
-    // AudioStore = require('../stores/audio'),
     TrackStore = require('../stores/track');
-    // AudioActions = require('../actions/audio_actions');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -25,16 +23,23 @@ module.exports = React.createClass({
     }
 
     return (
-      <section className="player">
-        <div className="player-body">
+      <section className="playbar">
+        <div className="playbar-body group">
           <div className="controls">
-            <button onClick={this._playPrev}>PREVIOUS</button>
-            <div className="play-pause">{this._playPauseButton()}</div>
-            <button onClick={this._playNext}>NEXT</button>
+            <i className="fa fa-step-backward playback-button"
+              onClick={this._playPrev}></i>
+
+            {this._playPauseButton()}
+
+            <i className="fa fa-step-forward playback-button"
+              onClick={this._playNext}></i>
           </div>
 
-          <div className="track-info">
-            {this.state.track.title}
+          <div className="track-info group">
+            <figure className="playbar-art">
+              <img src={this.state.track.image_url}/>
+            </figure>
+            <p className="playbar-title">{this.state.track.title}</p>
           </div>
         </div>
       </section>
@@ -43,18 +48,12 @@ module.exports = React.createClass({
 
   _playPauseButton: function () {
     if (PlayerStore.isPlaying()) {
-      return (
-        <div className="play-button" onClick={this._pauseTrack}>
-          <div className="pause-line left"></div>
-          <div className="pause-line"></div>
-        </div>
+      return (<i className="fa fa-pause playback-button"
+        onClick={this._pauseTrack}></i>
       );
-
     } else {
-      return (
-        <div className="play-button" onClick={this._playTrack}>
-          <div className="play-arrow"></div>
-        </div>
+      return (<i className="fa fa-play playback-button"
+        onClick={this._playTrack}></i>
       );
     }
   },

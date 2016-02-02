@@ -1,9 +1,7 @@
 Play
-  Stop play of deleted tracks
   Keep playing while navigating!
-
-ReImplement player
-    disable prev and next if no prev or next track
+  disable prev and next if no prev or next track
+  keyboard listeners
 
 Explore
   gets its own index with thumbs
@@ -22,6 +20,22 @@ Display errors on forms
   -- modals listen to the message store (this.state.errors)
   -- Error component passed this.state.errors as props
   -- ul with li of props (list-style bullet)
+
+_________________
+
+Likes -
+  Tracks load with like count (update as like button pressed)
+  Users load with count of tracks likes
+  Like index shows a given user's liked tracks (like store)
+
+Follows
+  Users load with count of followers and followees
+  Stream indexes followees tracks (track store)
+  Follower and Followee store (user store)
+
+Playlists
+  Playlist store
+  Incorporate playlists into stream?
 
 -----------------
 

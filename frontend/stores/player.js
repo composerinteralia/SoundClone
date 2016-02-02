@@ -2,7 +2,7 @@ var AppDispatcher = require('../dispatcher/dispatcher'),
     Store = require('flux/utils').Store,
     PlayerConstants = require('../constants/player_constants');
 
-// array for order (next previous), combine with hash for fast lookup
+//hash with linked list would be better...
 var _wavesurfers = [],
     _currentWavesurfer = null,
     PlayerStore = new Store(AppDispatcher);
@@ -19,9 +19,12 @@ var findWavesurfer = function (trackId) {
 
 var remove = function (trackId) {
   var wavesurfer = findWavesurfer(trackId);
-  var index = _wavesurfers.indexOf(wavesurfer);
 
-  _wavesurfers.splice(index, 1);
+  if (wavesurfer) {
+    var index = _wavesurfers.indexOf(wavesurfer);
+
+    _wavesurfers.splice(index, 1);
+  }
 };
 
 var play = function (trackId) {
@@ -39,6 +42,13 @@ var pause = function () {
   _currentWavesurfer.wavesurfer.pause();
 };
 
+var destroy = function () {
+  _currentWavesurfer.wavesurfer.stop()
+
+  var index = _wavesurfers.indexOf(_currentWavesurfer);
+  _wavesurfers.splice(index, 1);
+};
+
 PlayerStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case PlayerConstants.RECEIVED:
@@ -53,6 +63,12 @@ PlayerStore.__onDispatch = function (payload) {
       break;
     case PlayerConstants.PAUSED:
       pause();
+      PlayerStore.__emitChange();
+      break;
+    case PlayerConstants.DESTROYED:
+      if (_currentWavesurfer.trackId === payload.trackId) {
+        destroy();
+      }
       PlayerStore.__emitChange();
       break;
   }

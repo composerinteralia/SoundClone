@@ -84,8 +84,10 @@ module.exports = React.createClass({
   _trackButtons: function () {
     return (
       <div className="track-buttons">
-        <button onClick={this._update}>Edit</button>
-        <button onClick={this._delete}>Delete</button>
+        <i className="fa fa-pencil track-button"
+          onClick={this._update}></i>
+        <i className="fa fa-trash track-button"
+          onClick={this._delete}></i>
 
         {this.state.dialog}
       </div>
@@ -125,7 +127,10 @@ module.exports = React.createClass({
   },
 
   _reallyDelete: function () {
-    ApiUtil.destroyTrack(this.props.track.id);
+    var trackId = this.props.track.id;
+    ApiUtil.destroyTrack(trackId, function () {
+      PlayerActions.destroy(trackId);
+    });
   },
 
   _onDialog: function () {
@@ -137,11 +142,6 @@ module.exports = React.createClass({
     var playing = (PlayerStore.trackId() === this.props.track.id);
     this.setState({ playing: playing });
   },
-
-  // _onTrackChange: function () {
-  //   var playing = (AudioStore.track().id === this.props.track.id);
-  //   this.setState({ playing: playing });
-  // },
 
   _initWavesurfer: function () {
     this.wavesurfer = Object.create(WaveSurfer);

@@ -256,8 +256,17 @@ button.cancel {
   padding-bottom: 10px;
 }
 
-.update-user {
+.fa-pencil, .fa-trash {
   float: right;
+  border: 1px solid #ccc;
+  padding: 5px 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.fa-pencil:hover, .fa-trash:hover {
+  border: 1px solid #999;
 }
 
 // forms
@@ -391,11 +400,12 @@ canvas {
   margin-top: 30px;
 }
 
-.track-buttons > button {
+.track-button {
+  float:left;
   visibility: hidden;
 }
 
-.track:hover button {
+.track:hover .track-button {
   visibility: visible;
 }
 
@@ -434,18 +444,18 @@ canvas {
   z-index: 101;
 }
 
-// player
+// playbar
 
-.player {
-  background: #333;
-  color: #ccc;
+.playbar {
+  background: #eee;
   z-index: 1000;
   position: fixed;
   width: 100%;
   bottom: 0;
+  border-top: 1px solid #ccc
 }
 
-.player-body {
+.playbar-body {
   width: 960px;
   margin: auto;
 }
@@ -454,10 +464,26 @@ canvas {
   float: left;
 }
 
-.controls > * {
-  float: left;
+.playback-button {
+  font-size: 20px;
+  padding: 10px 5px;
+  cursor: pointer;
+  margin-right: 20px;
 }
 
 .track-info {
   float: right;
+}
+
+.playbar-art {
+  float: left;
+  height: 30px;
+  width: 30px;
+  margin: 5px;
+  overflow: hidden;
+}
+
+.playbar-title {
+  float: left;
+  padding: 12px;
 }

@@ -28,5 +28,12 @@ module.exports = {
       actionType: PlayerConstants.PAUSED,
       trackId: trackId
     });
+  },
+
+  destroy: function (trackId) {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.DESTROYED,
+      trackId: trackId
+    });
   }
 };

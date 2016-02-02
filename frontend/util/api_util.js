@@ -121,13 +121,14 @@ module.exports = {
     });
   },
 
-  destroyTrack: function (trackId) {
+  destroyTrack: function (trackId, success) {
     $.ajax({
       url: "/api/tracks/" + trackId,
       method: "delete",
       success: function (data) {
         ApiActions.removeTrack(data);
         DialogActions.clearDialog();
+        if (success) success();
       },
       error: function (data) {
         console.log(data);
