@@ -7,10 +7,10 @@
 SoundClone is a web application inspired by SoundCloud, built using Ruby on Rails
 and React.js. SoundClone allows users to:
 
-- [ ] Create an account
-- [ ] Log in and Log out
-- [ ] Upload audio to create new tracks
-- [ ] Create, play, update, and delete tracks
+- [x] Create an account
+- [x] Log in and Log out
+- [x] Upload audio to create new tracks
+- [x] Create, play, update, and delete tracks
 - [ ] See the number of plays for each track
 - [ ] Follow other users
 - [ ] View, play, and like other users' tracks
@@ -81,5 +81,5 @@ update Explore to index tracks by date added, most liked, or most played.
 - [ ] Track tags
 - [ ] Search for users and tracks
 - [ ] Notifications for likes, follows, and plays
-- [ ] OmniAuth
+- [x] OmniAuth
 - [ ] Multiple sessions
