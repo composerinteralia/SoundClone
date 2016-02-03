@@ -138,12 +138,13 @@ module.exports = {
     });
   },
 
-  createLike: function (trackId) {
+  createLike: function (trackId, success) {
     $.ajax({
       url: "/api/tracks/" + trackId + "/like",
       method: "post",
       success: function (track) {
         ApiActions.receiveTracks([track]);
+        if (success) success();
       },
       error: function (data) {
         console.log(data);
@@ -151,12 +152,13 @@ module.exports = {
     });
   },
 
-  destroyLike: function (trackId) {
+  destroyLike: function (trackId, success) {
     $.ajax({
       url: "/api/tracks/" + trackId + "/like",
       method: "delete",
       success: function (track) {
         ApiActions.receiveTracks([track]);
+        if (success) success();
       },
       error: function (data) {
         console.log(data);

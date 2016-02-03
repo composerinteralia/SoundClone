@@ -1,6 +1,6 @@
 class Api::LikesController < ApplicationController
   def create
-    like = current_user.likes.new(track: params[:track_id])
+    like = current_user.likes.new(track_id: params[:track_id])
 
     if like.save
       @track = like.track

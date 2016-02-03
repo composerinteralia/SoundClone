@@ -13,7 +13,7 @@ module.exports = React.createClass({
       (PlayerStore.track().id === parseInt(this.props.params.id))
     );
 
-    return { track: null, playing: playing };
+    return { track: null, playing: playing, liked: CurrentUserStore.liked(this.props.params.id) };
   },
 
   componentDidMount: function () {
@@ -61,7 +61,7 @@ module.exports = React.createClass({
     }
 
     var likeButton;
-    if (CurrentUserStore.liked(track.id)) {
+    if (this.state.liked) {
       likeButton = <button onClick={this._unlikeTrack}>Unlike</button>;
     } else {
       likeButton = <button onClick={this._likeTrack}>Like</button>;
@@ -113,11 +113,15 @@ module.exports = React.createClass({
   },
 
   _likeTrack: function () {
-    ApiUtil.createLike(this.state.track.id);
+    ApiUtil.createLike(this.state.track.id, function () {
+      this.setState({ liked: true });
+    }.bind(this));
   },
 
   _unlikeTrack: function () {
-    ApiUtil.destroyLike(this.state.track.id);
+    ApiUtil.destroyLike(this.state.track.id, function () {
+      this.setState({ liked: false });
+    }.bind(this));
   },
 
   _playTrack: function () {
