@@ -21,6 +21,7 @@ module.exports = React.createClass({
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
 
     ApiUtil.fetchSingleTrack(this.props.params.id, function () {
+      debugger
       this._initWavesurfer();
 
       // do all sorts of checks for this
@@ -151,8 +152,7 @@ module.exports = React.createClass({
       progressColor: '#f50',
       barWidth: 2,
       cursorWidth: 0,
-      height: 200,
-      backend: 'MediaElement'
+      height: 200
     });
 
     this.wavesurfer.load(this.state.track.audio_url);
