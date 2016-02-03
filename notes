@@ -11,6 +11,7 @@ Likes -
 ----------------
 
 Play
+  Find and mount existing wavesurfer if it exists?
   Bug on first dismount
   player 38 on deleting track before playing it? (cannot read property track of null)
   Bug from login explore tracks...

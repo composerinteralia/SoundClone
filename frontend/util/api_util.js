@@ -76,11 +76,12 @@ module.exports = {
     });
   },
 
-  fetchSingleTrack: function (trackId) {
+  fetchSingleTrack: function (trackId, success) {
     $.ajax({
       url: "api/tracks/" + trackId,
       success: function (track) {
         ApiActions.receiveTracks([track]);
+        if (success) success();
       },
       error: function (data) {
         console.log(data);

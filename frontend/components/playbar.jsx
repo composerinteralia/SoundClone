@@ -107,6 +107,7 @@ module.exports = React.createClass({
 
   _onPlayerChange: function () {
     if (PlayerStore.isPlaying()) {
+      clearInterval(this.counter);
       this.counter = setInterval(function () {
         this.setState({ time: PlayerStore.currentTime() });
       }.bind(this), 60);

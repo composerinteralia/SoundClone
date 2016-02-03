@@ -180,7 +180,8 @@ module.exports = React.createClass({
       progressColor: '#f50',
       barWidth: 2,
       cursorWidth: 0,
-      backend: 'MediaElement'
+      backend: 'MediaElement',
+      fillParent: true
     });
 
     this.wavesurfer.load(this.props.track.audio_url);

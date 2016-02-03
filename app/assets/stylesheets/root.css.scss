@@ -249,23 +249,29 @@ button.cancel {
   display: block;
 }
 
-.display-name h1 {
+.header-name {
   float: left;
-  font-size: 24px;
-  padding: 10px 5px;
-  margin-bottom: 5px;
-  color: #fff;
   border-radius: 3px;
   background: rgba(0,0,0,.8);
 }
 
-.full-name h2 {
-  float: left;
+h1.header-name {
+  font-size: 24px;
+  color: #fff;
+}
+
+h2.header-name, a.header-name {
   font-size: 16px;
   padding: 5px;
-  color: #ddd;
-  border-radius: 3px;
-  background: rgba(0,0,0,.8);
+  color: #ccc;
+}
+
+.display-name h1 {
+  padding: 10px 5px;
+  margin-bottom: 5px;
+}
+
+.full-name h2 {
   margin-right: 10px;
 }
 
@@ -376,12 +382,23 @@ button.cancel {
 .wave {
   position: relative;
   width: 400px;
-  height: 80px;
-  content: "";
+  height: 64px;
 }
 
-canvas {
-  height: 120px;
+.show-wave {
+  width: 500px;
+  padding-top: 250px;
+}
+
+.wave > wave {
+  height: 70px !important;
+  cursor: pointer;
+  top: 15px;
+  position: absolute;
+}
+
+canvas, wave > wave {
+  top: -30px !important;
 }
 
 .hidden-wave {
@@ -452,7 +469,39 @@ canvas {
 
 // track show
 
+.track-header {
+  height: 320px;
+  padding: 30px;
+  background: linear-gradient(45deg, rgba(0, 0, 0, 0), rgba(60, 60, 100, 1));
+}
 
+.track-header-left {
+  float: left;
+}
+
+.track-header-image {
+  width: 320px;
+  height: 320px;
+  float: right;
+  overflow: hidden;
+}
+
+.track-names {
+  float: left;
+  margin-left: 15px;
+}
+
+.track-user-name:hover {
+  color: #eee;
+}
+
+.track-name h1 {
+  padding: 8px 5px;
+}
+
+.track-user-name {
+  margin-bottom: 5px;
+}
 
 // explore
 

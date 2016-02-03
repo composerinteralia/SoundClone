@@ -47,7 +47,7 @@ module.exports = React.createClass({
     if (user.fname || user.lname) {
       fullName = (
         <div className="full-name group">
-          <h2>
+          <h2 className="header-name">
           {
             [user.fname, user.lname].filter(function(name) {
               return name !== null;
@@ -68,7 +68,7 @@ module.exports = React.createClass({
 
           <div className="profile-names">
             <div className="display-name group">
-              <h1>{user.display_name}</h1>
+              <h1 className="header-name">{user.display_name}</h1>
             </div>
             {fullName}
           </div>
