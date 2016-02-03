@@ -6,14 +6,32 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :profile_image,
                                     content_type: /\Aimage\/.*\Z/
 
-  validates :username, :session_token, presence: true, uniqueness: true
+  validates :email, :display_name, :session_token, presence: true, uniqueness: true
+  validates_format_of :email, with: /@/
   validates :password, length: { minimum: 6, allow_nil: true }
 
   has_many :tracks
 
-  def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
+  def self.find_by_credentials(email, password)
+    user = User.find_by(email: email)
     user.try(:valid_password?, password) ? user : nil
+  end
+
+  def self.find_or_create_by_auth_hash(auth_hash)
+    provider = auth_hash[:provider]
+    uid = auth_hash[:uid]
+    debugger
+    user = User.find_by(provider: provider, uid: uid)
+
+    return user if user
+
+    User.create(
+      provider: provider,
+      uid: uid,
+      email: auth_hash[:info][:email],
+      display_name: auth_hash[:info][:name],
+      password: SecureRandom::urlsafe_base64
+    )
   end
 
   def self.generate_session_token

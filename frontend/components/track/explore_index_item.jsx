@@ -29,7 +29,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var playPauseButton, username, track = this.props.track;
+    var playPauseButton, name, track = this.props.track;
 
     if (this.state.playing && PlayerStore.isPlaying()) {
       playPauseButton = (
@@ -56,9 +56,9 @@ module.exports = React.createClass({
         <section className="explore-info">
           <p className="track-title">{track.title}</p>
           <Link
-            className="track-username"
+            className="track-display-name"
             to={"/users/" + track.user_id}>
-            {track.username}
+            {track.display_name}
           </Link>
         </section>
 

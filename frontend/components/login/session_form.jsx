@@ -8,7 +8,7 @@ module.exports = React.createClass({
   mixins: [History, LinkState],
 
   getInitialState: function () {
-    return { username: "", password: "" };
+    return { email: "", password: "" };
   },
 
   render: function() {
@@ -21,11 +21,11 @@ module.exports = React.createClass({
 
           <form onSubmit={ this._submit } className="login-form">
 
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
-              id="username"
+              id="email"
               type="text"
-              valueLink={this.linkState('username')} />
+              valueLink={this.linkState('email')} />
 
             <label htmlFor="password">Password</label>
             <input

@@ -11,9 +11,10 @@ module.exports = React.createClass({
   getInitialState: function () {
     var user = CurrentUserStore.currentUser();
     return {
-      fname: user.fname,
-      lname: user.lname,
-      bio: user.bio,
+      fname: user.fname || "",
+      lname: user.lname || "",
+      display_name: user.display_name,
+      bio: user.bio || "",
       imageFile: null,
       imageUrl: user.profile_image_url
     };
@@ -35,6 +36,12 @@ module.exports = React.createClass({
               {image}
             </div>
             <input type="file" onChange={this._imageUpload} />
+
+            <label htmlFor="display_name">Display Name<span>*</span></label>
+            <input
+              id="display_name"
+              type="text"
+              valueLink={this.linkState('display_name')} />
 
             <label htmlFor="fname">First Name</label>
             <input
@@ -94,7 +101,7 @@ module.exports = React.createClass({
 
     var formData = new FormData();
 
-
+    formData.append("user[display_name]", this.state.display_name);
     formData.append("user[fname]", this.state.fname);
     formData.append("user[lname]", this.state.lname);
     formData.append("user[bio]", this.state.bio);

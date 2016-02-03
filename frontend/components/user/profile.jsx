@@ -37,10 +37,25 @@ module.exports = React.createClass({
 
     var editButton;
     if (CurrentUserStore.currentUser().id === user.id) {
-        editButton = (
-          <i className="fa fa-pencil"
-            onClick={this._updateUser}></i>
-        );
+      editButton = (
+        <i className="fa fa-pencil"
+          onClick={this._updateUser}></i>
+      );
+    }
+
+    var fullName;
+    if (user.fname || user.lname) {
+      fullName = (
+        <div className="full-name group">
+        <h2>
+        {
+          [user.fname, user.lname].filter(function(val) {
+            return val !== null;
+          }).join(" ")
+        }
+        </h2>
+        </div>
+      );
     }
 
     return (
@@ -52,22 +67,21 @@ module.exports = React.createClass({
           </figure>
 
           <div className="profile-names">
-            <div className="username group">
-              <h1>{user.username}</h1>
+            <div className="display-name group">
+              <h1>{user.display_name}</h1>
             </div>
-            <div className="full-name group">
-              <h2>{user.fname + " " + user.lname}</h2>
-            </div>
+            {fullName}
           </div>
 
         </header>
+
         <section className="content">
-          <section className="profile-nav group">
+          <div className="profile-nav group">
             <nav className="profile-links">
               <p>Tracks</p>
             </nav>
             {editButton}
-          </section>
+          </div>
 
           { this.props.children }
         </section>

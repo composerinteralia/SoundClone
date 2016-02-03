@@ -1,48 +1,54 @@
 User.destroy_all
 
 colson = User.create!(
-  username: "composerinteralia",
+  email: "composerinteralia@example.com",
+  password: "password",
+  display_name: "composerinteralia",
   fname: "Daniel",
   lname: "Colson",
-  password: "password",
   profile_image: File.open("app/assets/images/daniel.jpg")
 )
 
 rachel = User.create!(
-  username: "PiùMosso",
+  email: "kim@example.com",
   password: "1qaz2WSX3edc",
+  display_name: "Più Mosso",
   fname: "Rachel",
   lname: "Kim",
   profile_image: File.open("app/assets/images/piano-outside.jpg")
 )
 
 ella = User.create!(
-  username: "EllaBella",
+  email: "woof@example.com",
   password: "1qaz2WSX3edc",
+  display_name: "Ella Bella",
   fname: "Ella",
   lname: "Kim",
   profile_image: File.open("app/assets/images/ellabella.jpg")
 )
 
 mozart = User.create!(
-  username: "Papapapapapageno",
+  email: "amadeus@example.com",
   password: "1qaz2WSX3edc",
+  display_name: "Papapapapapageno",
   fname: "Wolfgang",
   lname: "Mozart",
   profile_image: File.open("app/assets/images/YoungMozart.jpg")
 )
 
 brahms = User.create!(
-  username: "Big-Bad-B",
+  email: "counterpoint321@example.com",
   password: "1qaz2WSX3edc",
+  display_name: "Big-Bad-B",
   fname: "Johannes",
   lname: "Brahms",
   profile_image: File.open("app/assets/images/brahms.png")
 )
 
 beethoven = User.create!(
-  username: "ImmortalBeloved",
+  email: "joy@example.com",
   password: "1qaz2WSX3edc",
+  display_name: "ImmortalBeloved",
   fname: "Ludwig",
   lname: "van Beethoven",
   profile_image: File.open("app/assets/images/Beethoven.jpg")

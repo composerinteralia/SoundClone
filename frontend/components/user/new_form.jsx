@@ -9,8 +9,9 @@ module.exports = React.createClass({
 
   getInitialState: function () {
     return {
-      username: "",
+      email: "",
       password: "",
+      display_name: "",
       fname: "",
       lname: "",
       bio: "",
@@ -37,17 +38,23 @@ module.exports = React.createClass({
             </div>
             <input type="file" onChange={this._imageUpload} />
 
-            <label htmlFor="username">Username <span>*</span></label>
+            <label htmlFor="email">Email<span>*</span></label>
             <input
-              id="username"
+              id="email"
               type="text"
-              valueLink={this.linkState('username')} />
+              valueLink={this.linkState('email')} />
 
             <label htmlFor="password">Password <span>*</span></label>
             <input
               id="password"
               type="password"
               valueLink={this.linkState('password')} />
+
+            <label htmlFor="display_name">Display Name<span>*</span></label>
+            <input
+              id="display_name"
+              type="text"
+              valueLink={this.linkState('display_name')} />
 
             <label htmlFor="fname">First Name</label>
             <input
@@ -107,8 +114,9 @@ module.exports = React.createClass({
 
     var formData = new FormData();
 
-    formData.append("user[username]", this.state.username);
+    formData.append("user[email]", this.state.email);
     formData.append("user[password]", this.state.password);
+    formData.append("user[display_name]", this.state.display_name);
     formData.append("user[fname]", this.state.fname);
     formData.append("user[lname]", this.state.lname);
     formData.append("user[bio]", this.state.bio);

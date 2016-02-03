@@ -245,11 +245,11 @@ button.cancel {
   float: left;
 }
 
-.username, .full-name {
+.display-name, .full-name {
   display: block;
 }
 
-.username h1 {
+.display-name h1 {
   float: left;
   font-size: 24px;
   padding: 10px 5px;
@@ -365,13 +365,13 @@ height: 50px;
   font-size: 14px;
 }
 
-.track-username {
+.track-display-name {
   font-size: 13px;
   margin-bottom: 1px;
   color: #999;
 }
 
-.track-username:hover {
+.track-display-name:hover {
   color: #000;
 }
 

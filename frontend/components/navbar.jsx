@@ -27,7 +27,7 @@ module.exports = React.createClass({
               <div className="navbar-thumb">
                 <img src={currentUser.profile_image_url}/>
               </div>
-              {currentUser.username}
+              {currentUser.display_name}
             </Link>
             <a className="logout" href="#" onClick={this._logout}>Sign Out</a>
           </div>

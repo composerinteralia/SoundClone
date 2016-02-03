@@ -70,8 +70,8 @@ module.exports = React.createClass({
 
             <div className="track-naming">
               <Link
-                className="track-username"
-                to={"/users/" + track.user_id}>{track.username}
+                className="track-display-name"
+                to={"/users/" + track.user_id}>{track.display_name}
               </Link>
               <p>{track.title}</p>
               <div className={ "wave wave-" + this.props.track.id }></div>

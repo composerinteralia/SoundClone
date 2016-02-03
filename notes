@@ -1,19 +1,20 @@
 Play
-  Keep playing while navigating!
+  Bug on first dismount
+  Bug from login explore tracks...
   disable prev and next if no prev or next track
   keyboard listeners, playbar listeners
+  volume
 
-Track show
+*** ---> Track show
   clicking on track name or image links here
   create redirects here
   add public/private
 
 Profile
-  Add bio
+  Scrap bio
   Make sure editing updates the page!
-  conditional for showing full name
 
-Display errors on forms
+Display errors on forms (check out Robert's awesome)
   -- submit function triggers action to clear message store
   -- ajax errors trigger action to send messages to store
   -- modals listen to the message store (this.state.errors)
@@ -53,9 +54,7 @@ nav
   scroll to top whenever you navigate to new page
 
 Assorted
-  Edit and Delete icons
   Reset guest tracks on logout?
-  validate username has only letters, number, -
   navbar and modals f-ed up when resizing window... (media query)
   more efficient FormData appending?
   Background image or color choice?
