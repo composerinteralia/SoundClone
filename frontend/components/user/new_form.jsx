@@ -14,7 +14,6 @@ module.exports = React.createClass({
       display_name: "",
       fname: "",
       lname: "",
-      bio: "",
       imageFile: null,
       imageUrl: ""
     };
@@ -68,12 +67,6 @@ module.exports = React.createClass({
               type="text"
               valueLink={this.linkState('lname')} />
 
-            <label htmlFor="bio">Bio</label>
-            <textarea
-              id="bio"
-              type="text"
-              valueLink={this.linkState('bio')} />
-
             <input
               type="submit"
               className="hidden-submit"
@@ -119,7 +112,6 @@ module.exports = React.createClass({
     formData.append("user[display_name]", this.state.display_name);
     formData.append("user[fname]", this.state.fname);
     formData.append("user[lname]", this.state.lname);
-    formData.append("user[bio]", this.state.bio);
 
     if (this.state.imageFile) {
       formData.append("user[profile_image]", this.state.imageFile);

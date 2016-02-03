@@ -12,7 +12,6 @@ Play
 
 Profile
   Scrap bio
-  Make sure editing updates the page!
 
 Display errors on forms (check out Robert's awesome)
   -- submit function triggers action to clear message store

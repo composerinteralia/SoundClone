@@ -32,7 +32,6 @@ class Api::UsersController < ApplicationController
       :display_name,
       :fname,
       :lname,
-      :bio,
       :profile_image
     )
   end
