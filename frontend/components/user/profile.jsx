@@ -50,12 +50,24 @@ module.exports = React.createClass({
           <figure className="profile-image">
             <img src={user.profile_image_url}/>
           </figure>
-          <h1 className="profile-username">{user.username}</h1>
+
+          <div className="profile-names">
+            <div className="username group">
+              <h1>{user.username}</h1>
+            </div>
+            <div className="full-name group">
+              <h2>{user.fname + " " + user.lname}</h2>
+            </div>
+          </div>
+
         </header>
         <section className="content">
-          <nav className="profile-nav group">
+          <section className="profile-nav group">
+            <nav className="profile-links">
+              <p>Tracks</p>
+            </nav>
             {editButton}
-          </nav>
+          </section>
 
           { this.props.children }
         </section>

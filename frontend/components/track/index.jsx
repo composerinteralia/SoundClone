@@ -20,18 +20,15 @@ module.exports = React.createClass({
   render: function () {
     var tracks = this.state.tracks;
     return (
-      <div className="tracks">
-        <h2>Tracks</h2>
-        <ul className="tracks-list">
-          {
-            tracks.map(function (track) {
-              return (
-                <TrackIndexItem key={track.id} track={track} />
-              );
-            })
-          }
-        </ul>
-      </div>
+      <ul className="tracks-list">
+        {
+          tracks.map(function (track) {
+            return (
+              <TrackIndexItem key={track.id} track={track} />
+            );
+          })
+        }
+      </ul>
     );
   },
 

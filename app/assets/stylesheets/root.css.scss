@@ -239,14 +239,34 @@ button.cancel {
   overflow: hidden;
 }
 
-.profile-username {
+.profile-names {
+  width: 470px;
+  padding-left: 30px;
+  float: left;
+}
+
+.username, .full-name {
+  display: block;
+}
+
+.username h1 {
   float: left;
   font-size: 24px;
   padding: 10px 5px;
+  margin-bottom: 5px;
   color: #fff;
   border-radius: 3px;
   background: rgba(0,0,0,.8);
-  margin-left: 30px;
+}
+
+.full-name h2 {
+  float: left;
+  font-size: 16px;
+  padding: 5px;
+  color: #ddd;
+  border-radius: 3px;
+  background: rgba(0,0,0,.8);
+  margin-right: 10px;
 }
 
 .profile-nav {
@@ -254,6 +274,12 @@ button.cancel {
   text-align: right;
   border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
+}
+
+.profile-links {
+  float: left;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 .fa-pencil, .fa-trash {
@@ -315,19 +341,15 @@ height: 50px;
 
 // tracks index
 
-.tracks {
-  margin-top: 10px;
-}
-
+//remove
 .tracks > h2 {
   font-weight: bold;
   font-size: 24px;
 }
 
 .track {
-  margin: 10px 0;
   display: block;
-  margin: 40px 0;
+  margin: 20px 0 40px;
 }
 
 .track-detail-container {
