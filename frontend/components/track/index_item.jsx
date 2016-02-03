@@ -20,6 +20,8 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function () {
+    this.currentUserChangeToken =
+      CurrentUserStore.addListener(this._onCurrentUserChange);
     this.dialogToken = DialogStore.addListener(this._onDialog);
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
 
@@ -27,6 +29,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function () {
+    this.currentUserChangeToken.remove();
     this.dialogToken.remove();
     this.playerChangeToken.remove();
 
@@ -36,10 +39,15 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var playPauseButton, trackButtons, track = this.props.track;
+    var playPauseButton,
+        trackButtons,
+        track = this.props.track,
+        display_name = track.display_name,
+        currentUser = CurrentUserStore.currentUser();
 
-    if (CurrentUserStore.currentUser().id === track.user_id) {
+    if (currentUser && currentUser.id === track.user_id) {
       trackButtons = this._trackButtons();
+      display_name = currentUser.display_name;
     }
 
     if (this.state.playing && PlayerStore.isPlaying()) {
@@ -71,7 +79,7 @@ module.exports = React.createClass({
             <div className="track-naming">
               <Link
                 className="track-display-name"
-                to={"/users/" + track.user_id}>{track.display_name}
+                to={"/users/" + track.user_id}>{display_name}
               </Link>
               <p>{track.title}</p>
               <div className={ "wave wave-" + this.props.track.id }></div>
@@ -135,6 +143,10 @@ module.exports = React.createClass({
     ApiUtil.destroyTrack(trackId, function () {
       PlayerActions.destroy(trackId);
     });
+  },
+
+  _onCurrentUserChange: function () {
+    this.forceUpdate();
   },
 
   _onDialog: function () {

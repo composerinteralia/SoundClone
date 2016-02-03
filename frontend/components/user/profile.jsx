@@ -92,6 +92,7 @@ module.exports = React.createClass({
   _onChange: function () {
     var user = UserStore.find(this.props.params.id);
     this.setState({ user: user });
+    this.forceUpdate();
   },
 
   _onModal: function () {

@@ -43,6 +43,7 @@ module.exports = {
       data: formData,
       success: function (data) {
         CurrentUserActions.receiveCurrentUser(data);
+        ApiActions.receiveUsers([data]);
         ModalActions.destroyModal();
       },
       error: function (data) {

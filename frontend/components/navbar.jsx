@@ -7,8 +7,20 @@ var React = require('react'),
 module.exports = React.createClass({
   mixins: [History],
 
+  getInitialState: function () {
+    return { user: CurrentUserStore.currentUser() };
+  },
+
+  componentDidMount: function () {
+    this.onChangeToken = CurrentUserStore.addListener(this._onChange);
+  },
+
+  componenetWillUnmount: function () {
+    this.onChangeToken.remove();
+  },
+
   render: function () {
-    var currentUser = CurrentUserStore.currentUser();
+    var user = this.state.user;
 
     return (
       <header className="navbar">
@@ -23,11 +35,11 @@ module.exports = React.createClass({
 
           <div className="navbar-right group">
             <Link to="/upload" className="upload">Upload</Link>
-            <Link to={"/users/" + currentUser.id} className="current-user-profile">
+            <Link to={"/users/" + user.id} className="current-user-profile">
               <div className="navbar-thumb">
-                <img src={currentUser.profile_image_url}/>
+                <img src={user.profile_image_url}/>
               </div>
-              {currentUser.display_name}
+              {user.display_name}
             </Link>
             <a className="logout" href="#" onClick={this._logout}>Sign Out</a>
           </div>
@@ -41,6 +53,10 @@ module.exports = React.createClass({
     SessionsApiUtil.logout(function () {
       this.history.pushState({}, "/login");
     }.bind(this));
+  },
+
+  _onChange: function () {
+    this.setState({ user: CurrentUserStore.currentUser() });
   }
 
 });
