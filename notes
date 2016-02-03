@@ -1,12 +1,13 @@
-*** ---> Track show
-  float image right
-  wavesurfer and big play button
-  add username (link), description
+Work on wavesurfer!
 
-Likes -
-  Tracks load with like count (update as like button pressed)
-  Users load with count of tracks likes
-  Like index shows a given user's liked tracks (like store)
+Add description to track show
+
+Track like count on show page
+Like/unlike buttons (based on current user's liked tracks) on index_item, explore_item
+  - updates like counts (ajax request sends back a track with updated count)
+  - toggles like/unlike button
+
+Like index (gets a user's liked tracks)
 
 ----------------
 
@@ -27,6 +28,7 @@ Display errors on forms (check out Robert's awesome)
   -- ul with li of props (list-style bullet)
 
 _________________
+Plays
 
 Follows
   Users load with count of followers and followees

@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
 
   has_many :tracks
+  has_many :likes, dependent: :destroy
+  has_many :liked_tracks, through: :likes, source: :track
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

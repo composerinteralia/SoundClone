@@ -3,7 +3,8 @@ var React = require('react'),
     TrackStore = require('../../stores/track'),
     PlayerStore = require('../../stores/player'),
     PlayerActions = require('../../actions/player_actions'),
-    ApiUtil = require('../../util/api_util');
+    ApiUtil = require('../../util/api_util'),
+    CurrentUserStore = require('../../stores/current_user');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -21,6 +22,10 @@ module.exports = React.createClass({
 
     ApiUtil.fetchSingleTrack(this.props.params.id, function () {
       this._initWavesurfer();
+
+      // do all sorts of checks for this
+      // var w = PlayerStore.wavesurfer().wavesurfer;
+      // $("." + w.container.classList[1])[0].appendChild(w.container.children[0]);
     }.bind(this));
   },
 
@@ -55,6 +60,13 @@ module.exports = React.createClass({
       );
     }
 
+    var likeButton;
+    if (CurrentUserStore.liked(track.id)) {
+      likeButton = <button onClick={this._unlikeTrack}>Unlike</button>;
+    } else {
+      likeButton = <button onClick={this._likeTrack}>Like</button>;
+    }
+
     return (
       <main className="main">
         <header className="track-header group">
@@ -85,7 +97,9 @@ module.exports = React.createClass({
         </header>
 
         <section className="content">
+          {likeButton}
           <div>{track.description}</div>
+
         </section>
 
       </main>
@@ -95,6 +109,14 @@ module.exports = React.createClass({
   _onChange: function () {
     var track = TrackStore.find(this.props.params.id);
     this.setState({ track: track });
+  },
+
+  _likeTrack: function () {
+    ApiUtil.createLike(this.state.track.id);
+  },
+
+  _unlikeTrack: function () {
+    ApiUtil.destroyLike(this.state.track.id);
   },
 
   _playTrack: function () {
@@ -124,6 +146,7 @@ module.exports = React.createClass({
       progressColor: '#f50',
       barWidth: 2,
       cursorWidth: 0,
+      height: 200,
       backend: 'MediaElement'
     });
 

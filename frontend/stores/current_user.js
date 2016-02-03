@@ -6,6 +6,10 @@ var _currentUser = {},
     _hasBeenFetched = false,
     CurrentUserStore = new Store(AppDispatcher);
 
+CurrentUserStore.liked = function (trackId) {
+  return _currentUser.liked_track_ids.includes(trackId);
+};
+
 CurrentUserStore.currentUser = function () {
   return $.extend({}, _currentUser);
 };

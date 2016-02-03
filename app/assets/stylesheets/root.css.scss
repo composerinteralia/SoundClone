@@ -382,19 +382,22 @@ h2.header-name, a.header-name {
 .wave {
   position: relative;
   width: 400px;
-  height: 64px;
-}
-
-.show-wave {
-  width: 500px;
-  padding-top: 250px;
 }
 
 .wave > wave {
   height: 70px !important;
   cursor: pointer;
   top: 15px;
-  position: absolute;
+}
+
+.show-wave {
+  width: 500px;
+  margin-top: 180px;
+}
+
+.show-wave > wave {
+  height: 150px !important;
+  cursor: pointer;
 }
 
 canvas, wave > wave {

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       collection do
         get 'explore'
       end
+
+      resource :like, only: [:create, :destroy]
     end
 
     resources :users, only: [:create, :show] do

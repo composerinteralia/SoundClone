@@ -136,5 +136,28 @@ module.exports = {
         console.log(data);
       }
     });
+  },
+
+  createLike: function (trackId) {
+    $.ajax({
+      url: "/api/tracks/" + trackId + "/like",
+      method: "post",
+      success: function (track) {
+        debugger
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+  },
+
+  destroyLike: function (trackId) {
+    $.ajax({
+      url: "/api/tracks/" + trackId + "/like",
+      method: "delete",
+      success: function (data) {
+        debugger
+      }
+    });
   }
 };

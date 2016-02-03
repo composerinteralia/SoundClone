@@ -28,7 +28,6 @@ class Api::TracksController < ApplicationController
     @tracks =
       user.tracks
         .order('updated_at DESC')
-        .includes(:user)
   end
 
   def explore
@@ -36,7 +35,7 @@ class Api::TracksController < ApplicationController
       Track.all
         .where.not(user: current_user)
         .order('updated_at DESC')
-        .includes(:user)
+        .includes(:user, :likes)
 
     render :index
   end

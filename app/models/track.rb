@@ -12,4 +12,6 @@ class Track < ActiveRecord::Base
   validates :title, uniqueness: { scope: :user }
 
   belongs_to :user
+  has_many :likes, dependent: :destroy
+  has_many :likers, through: :likes, source: :user
 end
