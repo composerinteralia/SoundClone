@@ -1,17 +1,22 @@
+*** ---> Track show
+  float image right
+  wavesurfer and big play button
+  add username (link), description
+
+Likes -
+  Tracks load with like count (update as like button pressed)
+  Users load with count of tracks likes
+  Like index shows a given user's liked tracks (like store)
+
+----------------
+
 Play
   Bug on first dismount
+  player 38 on deleting track before playing it? (cannot read property track of null)
   Bug from login explore tracks...
   disable prev and next if no prev or next track
   keyboard listeners, playbar listeners
   volume
-
-*** ---> Track show
-  clicking on track name or image links here
-  create redirects here
-  add public/private
-
-Profile
-  Scrap bio
 
 Display errors on forms (check out Robert's awesome)
   -- submit function triggers action to clear message store
@@ -21,11 +26,6 @@ Display errors on forms (check out Robert's awesome)
   -- ul with li of props (list-style bullet)
 
 _________________
-
-Likes -
-  Tracks load with like count (update as like button pressed)
-  Users load with count of tracks likes
-  Like index shows a given user's liked tracks (like store)
 
 Follows
   Users load with count of followers and followees
@@ -57,3 +57,5 @@ Assorted
   navbar and modals f-ed up when resizing window... (media query)
   more efficient FormData appending?
   Background image or color choice?
+
+  track public/private

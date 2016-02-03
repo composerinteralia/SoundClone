@@ -35,12 +35,14 @@ module.exports = React.createClass({
 
           <div className="navbar-right group">
             <Link to="/upload" className="upload">Upload</Link>
-            <Link to={"/users/" + user.id} className="current-user-profile">
+
+            <Link to={"/users/" + user.id} className="current-user">
               <div className="navbar-thumb">
                 <img src={user.profile_image_url}/>
               </div>
               {user.display_name}
             </Link>
+
             <a className="logout" href="#" onClick={this._logout}>Sign Out</a>
           </div>
         </nav>

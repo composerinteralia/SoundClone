@@ -44,7 +44,7 @@ TrackStore.__onDispatch = function (payload) {
 
 TrackStore.find = function (trackId) {
   return _tracks.find(function (track) {
-    return track.id === trackId;
+    return track.id === parseInt(trackId);
   });
 };
 

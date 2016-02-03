@@ -1,30 +1,35 @@
 var React = require('react'),
+    Link = require('react-router').Link,
     PlayerActions = require('../actions/player_actions'),
     PlayerStore = require('../stores/player'),
     TrackStore = require('../stores/track');
 
 var formatSecondsAsTime = function (secs) {
-        secs = Math.round(secs);
+  secs = Math.round(secs);
+	var min = Math.floor(secs / 60 );
+	var sec = secs - (min * 60);
 
-    		var min = Math.floor(secs / 60 );
-    		var sec = secs - (min * 60);
+	if (sec < 10)  { sec  = "0" + sec; }
 
-    		if (sec < 10)  { sec  = "0" + sec; }
-
-        return min + ':' + sec;
+  return min + ':' + sec;
 };
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return { track: PlayerStore.track(), time: PlayerStore.currentTime };
+    return {
+      track: PlayerStore.track(),
+      time: PlayerStore.currentTime()
+    };
   },
 
   componentDidMount: function () {
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
 
-    this.counter = setInterval(function () {
-      this.setState({ time: PlayerStore.currentTime() });
-    }.bind(this), 60);
+    if (PlayerStore.isPlaying()) {
+      this.counter = setInterval(function () {
+        this.setState({ time: PlayerStore.currentTime() });
+      }.bind(this), 60);
+    }
   },
 
   componentWillUnmount: function () {
@@ -34,7 +39,9 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    if (!this.state.track) {
+    var track = this.state.track;
+
+    if (!track) {
       return <div></div>;
     }
 
@@ -44,6 +51,7 @@ module.exports = React.createClass({
     return (
       <footer className="playbar">
         <div className="playbar-body group">
+
           <div className="controls">
             <i className="fa fa-step-backward playback-button"
               onClick={this._playPrev}></i>
@@ -69,12 +77,17 @@ module.exports = React.createClass({
             <span>{formatSecondsAsTime(totalTime)}</span>
           </div>
 
-          <div className="track-info group">
+          <Link
+            to={"/tracks/" + track.id}
+            className="track-info group">
+
             <figure className="playbar-art">
-              <img src={this.state.track.image_url}/>
+              <img src={track.image_url}/>
             </figure>
-            <p className="playbar-title">{this.state.track.title}</p>
-          </div>
+
+            <p className="playbar-title">{track.title}</p>
+          </Link>
+
         </div>
       </footer>
     );
@@ -93,6 +106,14 @@ module.exports = React.createClass({
   },
 
   _onPlayerChange: function () {
+    if (PlayerStore.isPlaying()) {
+      this.counter = setInterval(function () {
+        this.setState({ time: PlayerStore.currentTime() });
+      }.bind(this), 60);
+    } else {
+      clearInterval(this.counter);
+    }
+
     this.setState({ track: PlayerStore.track() });
   },
 
@@ -101,6 +122,8 @@ module.exports = React.createClass({
   },
 
   _pauseTrack: function () {
+    clearInterval(this.counter);
+
     PlayerActions.pause();
   },
 

@@ -47,13 +47,13 @@ module.exports = React.createClass({
     if (user.fname || user.lname) {
       fullName = (
         <div className="full-name group">
-        <h2>
-        {
-          [user.fname, user.lname].filter(function(val) {
-            return val !== null;
-          }).join(" ")
-        }
-        </h2>
+          <h2>
+          {
+            [user.fname, user.lname].filter(function(name) {
+              return name !== null;
+            }).join(" ")
+          }
+          </h2>
         </div>
       );
     }
@@ -92,7 +92,6 @@ module.exports = React.createClass({
   _onChange: function () {
     var user = UserStore.find(this.props.params.id);
     this.setState({ user: user });
-    this.forceUpdate();
   },
 
   _onModal: function () {

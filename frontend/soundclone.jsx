@@ -14,6 +14,7 @@ var React = require('react'),
     Upload = require('./components/track/upload'),
     Profile = require('./components/user/profile'),
     TracksIndex = require('./components/track/index'),
+    Track = require('./components/track/show'),
     Login = require('./components/login/login');
 
 
@@ -56,6 +57,7 @@ var router = (
       <Route path="users/:id" component={ Profile } >
         <IndexRoute component={ TracksIndex } />
       </Route>
+      <Route path="tracks/:id" component={ Track } />
     </Route>
 
     <Route path="/login" component={ Login } onEnter={_ensureLoggedOut} />

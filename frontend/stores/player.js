@@ -64,7 +64,7 @@ PlayerStore.__onDispatch = function (payload) {
 };
 
 PlayerStore.track = function () {
-  return _currentWavesurfer && _currentWavesurfer.track;
+  return (_currentWavesurfer && _currentWavesurfer.track) || undefined ;
 };
 
 PlayerStore.isPlaying = function () {
@@ -72,11 +72,11 @@ PlayerStore.isPlaying = function () {
 };
 
 PlayerStore.currentTime = function () {
-  return _currentWavesurfer && _currentWavesurfer.wavesurfer.getCurrentTime();
+  return (_currentWavesurfer && _currentWavesurfer.wavesurfer.getCurrentTime()) || 0;
 };
 
 PlayerStore.totalTime = function () {
-  return _currentWavesurfer && _currentWavesurfer.wavesurfer.getDuration();
+  return (_currentWavesurfer && _currentWavesurfer.wavesurfer.getDuration()) || 0;
 };
 
 module.exports = PlayerStore;

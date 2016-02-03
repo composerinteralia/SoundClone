@@ -54,12 +54,19 @@ module.exports = React.createClass({
         </figure>
 
         <section className="explore-info">
-          <p className="track-title">{track.title}</p>
+
           <Link
-            className="track-display-name"
+            className="track-name"
+            to={"/tracks/" + track.id}>
+            {track.title}
+          </Link>
+
+          <Link
+            className="track-user"
             to={"/users/" + track.user_id}>
             {track.display_name}
           </Link>
+          
         </section>
 
         <div className={ "hidden-wave wave-" + this.props.track.id }></div>

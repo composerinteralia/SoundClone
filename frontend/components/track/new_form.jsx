@@ -96,9 +96,8 @@ module.exports = React.createClass({
       formData.append("track[track_art]", this.state.imageFile);
     }
 
-    ApiUtil.createTrack (formData, function () {
-      this.history.pushState({}, "/users/" + CurrentUserStore.currentUser().id);
-      // redirect to track show page
+    ApiUtil.createTrack (formData, function (trackId) {
+      this.history.pushState({}, "/tracks/" + trackId);
     }.bind(this));
   },
 

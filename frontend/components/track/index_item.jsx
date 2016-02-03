@@ -67,9 +67,9 @@ module.exports = React.createClass({
 
     return (
       <li className="track group">
-        <figure className="track-image">
+        <Link to={"/tracks/" + track.id} className="track-image">
           <img src={track.image_url}/>
-        </figure>
+        </Link>
 
         <section className="track-detail-container">
 
@@ -77,11 +77,18 @@ module.exports = React.createClass({
             {playPauseButton}
 
             <div className="track-naming">
+
               <Link
-                className="track-display-name"
+                className="track-user"
                 to={"/users/" + track.user_id}>{display_name}
               </Link>
-              <p>{track.title}</p>
+
+              <Link
+                className="track-name"
+                to={"/tracks/" + track.id}>
+                {track.title}
+              </Link>
+
               <div className={ "wave wave-" + this.props.track.id }></div>
             </div>
           </div>

@@ -11,7 +11,7 @@ module.exports = {
         if (success) success();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -25,7 +25,7 @@ module.exports = {
         if (callback) callback();
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   },
@@ -39,7 +39,7 @@ module.exports = {
         if (callback) callback(currentUser);
       },
       error: function (data) {
-        console.log(data)
+        console.log(data);
       }
     });
   }

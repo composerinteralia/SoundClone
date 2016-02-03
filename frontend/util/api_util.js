@@ -11,8 +11,8 @@ module.exports = {
       processData: false,
       contentType: false,
       data: formData,
-      success: function (data) {
-        CurrentUserActions.receiveCurrentUser(data);
+      success: function (currentUser) {
+        CurrentUserActions.receiveCurrentUser(currentUser);
         ModalActions.destroyModal();
         if (success) success();
       },
@@ -25,8 +25,8 @@ module.exports = {
   fetchUser: function (userId) {
     $.ajax({
       url: "/api/users/" + userId,
-      success: function (data) {
-        ApiActions.receiveUsers([data]);
+      success: function (user) {
+        ApiActions.receiveUsers([user]);
       },
       error: function (data) {
         console.log(data);
@@ -41,9 +41,9 @@ module.exports = {
       processData: false,
       contentType: false,
       data: formData,
-      success: function (data) {
-        CurrentUserActions.receiveCurrentUser(data);
-        ApiActions.receiveUsers([data]);
+      success: function (user) {
+        CurrentUserActions.receiveCurrentUser(user);
+        ApiActions.receiveUsers([user]);
         ModalActions.destroyModal();
       },
       error: function (data) {
@@ -55,8 +55,8 @@ module.exports = {
   fetchExploreTracks: function () {
     $.ajax({
       url: "api/tracks/explore",
-      success: function (data) {
-        ApiActions.receiveTracks(data);
+      success: function (tracks) {
+        ApiActions.receiveTracks(tracks);
       },
       error: function (data) {
         console.log(data);
@@ -67,8 +67,8 @@ module.exports = {
   fetchUserTracks: function (userId) {
     $.ajax({
       url: "api/users/" + userId + "/tracks",
-      success: function (data) {
-        ApiActions.receiveTracks(data);
+      success: function (tracks) {
+        ApiActions.receiveTracks(tracks);
       },
       error: function (data) {
         console.log(data);
@@ -79,8 +79,8 @@ module.exports = {
   fetchSingleTrack: function (trackId) {
     $.ajax({
       url: "api/tracks/" + trackId,
-      success: function (data) {
-        ApiActions.receiveTracks([data]);
+      success: function (track) {
+        ApiActions.receiveTracks([track]);
       },
       error: function (data) {
         console.log(data);
@@ -95,9 +95,9 @@ module.exports = {
       processData: false,
       contentType: false,
       data: formData,
-      success: function (data) {
-        ApiActions.receiveSingleTrack(data);
-        if (success) success();
+      success: function (track) {
+        ApiActions.receiveSingleTrack(track);
+        if (success) success(track.id);
       },
       error: function (data) {
         console.log(data);
@@ -112,8 +112,8 @@ module.exports = {
       processData: false,
       contentType: false,
       data: formData,
-      success: function (data) {
-        ApiActions.receiveSingleTrack(data);
+      success: function (track) {
+        ApiActions.receiveSingleTrack(track);
         ModalActions.destroyModal();
       },
       error: function (data) {
@@ -126,8 +126,8 @@ module.exports = {
     $.ajax({
       url: "/api/tracks/" + trackId,
       method: "delete",
-      success: function (data) {
-        ApiActions.removeTrack(data);
+      success: function (track) {
+        ApiActions.removeTrack(track);
         DialogActions.clearDialog();
         if (success) success();
       },

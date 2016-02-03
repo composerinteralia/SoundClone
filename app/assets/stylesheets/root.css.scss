@@ -125,12 +125,12 @@ button.cancel {
   float: right;
 }
 
-.current-user-profile {
+.current-user {
   vertical-align: center;
   padding: 8px 15px;
 }
 
-.current-user-profile > span {
+.current-user > span {
   float: left;
   padding: 6.5px 0 6.5px 10px;
 }
@@ -335,66 +335,8 @@ button.cancel {
 }
 
 .form-image {
-width: 50px;
-height: 50px;
-}
-
-// tracks index
-
-//remove
-.tracks > h2 {
-  font-weight: bold;
-  font-size: 24px;
-}
-
-.track {
-  display: block;
-  margin: 20px 0 40px;
-}
-
-.track-detail-container {
-  float: left;
-  width: 500px;
+  width: 50px;
   height: 50px;
-  margin-left: 15px;
-}
-
-.track-naming {
-  float: left;
-  padding-left: 10px;
-  font-size: 14px;
-}
-
-.track-display-name {
-  font-size: 13px;
-  margin-bottom: 1px;
-  color: #999;
-}
-
-.track-display-name:hover {
-  color: #000;
-}
-
-.track-buttons {
-  position: relative;
-  font-size: 14px;
-  margin-top: 30px;
-}
-
-.track-button {
-  float:left;
-  visibility: hidden;
-}
-
-.track:hover .track-button {
-  visibility: visible;
-}
-
-.track-image {
-  width: 150px;
-  height: 150px;
-  float: left;
-  overflow: hidden;
 }
 
 // play buttons
@@ -445,6 +387,72 @@ canvas {
 .hidden-wave {
   display: none;
 }
+
+// tracks index
+
+//remove this later
+.tracks > h2 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.track {
+  display: block;
+  margin: 20px 0 40px;
+}
+
+.track-detail-container {
+  float: left;
+  width: 500px;
+  height: 50px;
+  margin-left: 15px;
+}
+
+.track-naming {
+  float: left;
+  padding-left: 10px;
+  font-size: 14px;
+}
+
+.track-user {
+  font-size: 13px;
+  margin-bottom: 1px;
+  color: #999;
+}
+
+.track-name, .track-user {
+  display: block;
+}
+
+.track-name:hover, .track-user:hover {
+  color: #d60;
+}
+
+.track-buttons {
+  position: relative;
+  font-size: 14px;
+  margin-top: 30px;
+}
+
+.track-button {
+  float:left;
+  visibility: hidden;
+}
+
+.track:hover .track-button {
+  visibility: visible;
+}
+
+.track-image {
+  width: 150px;
+  height: 150px;
+  float: left;
+  overflow: hidden;
+}
+
+// track show
+
+
 
 // explore
 
@@ -565,6 +573,10 @@ canvas {
 
 .track-info {
   float: right;
+}
+
+.track-info:hover {
+  background: #edd;
 }
 
 .playbar-art {
