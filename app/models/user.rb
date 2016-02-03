@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   def self.find_or_create_by_auth_hash(auth_hash)
     provider = auth_hash[:provider]
     uid = auth_hash[:uid]
-    debugger
+
     user = User.find_by(provider: provider, uid: uid)
 
     return user if user
