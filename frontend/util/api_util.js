@@ -143,7 +143,7 @@ module.exports = {
       url: "/api/tracks/" + trackId + "/like",
       method: "post",
       success: function (track) {
-        debugger
+        ApiActions.receiveTracks([track]);
       },
       error: function (data) {
         console.log(data);
@@ -155,8 +155,11 @@ module.exports = {
     $.ajax({
       url: "/api/tracks/" + trackId + "/like",
       method: "delete",
-      success: function (data) {
-        debugger
+      success: function (track) {
+        ApiActions.receiveTracks([track]);
+      },
+      error: function (data) {
+        console.log(data);
       }
     });
   }

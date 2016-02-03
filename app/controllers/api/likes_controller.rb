@@ -1,10 +1,9 @@
 class Api::LikesController < ApplicationController
   def create
-    @track = Track.find(params[:track_id])
-    like = current_user.likes.new(track: @track)
+    like = current_user.likes.new(track: params[:track_id])
 
     if like.save
-      # what to render?
+      @track = like.track
       render 'api/tracks/show'
     else
       render json: like.errors.full_messages, status: :unprocessable_entity
@@ -12,12 +11,11 @@ class Api::LikesController < ApplicationController
   end
 
   def destroy
-    like = current_user.likes.find_by(track_id: params[:track_id])
+    like = current_user.likes.find_by(track: params[:track_id])
 
     if like.destroy
-      # not sure yet
-      @user = current_user
-      render 'api/users/show'
+      @track = like.track
+      render 'api/tracks/show'
     else
       render json: like.errors.full_messages, status: :unprocessable_entity
     end

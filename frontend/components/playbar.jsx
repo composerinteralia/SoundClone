@@ -34,7 +34,6 @@ module.exports = React.createClass({
 
   componentWillUnmount: function () {
     this.playerChangeToken.remove();
-
     clearInterval(this.counter);
   },
 

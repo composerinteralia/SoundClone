@@ -98,6 +98,7 @@ module.exports = React.createClass({
 
         <section className="content">
           {likeButton}
+          {track.like_count}
           <div>{track.description}</div>
 
         </section>

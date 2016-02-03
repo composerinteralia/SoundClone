@@ -66,7 +66,7 @@ module.exports = React.createClass({
             to={"/users/" + track.user_id}>
             {track.display_name}
           </Link>
-          
+
         </section>
 
         <div className={ "hidden-wave wave-" + this.props.track.id }></div>
@@ -99,8 +99,7 @@ module.exports = React.createClass({
       container: $(container)[0],
       waveColor: '#000',
       progressColor: '#000',
-      cursorWidth: 0,
-      backend: 'MediaElement'
+      cursorWidth: 0
     });
 
     this.wavesurfer.load(this.props.track.audio_url);

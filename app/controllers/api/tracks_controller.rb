@@ -28,6 +28,7 @@ class Api::TracksController < ApplicationController
     @tracks =
       user.tracks
         .order('updated_at DESC')
+        .includes(:likes)
   end
 
   def explore
