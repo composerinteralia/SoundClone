@@ -401,7 +401,7 @@ h2.header-name, a.header-name {
 
 .wave {
   width: 400px;
-  height: 68px;
+  height: 45px;
 }
 
 .wave > wave {
@@ -625,7 +625,7 @@ wave {
 
 .progress {
   float: left;
-  padding: 14px 60px;
+  padding: 14px 70px;
   font-size: 12px;
 }
 
@@ -655,10 +655,12 @@ wave {
 
 .track-info {
   float: right;
+  padding: 0 15px;
 }
 
 .track-info:hover {
-  background: #edd;
+  background: #f50;
+  color: #fff;
 }
 
 .playbar-art {
