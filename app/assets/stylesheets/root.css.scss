@@ -224,6 +224,26 @@ button.cancel {
   background: #e42;
 }
 
+.facebook {
+  display: block;
+  margin: auto;
+  height: 50px;
+  width: 210px;
+  margin-top: 20px;
+}
+
+.facebook > div {
+  background: asset-url('facebook.png') no-repeat;
+  background-size: cover;
+  height: 100%;
+  width: auto;
+}
+
+.facebook:hover {
+  background: #f90;
+  border-radius: 5px;
+}
+
 // profile
 
 .profile-header {
