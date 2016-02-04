@@ -1,8 +1,7 @@
 var React = require('react'),
     Link = require('react-router').Link,
-    PlayerActions = require('../actions/player_actions'),
     PlayerStore = require('../stores/player'),
-    TrackStore = require('../stores/track');
+    PlayerControls = require('../mixins/player_controls');
 
 var formatSecondsAsTime = function (secs) {
   secs = Math.round(secs);
@@ -15,6 +14,8 @@ var formatSecondsAsTime = function (secs) {
 };
 
 module.exports = React.createClass({
+  mixins: [PlayerControls],
+
   getInitialState: function () {
     return {
       track: PlayerStore.track(),
@@ -47,12 +48,12 @@ module.exports = React.createClass({
 
           <div className="controls">
             <i className="fa fa-step-backward playback-button"
-              onClick={this._playPrev}></i>
+              onClick={this._playPrev.bind(null, track)}></i>
 
             {this._playPauseButton()}
 
             <i className="fa fa-step-forward playback-button"
-              onClick={this._playNext}></i>
+              onClick={this._playNext.bind(null, track)}></i>
           </div>
 
           <div className="progress">
@@ -93,7 +94,7 @@ module.exports = React.createClass({
       );
     } else {
       return (<i className="fa fa-play playback-button"
-        onClick={this._playTrack}></i>
+        onClick={this._playTrack.bind(null, this.state.track)}></i>
       );
     }
   },
@@ -110,29 +111,5 @@ module.exports = React.createClass({
     }
 
     this.setState({ track: PlayerStore.track() });
-  },
-
-  _playTrack: function () {
-    PlayerActions.play(this.state.track.id);
-  },
-
-  _pauseTrack: function () {
-    PlayerActions.pause();
-  },
-
-  _playNext: function () {
-    var nextTrack = TrackStore.next(this.state.track);
-
-    if (nextTrack) {
-      PlayerActions.play(nextTrack.id);
-    }
-  },
-
-  _playPrev: function () {
-    var prevTrack = TrackStore.prev(this.state.track);
-
-    if (prevTrack) {
-      PlayerActions.play(prevTrack.id);
-    }
   }
 });

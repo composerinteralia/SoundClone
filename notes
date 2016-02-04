@@ -1,22 +1,14 @@
-Questions:
-  - setState???
-  - receiving new props
+glow around like button
+word when hovering over logos
 
-Wavesurfer styling!!! (fucks up edit buttons)
-
-renaming in player store
-
-
-
-Like/unlike buttons (based on current user's liked tracks) on index_item, explore_item
-  - updates like counts (ajax request sends back a track with updated count)
-  - toggles like/unlike button
+rename player store internals
 
 Like index (gets a user's liked tracks)
 
 ----------------
 
 Play
+  better solution for wavesurfer load: disable play button until loaded
   Work on setting and clearing interval (on play, on pause, on finish)
   Next track when finished
   keyboard listeners, playbar listeners

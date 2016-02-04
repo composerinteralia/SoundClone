@@ -365,6 +365,13 @@ h2.header-name, a.header-name {
   height: 50px;
 }
 
+// like buttons
+
+button.unlike {
+  border: 1px solid #f50;
+  color: #f50;
+}
+
 // play buttons
 
 .play-button {
@@ -414,7 +421,7 @@ h2.header-name, a.header-name {
 }
 
 .show-wave {
-  width: 500px;
+  width: 550px;
   height: 200px;
   margin-top: 150px;
 }
@@ -429,12 +436,6 @@ h2.header-name, a.header-name {
 
 wave {
   cursor: pointer;
-}
-
-
-.show-wave > wave {
-  // height: 170px !important;
-  // cursor: pointer;
 }
 
 // tracks index
@@ -659,8 +660,7 @@ wave {
 }
 
 .track-info:hover {
-  background: #f50;
-  color: #fff;
+  background: #aaa;
 }
 
 .playbar-art {

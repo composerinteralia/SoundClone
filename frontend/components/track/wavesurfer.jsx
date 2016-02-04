@@ -41,7 +41,7 @@ module.exports = React.createClass({
 
     this.wavesurfer.init({
       container: container,
-      waveColor: '#888',
+      waveColor: '#555',
       progressColor: '#f50',
       barWidth: 2,
       cursorWidth: 0,

@@ -106,6 +106,10 @@ PlayerStore.track = function () {
   return (_currentWavesurfer && _currentWavesurfer.track) || undefined ;
 };
 
+PlayerStore.isCurrentTrack = function (trackId) {
+  return _currentWavesurfer && _currentWavesurfer.track.id === parseInt(trackId);
+};
+
 PlayerStore.isPlaying = function () {
   return _currentWavesurfer && _currentWavesurfer.wavesurfer.isPlaying();
 };

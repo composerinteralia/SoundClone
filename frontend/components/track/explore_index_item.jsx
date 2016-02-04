@@ -1,18 +1,17 @@
 var React = require('react'),
     Link = require('react-router').Link,
-    PlayerActions = require('../../actions/player_actions'),
     PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
-    WaveSurfer = require('./wavesurfer');
+    LikeStore = require('../../stores/like'),
+    WaveSurfer = require('./wavesurfer'),
+    PlayerControls = require('../../mixins/player_controls'),
+    LikeMixin = require('../../mixins/like_mixin');
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    var playing =
-      (PlayerStore.track() &&
-      (PlayerStore.track().id === this.props.track.id)
-    );
+  mixins: [PlayerControls, LikeMixin],
 
-    return ({ playing: playing });
+  getInitialState: function () {
+    return { playing: PlayerStore.isCurrentTrack(this.props.track.id) };
   },
 
   componentDidMount: function () {
@@ -24,8 +23,8 @@ module.exports = React.createClass({
   },
 
   render: function () {
-
-    var playPauseButton, name, track = this.props.track;
+    var track = this.props.track;
+    var playPauseButton, name;
 
     if (this.state.playing && PlayerStore.isPlaying()) {
       playPauseButton = (
@@ -36,11 +35,30 @@ module.exports = React.createClass({
       );
     } else {
       playPauseButton = (
-        <div className="play-button play-button-explore" onClick={this._playTrack}>
+        <div className="play-button play-button-explore" onClick={this._playTrack.bind(null, track)}>
           <div className="play-arrow"></div>
         </div>
       );
     }
+
+    var likeButton;
+    if (LikeStore.includes(track.id)) {
+      likeButton =
+        <button
+          className="unlike"
+          onClick={this._unlikeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span> {track.like_count}
+      </button>;
+
+    } else {
+      likeButton =
+        <button
+          className="like"
+          onClick={this._likeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span> Like
+      </button>;
+    }
+
 
     return (
       <li className="explore-item">
@@ -63,6 +81,7 @@ module.exports = React.createClass({
             {track.display_name}
           </Link>
 
+          {likeButton}
         </section>
 
         <WaveSurfer track={track} type="hidden-wave" />
@@ -70,20 +89,7 @@ module.exports = React.createClass({
     );
   },
 
-  _playTrack: function () {
-    PlayerActions.play(this.props.track.id);
-  },
-
-  _pauseTrack: function () {
-    PlayerActions.pause();
-  },
-
   _onPlayerChange: function () {
-    var playing =
-      (PlayerStore.track() &&
-      (PlayerStore.track().id === this.props.track.id)
-    );
-
-    this.setState({ playing: playing });
+    this.setState({ playing: PlayerStore.isCurrentTrack(this.props.track.id) });
   }
 });

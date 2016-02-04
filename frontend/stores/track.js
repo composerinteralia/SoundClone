@@ -20,9 +20,17 @@ var remove = function (removedTrack) {
   }
 };
 
-var update = function (track) {
-  remove(track);
-  _tracks.unshift(track);
+var update = function (newTrack) {
+  var oldTrack = _tracks.find(function (track) {
+    return track.id === newTrack.id;
+  });
+
+  if (oldTrack) {
+    var index = _tracks.indexOf(oldTrack);
+    _tracks[index] = newTrack;
+  } else {
+    _tracks.unshift(track);
+  }
 };
 
 TrackStore.__onDispatch = function (payload) {

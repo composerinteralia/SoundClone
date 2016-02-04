@@ -4,17 +4,19 @@ var React = require('react'),
     PlayerStore = require('../../stores/player'),
     PlayerActions = require('../../actions/player_actions'),
     TrackUtil = require('../../util/track_util'),
-    CurrentUserStore = require('../../stores/current_user'),
-    WaveSurfer = require('./wavesurfer');
+    LikeStore = require('../../stores/like'),
+    WaveSurfer = require('./wavesurfer'),
+    PlayerControls = require('../../mixins/player_controls'),
+    LikeMixin = require('../../mixins/like_mixin');
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    var playing =
-      (PlayerStore.track() &&
-      (PlayerStore.track().id === parseInt(this.props.params.id))
-    );
+  mixins: [PlayerControls, LikeMixin],
 
-    return { track: null, playing: playing, liked: CurrentUserStore.liked(this.props.params.id) };
+  getInitialState: function () {
+    return {
+      track: null,
+      playing: PlayerStore.isCurrentTrack(this.props.params.id)
+    };
   },
 
   componentDidMount: function () {
@@ -49,17 +51,28 @@ module.exports = React.createClass({
       );
     } else {
       playPauseButton = (
-        <div className="play-button" onClick={this._playTrack}>
+        <div className="play-button" onClick={this._playTrack.bind(null, track)}>
           <div className="play-arrow"></div>
         </div>
       );
     }
 
     var likeButton;
-    if (this.state.liked) {
-      likeButton = <button onClick={this._unlikeTrack}>Unlike</button>;
+    if (LikeStore.includes(track.id)) {
+      likeButton =
+        <button
+          className="unlike"
+          onClick={this._unlikeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span> Liked
+      </button>;
+
     } else {
-      likeButton = <button onClick={this._likeTrack}>Like</button>;
+      likeButton =
+        <button
+          className="like"
+          onClick={this._likeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span> Like
+      </button>;
     }
 
     return (
@@ -93,7 +106,6 @@ module.exports = React.createClass({
 
         <section className="content">
           {likeButton}
-          {track.like_count}
           <div>{track.description}</div>
 
         </section>
@@ -107,32 +119,7 @@ module.exports = React.createClass({
     this.setState({ track: track });
   },
 
-  _likeTrack: function () {
-    TrackUtil.createLike(this.state.track.id, function () {
-      this.setState({ liked: true });
-    }.bind(this));
-  },
-
-  _unlikeTrack: function () {
-    TrackUtil.destroyLike(this.state.track.id, function () {
-      this.setState({ liked: false });
-    }.bind(this));
-  },
-
-  _playTrack: function () {
-    PlayerActions.play(this.state.track.id);
-  },
-
-  _pauseTrack: function () {
-    PlayerActions.pause();
-  },
-
   _onPlayerChange: function () {
-    var playing =
-      (PlayerStore.track() &&
-      (PlayerStore.track().id === parseInt(this.props.params.id))
-    );
-
-    this.setState({ playing: playing });
+    this.setState({ playing: PlayerStore.isCurrentTrack(this.props.params.id) });
   }
 });
