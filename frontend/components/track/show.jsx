@@ -3,6 +3,7 @@ var React = require('react'),
     TrackStore = require('../../stores/track'),
     PlayerStore = require('../../stores/player'),
     PlayerActions = require('../../actions/player_actions'),
+    CurrentUserStore = require('../../stores/current_user'),
     TrackUtil = require('../../util/track_util'),
     LikeStore = require('../../stores/like'),
     WaveSurfer = require('./wavesurfer'),
@@ -57,22 +58,25 @@ module.exports = React.createClass({
       );
     }
 
+    var currentUser = CurrentUserStore.currentUser();
     var likeButton;
-    if (LikeStore.includes(track.id)) {
-      likeButton =
-        <button
-          className="unlike"
-          onClick={this._unlikeTrack.bind(this, track.id)}>
-          <span className="heart">♥</span> Liked
-      </button>;
+    if (currentUser && currentUser.id !== track.user_id) {
+      if (LikeStore.includes(track.id)) {
+        likeButton =
+          <button
+            className="unlike"
+            onClick={this._unlikeTrack.bind(this, track.id)}>
+            <span className="heart">♥</span> Liked
+          </button>;
 
-    } else {
-      likeButton =
-        <button
-          className="like"
-          onClick={this._likeTrack.bind(this, track.id)}>
-          <span className="heart">♥</span> Like
-      </button>;
+      } else {
+        likeButton =
+          <button
+            className="like"
+            onClick={this._likeTrack.bind(this, track.id)}>
+            <span className="heart">♥</span> Like
+          </button>;
+      }
     }
 
     return (

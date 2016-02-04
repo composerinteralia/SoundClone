@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
     resources :users, only: [:create, :show] do
       resources :tracks, only: [:index]
+
+      resource :follow, only: [:create, :destroy]
     end
 
     resource :user, only: [:update]

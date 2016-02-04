@@ -1,13 +1,11 @@
-glow around like button
-word when hovering over logos
 
-rename player store internals
-
+Add like button to navbar
 Like index (gets a user's liked tracks)
 
 ----------------
 
 Play
+  rename player store wavesurfer object
   better solution for wavesurfer load: disable play button until loaded
   Work on setting and clearing interval (on play, on pause, on finish)
   Next track when finished
@@ -21,6 +19,7 @@ Display errors on forms (check out Robert's awesome)
   -- Error component passed this.state.errors as props
   -- ul with li of props (list-style bullet)
 
+Spinners galore!
 _________________
 Plays
 
@@ -34,6 +33,9 @@ Playlists
   Incorporate playlists into stream?
 
 -----------------
+
+Track show
+  show edit buttons if belongs to current user
 
 Audio
   Spinner while waiting for upload to complete?

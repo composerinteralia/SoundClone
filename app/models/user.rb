@@ -12,7 +12,14 @@ class User < ActiveRecord::Base
 
   has_many :tracks
   has_many :likes, dependent: :destroy
+
   has_many :liked_tracks, through: :likes, source: :track
+
+  has_many :follows, foreign_key: :follower_id, dependent: :destroy
+  has_many :followees, through: :follows
+
+  has_many :followings, class_name: "Follow", foreign_key: :followee_id, dependent: :destroy
+  has_many :followers, through: :followings
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

@@ -47,11 +47,11 @@ module.exports = React.createClass({
     if (currentUser && currentUser.id === track.user_id) {
       trackButtons = this._trackButtons();
       display_name = currentUser.display_name;
-    } else {
+    } else if (currentUser) {
       if (LikeStore.includes(track.id)) {
         likeButton =
           <button
-            className="unlike"
+            className="unlike index-like"
             onClick={this._unlikeTrack.bind(this, track.id)}>
             <span className="heart">♥</span> {track.like_count}
         </button>;
@@ -59,14 +59,12 @@ module.exports = React.createClass({
       } else {
         likeButton =
           <button
-            className="like"
+            className="like index-like"
             onClick={this._likeTrack.bind(this, track.id)}>
             <span className="heart">♥</span> Like
         </button>;
       }
     }
-
-
 
     if (this.state.playing && PlayerStore.isPlaying()) {
       playPauseButton = (
@@ -121,9 +119,9 @@ module.exports = React.createClass({
   _trackButtons: function () {
     return (
       <div className="track-buttons">
-        <i className="fa fa-pencil track-button"
+        <i title="Edit Track" className="fa fa-pencil track-button"
           onClick={this._update}></i>
-        <i className="fa fa-trash track-button"
+        <i title="Delete Track" className="fa fa-trash track-button"
           onClick={this._delete}></i>
 
         {this.state.dialog}

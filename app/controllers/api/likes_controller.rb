@@ -1,4 +1,6 @@
 class Api::LikesController < ApplicationController
+  before_action :require_signed_in!
+
   def create
     like = current_user.likes.new(track_id: params[:track_id])
 

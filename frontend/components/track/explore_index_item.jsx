@@ -24,7 +24,7 @@ module.exports = React.createClass({
 
   render: function () {
     var track = this.props.track;
-    var playPauseButton, name;
+    var playPauseButton, likeButton;
 
     if (this.state.playing && PlayerStore.isPlaying()) {
       playPauseButton = (
@@ -41,30 +41,33 @@ module.exports = React.createClass({
       );
     }
 
-    var likeButton;
-    if (LikeStore.includes(track.id)) {
-      likeButton =
+    if (CurrentUserStore.currentUser()) {
+      if (LikeStore.includes(track.id)) {
+        likeButton =
         <button
-          className="unlike"
+          title="Unlike track"
+          className="unlike small-like"
           onClick={this._unlikeTrack.bind(this, track.id)}>
-          <span className="heart">♥</span> {track.like_count}
-      </button>;
+          <span className="heart">♥</span>
+        </button>;
 
-    } else {
-      likeButton =
+      } else {
+        likeButton =
         <button
-          className="like"
+          title="Like track"
+          className="like small-like"
           onClick={this._likeTrack.bind(this, track.id)}>
-          <span className="heart">♥</span> Like
-      </button>;
+          <span className="heart">♥</span>
+        </button>;
+      }
     }
-
 
     return (
       <li className="explore-item">
         <figure className="explore-image">
           <img src={track.image_url}/>
           {playPauseButton}
+          {likeButton}
         </figure>
 
         <section className="explore-info">
@@ -81,7 +84,6 @@ module.exports = React.createClass({
             {track.display_name}
           </Link>
 
-          {likeButton}
         </section>
 
         <WaveSurfer track={track} type="hidden-wave" />
