@@ -10,7 +10,18 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
+//Vendor
+
 //= require jquery
 //= require jquery_ujs
 //= require bundle.js
 //= require_tree .
+
+//= require wavesurfer.js
+//= require util.js
+//= require webaudio.js
+//= require mediaelement.js
+//= require drawer.js
+//= require drawer.canvas.js
+//= require html-init.js

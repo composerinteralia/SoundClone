@@ -9,6 +9,14 @@ module.exports = {
     });
   },
 
+  remountWavesurfer: function (container, waveType) {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.REMOUNTED,
+      container: container,
+      waveType: waveType
+    });
+  },
+
   removeWavesurfer: function (trackId) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.REMOVED,

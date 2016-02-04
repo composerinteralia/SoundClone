@@ -81,7 +81,7 @@ module.exports = {
       url: "api/tracks/" + trackId,
       success: function (track) {
         ApiActions.receiveTracks([track]);
-        if (success) success();
+        if (success) success(track);
       },
       error: function (data) {
         console.log(data);

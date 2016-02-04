@@ -24,12 +24,6 @@ module.exports = React.createClass({
 
   componentDidMount: function () {
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
-
-    if (PlayerStore.isPlaying()) {
-      this.counter = setInterval(function () {
-        this.setState({ time: PlayerStore.currentTime() });
-      }.bind(this), 60);
-    }
   },
 
   componentWillUnmount: function () {
@@ -105,6 +99,7 @@ module.exports = React.createClass({
   },
 
   _onPlayerChange: function () {
+
     if (PlayerStore.isPlaying()) {
       clearInterval(this.counter);
       this.counter = setInterval(function () {
@@ -122,8 +117,6 @@ module.exports = React.createClass({
   },
 
   _pauseTrack: function () {
-    clearInterval(this.counter);
-
     PlayerActions.pause();
   },
 

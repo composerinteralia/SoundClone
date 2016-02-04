@@ -171,16 +171,24 @@ module.exports = React.createClass({
   },
 
   _initWavesurfer: function () {
+    var containerClass = "wave-" + this.props.track.id
+    var container = $("." + containerClass)[0];
+
+    if (PlayerStore.wavesurferExists(containerClass)) {
+      setTimeout(function () {
+        PlayerActions.remountWavesurfer(container, "wave")
+      }.bind(this), 0);
+      return
+    }
+
     this.wavesurfer = Object.create(WaveSurfer);
-    var container = ".wave-" + this.props.track.id;
 
     this.wavesurfer.init({
-      container: $(container)[0],
+      container: container,
       waveColor: '#888',
       progressColor: '#f50',
       barWidth: 2,
       cursorWidth: 0,
-      fillParent: true
     });
 
     this.wavesurfer.load(this.props.track.audio_url);

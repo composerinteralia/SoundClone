@@ -29,6 +29,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
+
     var playPauseButton, name, track = this.props.track;
 
     if (this.state.playing && PlayerStore.isPlaying()) {
@@ -92,22 +93,33 @@ module.exports = React.createClass({
   },
 
   _initWavesurfer: function () {
-    this.wavesurfer = Object.create(WaveSurfer);
-    var container = ".wave-" + this.props.track.id;
 
-    this.wavesurfer.init({
-      container: $(container)[0],
-      waveColor: '#000',
-      progressColor: '#000',
-      cursorWidth: 0
+    var containerClass = "wave-" + this.props.track.id
+    var container = $("." + containerClass)[0];
+
+    if (PlayerStore.wavesurferExists(containerClass)) {
+      setTimeout(function () {
+        PlayerActions.remountWavesurfer(container, "hidden-wave")
+      }.bind(this), 0);
+      return
+    }
+
+    var wavesurfer = Object.create(WaveSurfer);
+
+    wavesurfer.init({
+      container: container,
+      waveColor: '#888',
+      progressColor: '#f50',
+      barWidth: 2,
+      cursorWidth: 0,
     });
 
-    this.wavesurfer.load(this.props.track.audio_url);
+    wavesurfer.load(this.props.track.audio_url);
 
     setTimeout(function () {
       PlayerActions.receiveWavesurfer({
         track: this.props.track,
-        wavesurfer: this.wavesurfer
+        wavesurfer: wavesurfer
       });
     }.bind(this), 0);
 

@@ -10,6 +10,12 @@ var add = function (wavesurfer) {
   _wavesurfers[wavesurfer.track.id] = wavesurfer;
 };
 
+var remount = function (container, waveType) {
+  var child = _currentWavesurfer.wavesurfer.container.children[0]
+  container.appendChild(child)
+  _currentWavesurfer.wavesurfer.container = container
+}
+
 var findWavesurfer = function (trackId) {
   return _wavesurfers[trackId];
 };
@@ -34,19 +40,26 @@ var pause = function () {
 };
 
 var destroy = function (trackId) {
-  if (_currentWavesurfer.track.id === trackId) {
-    _currentWavesurfer.wavesurfer.stop();
+  if (_currentWavesurfer && _currentWavesurfer.track.id === trackId) {
+    pause();
     _currentWavesurfer = null;
   }
+  debugger
 };
 
 PlayerStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case PlayerConstants.RECEIVED:
       add(payload.wavesurfer);
+      PlayerStore.__emitChange();
+      break;
+    case PlayerConstants.REMOUNTED:
+      remount(payload.container, payload.waveType)
+      PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOVED:
       remove(payload.trackId);
+      PlayerStore.__emitChange();
       break;
     case PlayerConstants.PLAYED:
       play(payload.trackId);
@@ -63,13 +76,14 @@ PlayerStore.__onDispatch = function (payload) {
   }
 };
 
+PlayerStore.wavesurferExists = function (containerClass) {
+  return _currentWavesurfer &&
+    _currentWavesurfer.wavesurfer.container.classList[1] === containerClass
+};
+
 PlayerStore.track = function () {
   return (_currentWavesurfer && _currentWavesurfer.track) || undefined ;
 };
-
-// PlayerStore.wavesurfer = function () {
-//   return _currentWavesurfer
-// }
 
 PlayerStore.isPlaying = function () {
   return _currentWavesurfer && _currentWavesurfer.wavesurfer.isPlaying();
