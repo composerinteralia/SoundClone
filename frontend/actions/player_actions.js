@@ -42,5 +42,11 @@ module.exports = {
       actionType: PlayerConstants.DESTROYED,
       trackId: trackId
     });
+  },
+
+  reset: function () {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.RESET
+    });
   }
 };

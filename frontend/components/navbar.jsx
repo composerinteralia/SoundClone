@@ -2,7 +2,8 @@ var React = require('react'),
     Link = require('react-router').Link,
     History = require('react-router').History,
     SessionsApiUtil = require('../util/sessions_api_util'),
-    CurrentUserStore = require('../stores/current_user');
+    CurrentUserStore = require('../stores/current_user'),
+    PlayerActions = require('../actions/player_actions');
 
 module.exports = React.createClass({
   mixins: [History],
@@ -55,6 +56,8 @@ module.exports = React.createClass({
     SessionsApiUtil.logout(function () {
       this.history.pushState({}, "/login");
     }.bind(this));
+
+    PlayerActions.reset();
   },
 
   _onChange: function () {

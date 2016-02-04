@@ -10,10 +10,21 @@ var add = function (wavesurfer) {
   _wavesurfers[wavesurfer.track.id] = wavesurfer;
 };
 
-var remount = function (container, waveType) {
-  var child = _currentWavesurfer.wavesurfer.container.children[0];
+var remount = function (container, height) {
+  var wavesurfer = _currentWavesurfer.wavesurfer;
+  var child = wavesurfer.container.children[0];
+
   container.appendChild(child);
-  _currentWavesurfer.wavesurfer.container = container;
+
+  wavesurfer.container = container;
+  wavesurfer.mediaContainer = container;
+  wavesurfer.drawer.container = container;
+
+  wavesurfer.drawer.height = height;
+  wavesurfer.drawer.params.height = height;
+
+  wavesurfer.drawBuffer();
+
   add(_currentWavesurfer);
 };
 
@@ -47,6 +58,13 @@ var destroy = function (trackId) {
   }
 };
 
+var reset = function () {
+  if (_currentWavesurfer) {
+    pause();
+    _currentWavesurfer = null;
+  }
+};
+
 PlayerStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case PlayerConstants.RECEIVED:
@@ -73,6 +91,9 @@ PlayerStore.__onDispatch = function (payload) {
       destroy(payload.trackId);
       PlayerStore.__emitChange();
       break;
+    case PlayerConstants.RESET:
+      reset();
+      PlayerStore.__emitChange();
   }
 };
 

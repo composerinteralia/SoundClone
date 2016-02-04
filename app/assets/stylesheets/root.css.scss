@@ -400,45 +400,41 @@ h2.header-name, a.header-name {
 // wavesurfer
 
 .wave {
-  // position: relative;
   width: 400px;
+  height: 68px;
+}
+
+.wave > wave {
+  margin-top: 20px;
+  height: 70px !important;
+}
+
+.wave > wave > canvas, .wave > wave > wave {
+  top: -30px !important;
 }
 
 .show-wave {
   width: 500px;
-  margin-top: 180px;
+  height: 200px;
+  margin-top: 150px;
+}
+
+.show-wave > wave {
+  height: 200px !important;
+}
+
+.hidden-wave {
+  display: none;
 }
 
 wave {
-  // height: 70px !important;
   cursor: pointer;
-  // top: 15px;
 }
 
 
 .show-wave > wave {
   // height: 170px !important;
-  cursor: pointer;
-}
-
-wave {
-  // height: 100% !important;
-  // width: 100% !important;
-}
-
-wave > wave {
-  // height: 100% !important;
-}
-
-canvas {
-  // top: -30px !important;
-  // height: 100% !important;
-  // width: 100% !important;
-}
-
-.hidden-wave {
-  // display: none;
-  width: 0;
+  // cursor: pointer;
 }
 
 // tracks index
@@ -621,7 +617,8 @@ canvas {
 
 .playback-button {
   font-size: 20px;
-  padding: 10px 5px;
+  padding: 10px 0;
+  width: 20px;
   cursor: pointer;
   margin-right: 20px;
 }

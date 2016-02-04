@@ -21,13 +21,18 @@ module.exports = React.createClass({
 
   _initWavesurfer: function () {
     var track = this.props.track;
+    var type = this.props.type;
+    var height = 128;
+    if (type === "show-wave") {
+      height = 200;
+    }
 
     var containerClass = "wave-" + track.id;
     var container = $("." + containerClass)[0];
 
     if (PlayerStore.wavesurferExists(containerClass)) {
       setTimeout(function () {
-        PlayerActions.remountWavesurfer(container, "show-wave");
+        PlayerActions.remountWavesurfer(container, height);
       }.bind(this), 0);
       return;
     }
@@ -39,7 +44,8 @@ module.exports = React.createClass({
       waveColor: '#888',
       progressColor: '#f50',
       barWidth: 2,
-      cursorWidth: 0
+      cursorWidth: 0,
+      height: height
     });
 
     this.wavesurfer.load(track.audio_url);

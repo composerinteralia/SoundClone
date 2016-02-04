@@ -5,7 +5,8 @@ var React = require('react'),
     SessionForm = require('./session_form'),
     NewUserForm = require('../user/new_form'),
     SessionsApiUtil = require('../../util/sessions_api_util'),
-    Explore = require('../track/explore');
+    Explore = require('../track/explore'),
+    Playbar = require('../playbar');
 
 module.exports = React.createClass({
   mixins: [History],
@@ -24,6 +25,7 @@ module.exports = React.createClass({
 
   render: function () {
     return (
+      <div>
       <main className="login main">
         {this.state.modal}
         <header className="login-header">
@@ -52,6 +54,8 @@ module.exports = React.createClass({
 
         <Explore />
       </main>
+        <Playbar />
+      </div>
     );
   },
 
