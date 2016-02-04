@@ -1,9 +1,12 @@
-Refactor all morning!
-renaming in player store
-getting the correct wavesurfer format? Or have just one - either show or hide
+Questions:
+  - setState???
+  - receiving new props
 
-Work on setting and clearing interval (on play, on pause, on finish)
-Next track when finished
+Wavesurfer styling!!! (fucks up edit buttons)
+
+renaming in player store
+
+
 
 Like/unlike buttons (based on current user's liked tracks) on index_item, explore_item
   - updates like counts (ajax request sends back a track with updated count)
@@ -14,9 +17,8 @@ Like index (gets a user's liked tracks)
 ----------------
 
 Play
-  player 38 on deleting track before playing it? (cannot read property track of null)
-  Bug from login explore tracks...
-  disable prev and next if no prev or next track
+  Work on setting and clearing interval (on play, on pause, on finish)
+  Next track when finished
   keyboard listeners, playbar listeners
   volume
 

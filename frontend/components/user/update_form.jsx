@@ -1,7 +1,7 @@
 var React = require('react'),
     History = require('react-router').History,
     LinkState = require('react-addons-linked-state-mixin'),
-    ApiUtil = require('../../util/api_util'),
+    UserUtil = require('../../util/user_util'),
     ModalActions = require('../../actions/modal_actions'),
     CurrentUserStore = require('../../stores/current_user');
 
@@ -102,7 +102,7 @@ module.exports = React.createClass({
       formData.append("user[profile_image]", this.state.imageFile);
     }
 
-    ApiUtil.updateUser(formData);
+    UserUtil.updateUser(formData);
   },
 
   _stopPropogation: function (e) {

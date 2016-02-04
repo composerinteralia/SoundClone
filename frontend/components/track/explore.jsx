@@ -1,6 +1,6 @@
 var React = require('react'),
     TrackStore = require('../../stores/track'),
-    ApiUtil = require('../../util/api_util'),
+    TrackUtil = require('../../util/track_util'),
     ExploreIndexItem = require('./explore_index_item');
 
 module.exports = React.createClass({
@@ -11,7 +11,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
 
-    ApiUtil.fetchExploreTracks();
+    TrackUtil.fetchExploreTracks();
   },
 
   componentWillUnmount: function () {

@@ -3,7 +3,7 @@ var React = require('react'),
     TrackStore = require('../../stores/track'),
     PlayerStore = require('../../stores/player'),
     PlayerActions = require('../../actions/player_actions'),
-    ApiUtil = require('../../util/api_util'),
+    TrackUtil = require('../../util/track_util'),
     CurrentUserStore = require('../../stores/current_user'),
     WaveSurfer = require('./wavesurfer');
 
@@ -21,7 +21,7 @@ module.exports = React.createClass({
     this.onChangeToken = TrackStore.addListener(this._onChange);
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
 
-    ApiUtil.fetchSingleTrack(this.props.params.id);
+    TrackUtil.fetchSingleTrack(this.props.params.id);
   },
 
   componentWillUnmount: function () {
@@ -30,7 +30,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps) {
-    ApiUtil.fetchSingleTrack(this.props.params.id);
+    TrackUtil.fetchSingleTrack(this.props.params.id);
   },
 
   render: function () {
@@ -108,13 +108,13 @@ module.exports = React.createClass({
   },
 
   _likeTrack: function () {
-    ApiUtil.createLike(this.state.track.id, function () {
+    TrackUtil.createLike(this.state.track.id, function () {
       this.setState({ liked: true });
     }.bind(this));
   },
 
   _unlikeTrack: function () {
-    ApiUtil.destroyLike(this.state.track.id, function () {
+    TrackUtil.destroyLike(this.state.track.id, function () {
       this.setState({ liked: false });
     }.bind(this));
   },

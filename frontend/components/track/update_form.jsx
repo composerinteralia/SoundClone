@@ -9,7 +9,7 @@ module.exports = React.createClass({
 
   getInitialState: function () {
     var title = "", description = "", imageUrl = "";
-    var track = TrackStore.find(this.props.trackId);
+    var track = this.props.track;
 
     if (track) {
       title = track.title;
@@ -24,16 +24,7 @@ module.exports = React.createClass({
       imageUrl: imageUrl
     };
   },
-
-  componentDidMount: function () {
-    this.onChangeToken = TrackStore.addListener(this._onChange);
-    // ApiUtil.fetchSingleTrack(this.props.trackId);
-  },
-
-  componentWillUnmount: function () {
-    this.onChangeToken.remove();
-  },
-
+  
   render: function () {
     var image;
     if (this.state.imageUrl) {
@@ -82,24 +73,6 @@ module.exports = React.createClass({
     ModalActions.destroyModal();
   },
 
-  _onChange: function () {
-    var title = "", description = "";
-    var track = TrackStore.find(this.props.trackId);
-
-    if (track) {
-      title = track.title;
-      description = track.description;
-      imageUrl = track.image_url;
-    }
-
-    this.setState({
-      title: title,
-      description: description,
-      imageFile: null,
-      imageUrl: imageUrl
-    });
-  },
-
   _imageUpload: function (e) {
     e.preventDefault();
 
@@ -128,7 +101,7 @@ module.exports = React.createClass({
       formData.append("track[track_art]", this.state.imageFile);
     }
 
-    ApiUtil.updateTrack (this.props.trackId, formData);
+    ApiUtil.updateTrack (this.props.track.id, formData);
   },
 
   _stopPropogation: function (e) {

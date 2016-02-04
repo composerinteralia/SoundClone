@@ -1,7 +1,7 @@
 var React = require('react'),
     TrackIndexItem = require('./index_item'),
     TrackStore = require('../../stores/track'),
-    ApiUtil = require('../../util/api_util');
+    TrackUtil = require('../../util/track_util');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -10,7 +10,7 @@ module.exports = React.createClass({
 
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
-    ApiUtil.fetchUserTracks(this.props.params.id);
+    TrackUtil.fetchUserTracks(this.props.params.id);
   },
 
   componentWillUnmount: function () {

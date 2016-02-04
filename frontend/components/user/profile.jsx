@@ -3,7 +3,7 @@ var React = require('react'),
     CurrentUserStore = require('../../stores/current_user'),
     ModalStore = require('../../stores/modal'),
     ModalActions = require('../../actions/modal_actions'),
-    ApiUtil = require('../../util/api_util'),
+    UserUtil = require('../../util/user_util'),
     UpdateUserForm = require('./update_form');
 
 module.exports = React.createClass({
@@ -16,7 +16,7 @@ module.exports = React.createClass({
     this.onChangeToken = UserStore.addListener(this._onChange);
     this.onModalToken = ModalStore.addListener(this._onModal);
 
-    ApiUtil.fetchUser(this.props.params.id);
+    UserUtil.fetchUser(this.props.params.id);
   },
 
   componentWillUnmount: function () {
@@ -25,7 +25,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps) {
-    ApiUtil.fetchUser(newProps.params.id);
+    UserUtil.fetchUser(newProps.params.id);
   },
 
   render: function () {

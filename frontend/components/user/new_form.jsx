@@ -1,7 +1,7 @@
 var React = require('react'),
     History = require('react-router').History,
     LinkState = require('react-addons-linked-state-mixin'),
-    ApiUtil = require('../../util/api_util'),
+    UserUtil = require('../../util/user_util'),
     ModalActions = require('../../actions/modal_actions');
 
 module.exports = React.createClass({
@@ -117,7 +117,7 @@ module.exports = React.createClass({
       formData.append("user[profile_image]", this.state.imageFile);
     }
 
-    ApiUtil.createUser(formData, function () {
+    UserUtil.createUser(formData, function () {
       this.history.pushState({}, "/");
     }.bind(this));
   },

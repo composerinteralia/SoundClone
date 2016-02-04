@@ -1,7 +1,7 @@
 var React = require('react'),
     History = require('react-router').History,
     LinkedState = require('react-addons-linked-state-mixin'),
-    ApiUtil = require('../../util/api_util'),
+    TrackUtil = require('../../util/track_util'),
     ModalActions = require('../../actions/modal_actions'),
     CurrentUserStore = require('../../stores/current_user');
 
@@ -96,7 +96,7 @@ module.exports = React.createClass({
       formData.append("track[track_art]", this.state.imageFile);
     }
 
-    ApiUtil.createTrack (formData, function (trackId) {
+    TrackUtil.createTrack (formData, function (trackId) {
       this.history.pushState({}, "/tracks/" + trackId);
     }.bind(this));
   },

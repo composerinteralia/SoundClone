@@ -1,6 +1,6 @@
 var React = require('react'),
     Link = require('react-router').Link,
-    ApiUtil = require('../../util/api_util'),
+    TrackUtil = require('../../util/track_util'),
     ModalActions = require('../../actions/modal_actions'),
     DialogActions = require('../../actions/dialog_actions'),
     UpdateTrackForm = require('./update_form'),
@@ -117,7 +117,7 @@ module.exports = React.createClass({
   },
 
   _update: function () {
-    var modal = <UpdateTrackForm trackId={this.props.track.id} />;
+    var modal = <UpdateTrackForm track={this.props.track} />;
     ModalActions.receiveModal(modal);
   },
 
@@ -142,7 +142,7 @@ module.exports = React.createClass({
 
   _reallyDelete: function () {
     var trackId = this.props.track.id;
-    ApiUtil.destroyTrack(trackId, function () {
+    TrackUtil.destroyTrack(trackId, function () {
       PlayerActions.destroy(trackId);
     });
   },

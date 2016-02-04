@@ -1,6 +1,6 @@
 var React = require('react'),
     TrackStore = require('../../stores/track'),
-    ApiUtil = require('../../util/api_util'),
+    TrackUtil = require('../../util/track_util'),
     TrackIndexItem = require('./index_item');
 
 module.exports = React.createClass({
@@ -12,7 +12,7 @@ module.exports = React.createClass({
     this.onChangeToken = TrackStore.addListener(this._onChange);
 
     // once I have followers... fetch stream tracks
-    ApiUtil.fetchExploreTracks();
+    TrackUtil.fetchExploreTracks();
   },
 
   componentWillUnmount: function () {
