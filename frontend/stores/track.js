@@ -52,14 +52,40 @@ TrackStore.all = function () {
   return _tracks.slice();
 };
 
-TrackStore.next = function (prevTrack) {
-  var index = _tracks.indexOf(prevTrack);
-  return _tracks[index + 1];
+TrackStore.next = function (currentTrack) {
+  var oldTrack = _tracks.find(function (track) {
+    return track.id === currentTrack.id;
+  });
+
+  var index = -1;
+  if (oldTrack) {
+    index = _tracks.indexOf(oldTrack);
+  }
+
+  index += 1;
+  if (index === _tracks.length) {
+    index = 0;
+  }
+
+  return _tracks[index];
 };
 
-TrackStore.prev = function (prevTrack) {
-  var index = _tracks.indexOf(prevTrack);
-  return _tracks[index - 1];
+TrackStore.prev = function (currentTrack) {
+  var oldTrack = _tracks.find(function (track) {
+    return track.id === currentTrack.id;
+  });
+
+  var index = _tracks.length;
+  if (oldTrack) {
+    index = _tracks.indexOf(oldTrack);
+  }
+
+  index -= 1;
+  if (index === -1) {
+    index += _tracks.length;
+  }
+
+  return _tracks[index];
 };
 
 module.exports = TrackStore;

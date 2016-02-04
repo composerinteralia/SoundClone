@@ -11,10 +11,11 @@ var add = function (wavesurfer) {
 };
 
 var remount = function (container, waveType) {
-  var child = _currentWavesurfer.wavesurfer.container.children[0]
-  container.appendChild(child)
-  _currentWavesurfer.wavesurfer.container = container
-}
+  var child = _currentWavesurfer.wavesurfer.container.children[0];
+  container.appendChild(child);
+  _currentWavesurfer.wavesurfer.container = container;
+  add(_currentWavesurfer);
+};
 
 var findWavesurfer = function (trackId) {
   return _wavesurfers[trackId];
@@ -44,7 +45,6 @@ var destroy = function (trackId) {
     pause();
     _currentWavesurfer = null;
   }
-  debugger
 };
 
 PlayerStore.__onDispatch = function (payload) {
@@ -54,7 +54,7 @@ PlayerStore.__onDispatch = function (payload) {
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOUNTED:
-      remount(payload.container, payload.waveType)
+      remount(payload.container, payload.waveType);
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOVED:
@@ -78,7 +78,7 @@ PlayerStore.__onDispatch = function (payload) {
 
 PlayerStore.wavesurferExists = function (containerClass) {
   return _currentWavesurfer &&
-    _currentWavesurfer.wavesurfer.container.classList[1] === containerClass
+    _currentWavesurfer.wavesurfer.container.classList[1] === containerClass;
 };
 
 PlayerStore.track = function () {

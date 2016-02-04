@@ -400,14 +400,8 @@ h2.header-name, a.header-name {
 // wavesurfer
 
 .wave {
-  position: relative;
+  // position: relative;
   width: 400px;
-}
-
-.wave > wave {
-  height: 70px !important;
-  cursor: pointer;
-  top: 15px;
 }
 
 .show-wave {
@@ -415,17 +409,36 @@ h2.header-name, a.header-name {
   margin-top: 180px;
 }
 
+wave {
+  // height: 70px !important;
+  cursor: pointer;
+  // top: 15px;
+}
+
+
 .show-wave > wave {
-  height: 170px !important;
+  // height: 170px !important;
   cursor: pointer;
 }
 
-canvas, wave > wave {
-  top: -30px !important;
+wave {
+  // height: 100% !important;
+  // width: 100% !important;
+}
+
+wave > wave {
+  // height: 100% !important;
+}
+
+canvas {
+  // top: -30px !important;
+  // height: 100% !important;
+  // width: 100% !important;
 }
 
 .hidden-wave {
-  display: none;
+  // display: none;
+  width: 0;
 }
 
 // tracks index

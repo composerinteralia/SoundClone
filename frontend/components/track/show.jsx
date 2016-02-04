@@ -4,7 +4,8 @@ var React = require('react'),
     PlayerStore = require('../../stores/player'),
     PlayerActions = require('../../actions/player_actions'),
     ApiUtil = require('../../util/api_util'),
-    CurrentUserStore = require('../../stores/current_user');
+    CurrentUserStore = require('../../stores/current_user'),
+    WaveSurfer = require('./wavesurfer');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -20,24 +21,16 @@ module.exports = React.createClass({
     this.onChangeToken = TrackStore.addListener(this._onChange);
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
 
-    ApiUtil.fetchSingleTrack(this.props.params.id, function (track) {
-      this._initWavesurfer(track);
-    }.bind(this));
+    ApiUtil.fetchSingleTrack(this.props.params.id);
   },
 
   componentWillUnmount: function () {
     this.onChangeToken.remove();
     this.playerChangeToken.remove();
-
-    setTimeout(function () {
-      PlayerActions.removeWavesurfer(this.props.params.id);
-    }.bind(this), 0);
   },
 
   componentWillReceiveProps: function (newProps) {
-    ApiUtil.fetchSingleTrack(this.props.params.id, function (track) {
-      this._initWavesurfer(track);
-    }.bind(this));
+    ApiUtil.fetchSingleTrack(this.props.params.id);
   },
 
   render: function () {
@@ -88,7 +81,7 @@ module.exports = React.createClass({
                 </div>
 
               </div>
-            <div className={ "show-wave wave-" + track.id }></div>
+              <WaveSurfer track={track} type="show-wave" />
           </div>
 
 
@@ -141,39 +134,5 @@ module.exports = React.createClass({
     );
 
     this.setState({ playing: playing });
-  },
-
-  _initWavesurfer: function (track) {
-
-    var containerClass = "wave-" + track.id
-    var container = $("." + containerClass)[0];
-
-    if (PlayerStore.wavesurferExists(containerClass)) {
-      setTimeout(function () {
-        PlayerActions.remountWavesurfer(container, "show-wave")
-      }.bind(this), 0);
-      return
-    }
-
-    this.wavesurfer = Object.create(WaveSurfer);
-
-    this.wavesurfer.init({
-      container: container,
-      waveColor: '#888',
-      progressColor: '#f50',
-      barWidth: 2,
-      cursorWidth: 0,
-      height: 200
-    });
-
-    this.wavesurfer.load(track.audio_url);
-
-    setTimeout(function () {
-      PlayerActions.receiveWavesurfer({
-        track: track,
-        wavesurfer: this.wavesurfer
-      });
-    }.bind(this), 0);
   }
-
 });

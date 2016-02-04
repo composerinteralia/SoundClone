@@ -28,6 +28,7 @@ module.exports = React.createClass({
         {this.state.modal}
         <header className="login-header">
           <div className="group">
+
             <figure className="login-sheep"></figure>
             <span className="soundclone">SOUNDCLONE</span>
 
@@ -48,6 +49,7 @@ module.exports = React.createClass({
             </div>
           </div>
         </header>
+
         <Explore />
       </main>
     );

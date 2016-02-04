@@ -325,7 +325,7 @@ WaveSurfer.WebAudio = {
         if (!this.buffer) {
           this.setState(this.PLAYING_STATE);
           this.tryPlay = setTimeout(function () {
-            this.play()
+            this.play();
           }.bind(this), 0);
         } else {
 

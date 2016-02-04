@@ -7,7 +7,8 @@ var React = require('react'),
     PlayerActions = require('../../actions/player_actions'),
     PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
-    DialogStore = require('../../stores/dialog');
+    DialogStore = require('../../stores/dialog'),
+    WaveSurfer = require('./wavesurfer');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -24,18 +25,12 @@ module.exports = React.createClass({
       CurrentUserStore.addListener(this._onCurrentUserChange);
     this.dialogToken = DialogStore.addListener(this._onDialog);
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
-
-    this._initWavesurfer();
   },
 
   componentWillUnmount: function () {
     this.currentUserChangeToken.remove();
     this.dialogToken.remove();
     this.playerChangeToken.remove();
-
-    setTimeout(function () {
-      PlayerActions.removeWavesurfer(this.props.track.id);
-    }.bind(this), 0);
   },
 
   render: function () {
@@ -89,7 +84,7 @@ module.exports = React.createClass({
                 {track.title}
               </Link>
 
-              <div className={ "wave wave-" + this.props.track.id }></div>
+              <WaveSurfer track={track} type="wave" />
             </div>
           </div>
 
@@ -168,38 +163,5 @@ module.exports = React.createClass({
     );
 
     this.setState({ playing: playing });
-  },
-
-  _initWavesurfer: function () {
-    var containerClass = "wave-" + this.props.track.id
-    var container = $("." + containerClass)[0];
-
-    if (PlayerStore.wavesurferExists(containerClass)) {
-      setTimeout(function () {
-        PlayerActions.remountWavesurfer(container, "wave")
-      }.bind(this), 0);
-      return
-    }
-
-    this.wavesurfer = Object.create(WaveSurfer);
-
-    this.wavesurfer.init({
-      container: container,
-      waveColor: '#888',
-      progressColor: '#f50',
-      barWidth: 2,
-      cursorWidth: 0,
-    });
-
-    this.wavesurfer.load(this.props.track.audio_url);
-
-    setTimeout(function () {
-      PlayerActions.receiveWavesurfer({
-        track: this.props.track,
-        wavesurfer: this.wavesurfer
-      });
-    }.bind(this), 0);
-
   }
-
 });

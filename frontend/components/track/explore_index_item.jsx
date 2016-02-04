@@ -2,7 +2,8 @@ var React = require('react'),
     Link = require('react-router').Link,
     PlayerActions = require('../../actions/player_actions'),
     PlayerStore = require('../../stores/player'),
-    CurrentUserStore = require('../../stores/current_user');
+    CurrentUserStore = require('../../stores/current_user'),
+    WaveSurfer = require('./wavesurfer');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -16,16 +17,10 @@ module.exports = React.createClass({
 
   componentDidMount: function () {
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
-
-    this._initWavesurfer();
   },
 
   componentWillUnmount: function () {
     this.playerChangeToken.remove();
-
-    setTimeout(function () {
-      PlayerActions.removeWavesurfer(this.props.track.id);
-    }.bind(this), 0);
   },
 
   render: function () {
@@ -70,7 +65,7 @@ module.exports = React.createClass({
 
         </section>
 
-        <div className={ "hidden-wave wave-" + this.props.track.id }></div>
+        <WaveSurfer track={track} type="hidden-wave" />
       </li>
     );
   },
@@ -90,39 +85,5 @@ module.exports = React.createClass({
     );
 
     this.setState({ playing: playing });
-  },
-
-  _initWavesurfer: function () {
-
-    var containerClass = "wave-" + this.props.track.id
-    var container = $("." + containerClass)[0];
-
-    if (PlayerStore.wavesurferExists(containerClass)) {
-      setTimeout(function () {
-        PlayerActions.remountWavesurfer(container, "hidden-wave")
-      }.bind(this), 0);
-      return
-    }
-
-    var wavesurfer = Object.create(WaveSurfer);
-
-    wavesurfer.init({
-      container: container,
-      waveColor: '#888',
-      progressColor: '#f50',
-      barWidth: 2,
-      cursorWidth: 0,
-    });
-
-    wavesurfer.load(this.props.track.audio_url);
-
-    setTimeout(function () {
-      PlayerActions.receiveWavesurfer({
-        track: this.props.track,
-        wavesurfer: wavesurfer
-      });
-    }.bind(this), 0);
-
   }
-
 });
