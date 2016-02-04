@@ -30,7 +30,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps) {
-    TrackUtil.fetchSingleTrack(this.props.params.id);
+    TrackUtil.fetchSingleTrack(newProps.params.id);
   },
 
   render: function () {

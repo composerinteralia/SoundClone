@@ -1,6 +1,6 @@
 var React = require('react'),
     LinkedState = require('react-addons-linked-state-mixin'),
-    ApiUtil = require('../../util/api_util'),
+    TrackUtil = require('../../util/track_util'),
     ModalActions = require('../../actions/modal_actions'),
     TrackStore = require('../../stores/track');
 
@@ -24,7 +24,7 @@ module.exports = React.createClass({
       imageUrl: imageUrl
     };
   },
-  
+
   render: function () {
     var image;
     if (this.state.imageUrl) {
@@ -101,7 +101,7 @@ module.exports = React.createClass({
       formData.append("track[track_art]", this.state.imageFile);
     }
 
-    ApiUtil.updateTrack (this.props.track.id, formData);
+    TrackUtil.updateTrack (this.props.track.id, formData);
   },
 
   _stopPropogation: function (e) {

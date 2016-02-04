@@ -17,6 +17,10 @@ module.exports = React.createClass({
     this.onChangeToken.remove();
   },
 
+  componentWillReceiveProps: function (newProps) {
+    TrackUtil.fetchUserTracks(newProps.params.id);
+  },
+
   render: function () {
     var tracks = this.state.tracks;
     return (

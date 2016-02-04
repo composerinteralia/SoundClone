@@ -15,7 +15,7 @@ module.exports = React.createClass({
     this.onChangeToken = CurrentUserStore.addListener(this._onChange);
   },
 
-  componenetWillUnmount: function () {
+  componentWillUnmount: function () {
     this.onChangeToken.remove();
   },
 
