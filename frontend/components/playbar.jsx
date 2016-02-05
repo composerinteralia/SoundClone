@@ -32,7 +32,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function () {
-    this.onChangeToken = TrackStore.addListener(this._onChange)
+    this.onChangeToken.remove();
     this.playerChangeToken.remove();
 
     clearInterval(this.counter);
