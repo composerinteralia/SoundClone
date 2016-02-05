@@ -33,6 +33,11 @@ var findWavesurfer = function (trackId) {
 };
 
 var remove = function (trackId) {
+  var wavesurfer = _wavesurfers[trackId];
+  if (wavesurfer) {
+    wavesurfer.mounted = false;
+  }
+
   delete _wavesurfers[trackId];
 };
 

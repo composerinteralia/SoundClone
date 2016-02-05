@@ -319,7 +319,6 @@ WaveSurfer.WebAudio = {
      * relative to the beginning of a clip.
      */
     play: function (start, end) {
-
         // will keep trying to play until loaded
         // Interval cleared if paused
         if (!this.buffer) {

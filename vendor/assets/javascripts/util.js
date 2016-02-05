@@ -14,7 +14,7 @@ WaveSurfer.util = {
         return 'wavesurfer_' + Math.random().toString(32).substring(2);
     },
 
-    ajax: function (options) {
+    ajax: function (options, wavesurfer) {
         var ajax = Object.create(WaveSurfer.Observer);
         var xhr = new XMLHttpRequest();
         var fired100 = false;
@@ -23,13 +23,22 @@ WaveSurfer.util = {
         xhr.responseType = options.responseType || 'json';
 
         xhr.addEventListener('progress', function (e) {
+          if (!wavesurfer.mounted) {
+            ajax.unall();
+            xhr.abort();
+          } else {
             ajax.fireEvent('progress', e);
             if (e.lengthComputable && e.loaded == e.total) {
                 fired100 = true;
             }
+          }
         });
 
         xhr.addEventListener('load', function (e) {
+          if (!wavesurfer.mounted) {
+            ajax.unall();
+            xhr.abort();
+          } else {
             if (!fired100) {
                 ajax.fireEvent('progress', e);
             }
@@ -40,13 +49,21 @@ WaveSurfer.util = {
             } else {
                 ajax.fireEvent('error', e);
             }
+          }
         });
 
         xhr.addEventListener('error', function (e) {
+          if (!wavesurfer.mounted) {
+            ajax.unall();
+            xhr.abort();
+          } else {
             ajax.fireEvent('error', e);
+          }
         });
 
-        xhr.send();
+        if (wavesurfer.mounted) {
+          xhr.send();
+        }
         ajax.xhr = xhr;
         return ajax;
     }

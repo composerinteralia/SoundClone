@@ -34,11 +34,13 @@ var WaveSurfer = {
         renderer      : 'Canvas',
         backend       : 'WebAudio',
         mediaType     : 'audio',
-        autoCenter    : true
+        autoCenter    : true,
     },
 
     init: function (params) {
         // Extract relevant parameters (or defaults)
+        this.mounted = true
+
         this.params = WaveSurfer.util.extend({}, this.defaultParams, params);
 
         this.container = 'string' == typeof params.container ?
@@ -378,7 +380,7 @@ var WaveSurfer = {
         var ajax = WaveSurfer.util.ajax({
             url: url,
             responseType: 'arraybuffer'
-        });
+        }, my);
         this.tmpEvents.push(
             ajax.on('progress', function (e) {
                 my.onProgress(e);
