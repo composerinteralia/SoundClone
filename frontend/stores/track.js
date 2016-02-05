@@ -28,8 +28,6 @@ var update = function (newTrack) {
   if (oldTrack) {
     var index = _tracks.indexOf(oldTrack);
     _tracks[index] = newTrack;
-  } else {
-    _tracks.unshift(track);
   }
 };
 

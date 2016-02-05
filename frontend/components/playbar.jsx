@@ -51,12 +51,12 @@ module.exports = React.createClass({
 
     var likeButton;
     if (CurrentUserStore.isLoggedIn()) {
-      if (track.liker_ids.includes(CurrentUserStore.currentUser().id)) {
+      if (this.state.liked) {
         likeButton =
         <button
           title="Unlike track"
           className="unlike playbar-like"
-          onClick={this._unlikeTrack.bind(this, track.id)}>
+          onClick={this._onUnlike}>
           <span className="heart">♥</span>
         </button>;
 
@@ -65,7 +65,7 @@ module.exports = React.createClass({
         <button
           title="Like track"
           className="like playbar-like"
-          onClick={this._likeTrack.bind(this, track.id)}>
+          onClick={this._onLike}>
           <span className="heart">♥</span>
         </button>;
       }
@@ -118,6 +118,16 @@ module.exports = React.createClass({
     );
   },
 
+  _onUnlike: function () {
+    this.setState({ liked: false });
+    this._unlikeTrack(this.state.track.id);
+  },
+
+  _onLike: function () {
+    this.setState({ liked: true });
+    this._likeTrack(this.state.track.id);
+  },
+
   _playPauseButton: function () {
     if (PlayerStore.isPlaying()) {
       return (<i className="fa fa-pause playback-button"
@@ -145,16 +155,18 @@ module.exports = React.createClass({
   },
 
   _onChange: function () {
-    var playingTrack = PlayerStore.track()
+    var playingTrack = PlayerStore.track();
+    var track;
 
     if (playingTrack) {
-      var track = TrackStore.find(playingTrack.id);
+      track = TrackStore.find(playingTrack.id);
     }
 
     if (track) {
-      this.setState({ track: track })
+      var liked = track.liker_ids.includes(CurrentUserStore.currentUser().id);
+      this.setState({ track: track, liked: liked });
     } else {
-      this.setState({})
+      this.setState({});
     }
 
   }

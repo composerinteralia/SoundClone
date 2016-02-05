@@ -28,7 +28,8 @@ class Api::TracksController < ApplicationController
     user = User.find(params[:user_id])
     @tracks =
       user.tracks
-        .order('updated_at DESC')
+        .order(updated_at: :desc)
+        .page(1).per(6)
         .includes(:likes)
   end
 
@@ -36,9 +37,11 @@ class Api::TracksController < ApplicationController
     @tracks =
       Track.all
         .where.not(user: current_user)
-        .order('updated_at DESC')
+        .order(updated_at: :desc)
+        .page(1).per(12)
         .includes(:user)
         .includes(:likes)
+
 
     render :index
   end
@@ -46,7 +49,8 @@ class Api::TracksController < ApplicationController
   def stream
     @tracks =
       current_user.followee_tracks
-        .order('updated_at DESC')
+        .order(updated_at: :desc)
+        .page(1).per(6)
         .includes(:user)
         .includes(:likes)
 

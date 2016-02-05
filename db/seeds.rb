@@ -236,12 +236,12 @@ sonata_1 = Track.create!(
   audio: "https://s3.amazonaws.com/soundclone-dev/seed-audio/rachel-beethoven1.mp3"
 )
 
-presto = Track.create!(
-  user: ella,
-  title: "Presto",
-  description: "Woof woof woof!",
-  track_art: "https://s3.amazonaws.com/soundclone-dev/seed-images/dog.jpg",
-  audio: "https://s3.amazonaws.com/soundclone-dev/seed-audio/stamitz-presto.mp3"
+prestissimo = Track.create!(
+  user: mozart,
+  title: "Prestissimo",
+  description: "One of stamitz's finest compositions",
+  track_art: "https://s3.amazonaws.com/soundclone-dev/seed-images/dogs.jpg",
+  audio: "https://s3.amazonaws.com/soundclone-dev/seed-audio/stamitz-prestissimo.mp3"
 )
 
  duet = Track.create!(
@@ -260,12 +260,12 @@ presto = Track.create!(
   audio: "https://s3.amazonaws.com/soundclone-dev/seed-audio/phonemena.mp3"
 )
 
- prestissimo = Track.create!(
-  user: mozart,
-  title: "Prestissimo",
-  description: "One of stamitz's finest compositions",
-  track_art: "https://s3.amazonaws.com/soundclone-dev/seed-images/dogs.jpg",
-  audio: "https://s3.amazonaws.com/soundclone-dev/seed-audio/stamitz-prestissimo.mp3"
+presto = Track.create!(
+  user: ella,
+  title: "Presto",
+  description: "Woof woof woof!",
+  track_art: "https://s3.amazonaws.com/soundclone-dev/seed-images/dog.jpg",
+  audio: "https://s3.amazonaws.com/soundclone-dev/seed-audio/stamitz-presto.mp3"
 )
 
 Follow.destroy_all
