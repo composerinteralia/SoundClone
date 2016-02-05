@@ -39,7 +39,7 @@ class Api::TracksController < ApplicationController
         .where.not(user: current_user)
         .includes(:user)
         .includes(:likes)
-        .sample(12)
+        .sample(6)
 
     render :index
   end
