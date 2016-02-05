@@ -1,5 +1,4 @@
-var CurrentUserActions = require("../actions/current_user_actions"),
-    LikeActions = require('../actions/like_actions');
+var CurrentUserActions = require("../actions/current_user_actions");
 
 module.exports = {
   login: function (credentials, success) {
@@ -9,7 +8,6 @@ module.exports = {
       data: credentials,
       success: function (currentUser) {
         CurrentUserActions.receiveCurrentUser(currentUser);
-        LikeActions.receiveLikes(currentUser.liked_track_ids);
         if (success) success();
       },
       error: function (data) {
@@ -38,7 +36,6 @@ module.exports = {
       type: 'GET',
       success: function (currentUser) {
         CurrentUserActions.receiveCurrentUser(currentUser);
-        LikeActions.receiveLikes(currentUser.liked_track_ids);
         if (callback) callback(currentUser);
       },
       error: function (data) {

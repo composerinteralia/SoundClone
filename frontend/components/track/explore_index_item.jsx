@@ -2,7 +2,6 @@ var React = require('react'),
     Link = require('react-router').Link,
     PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
-    LikeStore = require('../../stores/like'),
     WaveSurfer = require('./wavesurfer'),
     PlayerControls = require('../../mixins/player_controls'),
     LikeMixin = require('../../mixins/like_mixin');
@@ -41,8 +40,8 @@ module.exports = React.createClass({
       );
     }
 
-    if (CurrentUserStore.currentUser()) {
-      if (LikeStore.includes(track.id)) {
+    if (CurrentUserStore.isLoggedIn()) {
+      if (track.liker_ids.includes(CurrentUserStore.currentUser().id)) {
         likeButton =
         <button
           title="Unlike track"

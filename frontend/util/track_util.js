@@ -1,7 +1,6 @@
 var ApiActions = require('../actions/api_actions'),
     ModalActions = require('../actions/modal_actions'),
-    DialogActions = require('../actions/dialog_actions'),
-    LikeActions = require('../actions/like_actions');
+    DialogActions = require('../actions/dialog_actions');
 
 module.exports = {
   fetchExploreTracks: function () {
@@ -95,7 +94,6 @@ module.exports = {
       url: "/api/tracks/" + trackId + "/like",
       method: "post",
       success: function (track) {
-        LikeActions.receiveSingleLike(track.id);
         ApiActions.receiveSingleTrack(track);
       },
       error: function (data) {
@@ -109,7 +107,6 @@ module.exports = {
       url: "/api/tracks/" + trackId + "/like",
       method: "delete",
       success: function (track) {
-        LikeActions.destroyLike(track.id);
         ApiActions.receiveSingleTrack(track);
       },
       error: function (data) {

@@ -7,7 +7,6 @@ var React = require('react'),
     PlayerActions = require('../../actions/player_actions'),
     PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
-    LikeStore = require('../../stores/like'),
     DialogStore = require('../../stores/dialog'),
     WaveSurfer = require('./wavesurfer'),
     PlayerControls = require('../../mixins/player_controls'),
@@ -48,12 +47,12 @@ module.exports = React.createClass({
       trackButtons = this._trackButtons();
       display_name = currentUser.display_name;
     } else if (currentUser) {
-      if (LikeStore.includes(track.id)) {
+      if (track.liker_ids.includes(currentUser.id)) {
         likeButton =
           <button
             className="unlike index-like"
             onClick={this._unlikeTrack.bind(this, track.id)}>
-            <span className="heart">♥</span> {track.like_count}
+            <span className="heart">♥</span> {track.liker_ids.length}
         </button>;
 
       } else {
