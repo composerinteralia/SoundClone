@@ -58,7 +58,7 @@ module.exports = React.createClass({
     }
 
     var currentUser = CurrentUserStore.currentUser();
-    var likeButton;
+    var likeButton, followButton;
     if (currentUser && currentUser.id !== track.user_id) {
       if (track.liker_ids.includes(currentUser.id)) {
         likeButton =

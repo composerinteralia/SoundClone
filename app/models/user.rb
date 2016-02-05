@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
 
   has_many :follows, foreign_key: :follower_id, dependent: :destroy
   has_many :followees, through: :follows
+  has_many :followee_tracks, through: :followees, source: :tracks
 
   has_many :followings, class_name: "Follow", foreign_key: :followee_id, dependent: :destroy
   has_many :followers, through: :followings

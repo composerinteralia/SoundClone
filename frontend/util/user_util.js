@@ -49,5 +49,31 @@ module.exports = {
         console.log(data);
       }
     });
+  },
+
+  createFollow: function (userId) {
+    $.ajax({
+      url: "/api/users/" + userId + "/follow",
+      method: "post",
+      success: function (user) {
+        ApiActions.receiveUsers([user]);
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    })
+  },
+
+  destroyFollow: function (userId) {
+    $.ajax({
+      url: "/api/users/" + userId + "/follow",
+      method: "delete",
+      success: function (user) {
+        ApiActions.receiveUsers([user]);
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    })
   }
 };

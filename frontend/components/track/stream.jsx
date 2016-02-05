@@ -11,8 +11,7 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
 
-    // once I have followers... fetch stream tracks
-    TrackUtil.fetchExploreTracks();
+    TrackUtil.fetchStreamTracks();
   },
 
   componentWillUnmount: function () {
@@ -31,6 +30,7 @@ module.exports = React.createClass({
         {this.state.modal}
         <section className="tracks">
           <h2>Stream</h2>
+          <p>Hear the latests posts from the people you are following</p>
           <ul className="tracks-list">
             {
               tracks.map(function (track) {

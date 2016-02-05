@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :tracks, only: [:create, :destroy, :show, :update] do
       collection do
         get 'explore'
+        get 'stream'
       end
 
       resource :like, only: [:create, :destroy]

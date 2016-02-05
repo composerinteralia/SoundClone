@@ -15,6 +15,18 @@ module.exports = {
     });
   },
 
+  fetchStreamTracks: function () {
+    $.ajax({
+      url: "api/tracks/stream",
+      success: function (tracks) {
+        ApiActions.receiveTracks(tracks);
+      },
+      error: function (data) {
+        console.log(data);
+      }
+    });
+  },
+
   fetchUserTracks: function (userId) {
     $.ajax({
       url: "api/users/" + userId + "/tracks",

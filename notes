@@ -1,7 +1,6 @@
-no likes on login page!
 
-Add like button to navbar
-Like index (gets a user's liked tracks)
+Like index (gets a user's liked tracks) - collection
+Move explore component
 
 ----------------
 
@@ -25,18 +24,24 @@ _________________
 Plays
 
 Follows
-  Users load with count of followers and followees
-  Stream indexes followees tracks (track store)
+  Users load with count of followers and followees)
   Follower and Followee store (user store)
+
+__________________
 
 Playlists
   Playlist store
   Incorporate playlists into stream?
 
+Search
+Infinite Scroll
+Multiple Sessions
+
 -----------------
 
 Track show
   show edit buttons if belongs to current user
+  show total number of likes
 
 Audio
   Spinner while waiting for upload to complete?
@@ -58,5 +63,4 @@ Assorted
   more efficient FormData appending?
   Background image or color choice?
 
-  Add description to track show
   track public/private

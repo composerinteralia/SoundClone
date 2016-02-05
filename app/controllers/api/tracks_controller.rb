@@ -16,10 +16,11 @@ class Api::TracksController < ApplicationController
 
     if @track.user_id != current_user.id
       render json: ["Not yours!"], status: :unprocessable_entity
-    elsif @track.destroy
+    elsif @track
+      @track.destroy
       render :show
     else
-      render json: @track.errors.full_messages, status: :unprocessable_entity
+      render json: ["Track does not exist"], status: :unprocessable_entity
     end
   end
 
@@ -36,7 +37,18 @@ class Api::TracksController < ApplicationController
       Track.all
         .where.not(user: current_user)
         .order('updated_at DESC')
-        .includes(:user, :likes)
+        .includes(:user)
+        .includes(:likes)
+
+    render :index
+  end
+
+  def stream
+    @tracks =
+      current_user.followee_tracks
+        .order('updated_at DESC')
+        .includes(:user)
+        .includes(:likes)
 
     render :index
   end

@@ -35,12 +35,23 @@ module.exports = React.createClass({
       return <div>User not found!</div>;
     }
 
-    var editButton;
+    var editButton, followButton;
     if (CurrentUserStore.currentUser().id === user.id) {
       editButton = (
         <i title="Edit profile" className="fa fa-pencil"
           onClick={this._updateUser}></i>
       );
+    } else if (CurrentUserStore.isLoggedIn()){
+
+      if (user.follower_ids.includes(CurrentUserStore.currentUser().id)) {
+        followButton = (
+          <button className="unfollow" onClick={this._onUnfollow}>Following</button>
+        )
+      } else {
+        followButton = (
+          <button className="follow" onClick={this._onFollow}>Follow</button>
+        )
+      }
     }
 
     var fullName;
@@ -80,7 +91,7 @@ module.exports = React.createClass({
             <nav className="profile-links">
               <p>Tracks</p>
             </nav>
-            {editButton}
+            {editButton}{followButton}
           </div>
 
           { this.props.children }
@@ -102,5 +113,13 @@ module.exports = React.createClass({
   _updateUser: function () {
     var modal = <UpdateUserForm />;
     ModalActions.receiveModal(modal);
+  },
+
+  _onFollow: function () {
+    UserUtil.createFollow(this.props.params.id)
+  },
+
+  _onUnfollow: function () {
+    UserUtil.destroyFollow(this.props.params.id)
   }
 });

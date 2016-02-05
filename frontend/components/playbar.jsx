@@ -1,7 +1,10 @@
 var React = require('react'),
     Link = require('react-router').Link,
     PlayerStore = require('../stores/player'),
-    PlayerControls = require('../mixins/player_controls');
+    PlayerControls = require('../mixins/player_controls'),
+    TrackStore = require('../stores/track'),
+    LikeMixin = require('../mixins/like_mixin'),
+    CurrentUserStore = require('../stores/current_user');
 
 var formatSecondsAsTime = function (secs) {
   secs = Math.round(secs);
@@ -14,7 +17,7 @@ var formatSecondsAsTime = function (secs) {
 };
 
 module.exports = React.createClass({
-  mixins: [PlayerControls],
+  mixins: [PlayerControls, LikeMixin],
 
   getInitialState: function () {
     return {
@@ -24,11 +27,14 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function () {
+    this.onChangeToken = TrackStore.addListener(this._onChange);
     this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
   },
 
   componentWillUnmount: function () {
+    this.onChangeToken = TrackStore.addListener(this._onChange)
     this.playerChangeToken.remove();
+
     clearInterval(this.counter);
   },
 
@@ -41,6 +47,29 @@ module.exports = React.createClass({
 
     var totalTime = PlayerStore.totalTime();
     var position = (350 / totalTime) * this.state.time;
+
+
+    var likeButton;
+    if (CurrentUserStore.isLoggedIn()) {
+      if (track.liker_ids.includes(CurrentUserStore.currentUser().id)) {
+        likeButton =
+        <button
+          title="Unlike track"
+          className="unlike playbar-like"
+          onClick={this._unlikeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span>
+        </button>;
+
+      } else {
+        likeButton =
+        <button
+          title="Like track"
+          className="like playbar-like"
+          onClick={this._likeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span>
+        </button>;
+      }
+    }
 
     return (
       <footer className="playbar">
@@ -71,6 +100,7 @@ module.exports = React.createClass({
             <span>{formatSecondsAsTime(totalTime)}</span>
           </div>
 
+          {likeButton}
           <Link
             to={"/tracks/" + track.id}
             className="track-info group">
@@ -80,6 +110,7 @@ module.exports = React.createClass({
             </figure>
 
             <p className="playbar-title">{track.title}</p>
+
           </Link>
 
         </div>
@@ -110,6 +141,21 @@ module.exports = React.createClass({
       clearInterval(this.counter);
     }
 
-    this.setState({ track: PlayerStore.track() });
+    this._onChange();
+  },
+
+  _onChange: function () {
+    var playingTrack = PlayerStore.track()
+
+    if (playingTrack) {
+      var track = TrackStore.find(playingTrack.id);
+    }
+
+    if (track) {
+      this.setState({ track: track })
+    } else {
+      this.setState({})
+    }
+
   }
 });

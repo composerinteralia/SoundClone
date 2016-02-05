@@ -15,11 +15,12 @@ class Api::LikesController < ApplicationController
   def destroy
     like = current_user.likes.find_by(track: params[:track_id])
 
-    if like.destroy
+    if like
+      like.destroy
       @track = like.track
       render 'api/tracks/show'
     else
-      render json: like.errors.full_messages, status: :unprocessable_entity
+      render json: ["Like does not exist"], status: :unprocessable_entity
     end
   end
 end

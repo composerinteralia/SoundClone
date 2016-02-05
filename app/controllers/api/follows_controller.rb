@@ -15,11 +15,12 @@ class Api::FollowsController < ApplicationController
   def destroy
     follow = current_user.follows.find_by(followee: params[:user_id])
 
-    if follow.destroy
+    if follow
+      follow.destroy
       @user = follow.followee
       render 'api/users/show'
     else
-      render json: follow.errors.full_messages, status: :unprocessable_entity
+      render json: ["Follow does not exits"], status: :unprocessable_entity
     end
   end
 

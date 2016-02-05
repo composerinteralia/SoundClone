@@ -6,6 +6,7 @@ img, section, span {
   border: 0;
   margin: 0;
   padding: 0;
+  outline: none;
 
   font: inherit;
   text-align: inherit;
@@ -227,8 +228,8 @@ button.cancel {
 .facebook {
   display: block;
   margin: auto;
-  height: 50px;
-  width: 210px;
+  height: 43px;
+  width: 180px;
   margin-top: 20px;
 }
 
@@ -371,10 +372,6 @@ h2.header-name, a.header-name {
   font-size: 15px;
 }
 
-button.unlike, button.like {
-  outline: none;
-}
-
 button.unlike {
   border: 1px solid #f50;
   color: #f50;
@@ -382,6 +379,34 @@ button.unlike {
 
 button.small-like {
   border: none;
+}
+
+.playbar-like {
+  float: right;
+  margin: 7px;
+}
+
+.like.playbar-like {
+  background: #fff;
+}
+
+button.follow {
+  border: 1px solid #f50;
+  background: #f50;
+  color: #fff;
+  letter-spacing: 1.5px;
+}
+
+.follow:hover {
+  background: #e40;
+}
+
+.unfollow {
+  color: #f50;
+}
+
+.unfollow:hover {
+  border: 1px solid #f50;
 }
 
 // play buttons
@@ -694,7 +719,7 @@ wave {
 
 .track-info {
   float: right;
-  padding: 0 15px;
+  padding: 1px 15px 2px;
 }
 
 .track-info:hover {
