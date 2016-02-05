@@ -37,11 +37,9 @@ class Api::TracksController < ApplicationController
     @tracks =
       Track.all
         .where.not(user: current_user)
-        .order(updated_at: :desc)
-        .page(1).per(12)
         .includes(:user)
         .includes(:likes)
-
+        .sample(12)
 
     render :index
   end
