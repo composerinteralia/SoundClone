@@ -28,8 +28,7 @@ module.exports = React.createClass({
     return (
       <main className="main content">
         {this.state.modal}
-        <section className="tracks">
-          <h2>Explore</h2>
+
           <ul className="group">
             {
               tracks.map(function (track) {
@@ -39,7 +38,7 @@ module.exports = React.createClass({
               })
             }
           </ul>
-        </section>
+  
       </main>
     );
   },

@@ -13,6 +13,7 @@ gem 'paperclip'
 gem 'aws-sdk', '~> 1.6'
 gem 'figaro'
 gem 'omniauth-facebook'
+gem 'kaminari'
 
 group :production do
   gem 'rails_12factor'
