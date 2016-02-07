@@ -1,6 +1,7 @@
 var React = require('react'),
     Link = require('react-router').Link,
     PlayerStore = require('../stores/player'),
+    PlayerActions = require('../actions/player_actions'),
     PlayerControls = require('../mixins/player_controls'),
     TrackStore = require('../stores/track'),
     LikeMixin = require('../mixins/like_mixin'),
@@ -29,11 +30,15 @@ module.exports = React.createClass({
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
     this.playerChangeToken = PlayerStore.addListener(this._onChange);
+
+    document.addEventListener('keypress', this._onKeypress);
   },
 
   componentWillUnmount: function () {
     this.onChangeToken.remove();
     this.playerChangeToken.remove();
+
+    document.removeEventListener('keypress', this._onKeypress);
   },
 
   render: function () {
@@ -153,5 +158,13 @@ module.exports = React.createClass({
       this.setState({ time: PlayerStore.currentTime() });
     }
 
+  },
+
+  _onKeypress: function  (e) {
+    e.preventDefault()
+
+    if (e.keyCode === 32) {
+      PlayerActions.playPause();
+    }
   }
 });

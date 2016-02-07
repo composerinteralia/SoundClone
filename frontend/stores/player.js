@@ -47,6 +47,10 @@ var pause = function () {
   _currentTrack && _currentTrack.wavesurfer.pause();
 };
 
+var playPause = function () {
+  _currentTrack && _currentTrack.wavesurfer.playPause();
+}
+
 var destroy = function (trackId) {
   findTrack(trackId).wavesurfer.destroy()
 
@@ -87,6 +91,10 @@ PlayerStore.__onDispatch = function (payload) {
       break;
     case PlayerConstants.PAUSED:
       pause();
+      PlayerStore.__emitChange();
+      break;
+    case PlayerConstants.PLAY_PAUSED:
+      playPause();
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.DESTROYED:

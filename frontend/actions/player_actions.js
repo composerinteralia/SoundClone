@@ -39,6 +39,12 @@ module.exports = {
     });
   },
 
+  playPause: function () {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.PLAY_PAUSED
+    });
+  },
+
   destroy: function (trackId) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.DESTROYED,
