@@ -28,14 +28,12 @@ module.exports = React.createClass({
 
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
-    this.playerChangeToken = PlayerStore.addListener(this._onPlayerChange);
+    this.playerChangeToken = PlayerStore.addListener(this._onChange);
   },
 
   componentWillUnmount: function () {
     this.onChangeToken.remove();
     this.playerChangeToken.remove();
-
-    clearInterval(this.counter);
   },
 
   render: function () {
@@ -140,20 +138,6 @@ module.exports = React.createClass({
     }
   },
 
-  _onPlayerChange: function () {
-
-    if (PlayerStore.isPlaying()) {
-      clearInterval(this.counter);
-      this.counter = setInterval(function () {
-        this.setState({ time: PlayerStore.currentTime() });
-      }.bind(this), 60);
-    } else {
-      clearInterval(this.counter);
-    }
-
-    this._onChange();
-  },
-
   _onChange: function () {
     var playingTrack = PlayerStore.track();
     var track;
@@ -164,9 +148,9 @@ module.exports = React.createClass({
 
     if (track) {
       var liked = track.liker_ids.includes(CurrentUserStore.currentUser().id);
-      this.setState({ track: track, liked: liked });
+      this.setState({ track: track, liked: liked, time: PlayerStore.currentTime() });
     } else {
-      this.setState({});
+      this.setState({ time: PlayerStore.currentTime() });
     }
 
   }

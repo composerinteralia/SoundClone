@@ -445,11 +445,12 @@ button.follow {
 
 .wave {
   width: 400px;
-  height: 45px;
+  height: 50px;
+  margin-left: 45px;
 }
 
 .wave > wave {
-  margin-top: 20px;
+  margin-top: 10px;
   height: 70px !important;
 }
 
@@ -465,10 +466,6 @@ button.follow {
 
 .show-wave > wave {
   height: 200px !important;
-}
-
-.hidden-wave {
-  display: none;
 }
 
 wave {

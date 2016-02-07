@@ -9,11 +9,12 @@ module.exports = {
     });
   },
 
-  remountWavesurfer: function (container, waveType) {
+  remountWavesurfer: function (container, height, visible) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.REMOUNTED,
       container: container,
-      waveType: waveType
+      height: height,
+      visible: visible
     });
   },
 
@@ -48,5 +49,11 @@ module.exports = {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.RESET
     });
+  },
+
+  progress: function () {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.PROGRESS
+    })
   }
 };

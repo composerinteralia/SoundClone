@@ -1,69 +1,71 @@
-wavesurfer cache!!!
-
-Like index (gets a user's liked tracks) - collection
-Move explore component
-
 ----------------
+Do Yesterday:
 
 Play
+  wavesurfer cache!!!
   rename player store wavesurfer object
-  better solution for wavesurfer load: disable play button until loaded
-  Work on setting and clearing interval (on play, on pause, on finish)
+
   Next track when finished
   keyboard listeners, playbar listeners
   volume
 
-Display errors on forms (check out Robert's awesome)
+Display errors on forms (check out Robert's awesome forms)
   -- submit function triggers action to clear message store
   -- ajax errors trigger action to send messages to store
   -- modals listen to the message store (this.state.errors)
   -- Error component passed this.state.errors as props
   -- ul with li of props (list-style bullet)
+  more efficient FormData appending?
+  -- drag and drop image upload
 
-Spinners galore!
-_________________
-Plays
 
-Follows
-  Users load with count of followers and followees)
-  Follower and Followee store (user store)
+image sizes (paperclip)
+  cropping?
 
+Spinners galore! (especially audio upload)
+
+Allow logged out users to see more
+
+------------------
+Now:
+
+Connect Stream and Explore
+
+Collection
+  Like index (gets a user's liked tracks)
+  Followers and Follows (user store)
+
+Track show
+  show edit buttons if belongs to current user
+  show total number of likes
+  number of plays (and on track index item)
+
+Profile (and Sidebar)
+  Users load with like count, follow count, follower count
 __________________
 
-Playlists
-  Playlist store
-  Incorporate playlists into stream?
+Essential:
 
 Search
 Infinite Scroll
 Multiple Sessions
 
+scroll to top whenever you navigate to new page
+
+Like store would have been cleaner after all...
+
+__________________
+
+Optional:
+
+media queries (resizing window)
+
+Playlists
+Playlist store
+Incorporate playlists into stream?
+
 reposts
 
+Highlight current tab in navbar?
+redirect to user's desired location after login
 -----------------
-
-Track show
-  show edit buttons if belongs to current user
-  show total number of likes
-
-Audio
-  Spinner while waiting for upload to complete?
-  validate type
-  get rid of default
-
-image
-  paperclip image sizes
-  cropping?
-
-nav
-  Highlight current tab in navbar
-  redirect to user's desired location after login
-  scroll to top whenever you navigate to new page
-
-Assorted
-  Reset guest tracks on logout?
-  navbar and modals f-ed up when resizing window... (media query)
-  more efficient FormData appending?
-  Background image or color choice?
-
-  logged out users can still see a lot

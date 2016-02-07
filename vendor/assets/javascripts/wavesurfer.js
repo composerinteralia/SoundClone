@@ -10,11 +10,12 @@
 
 var WaveSurfer = {
     defaultParams: {
+        barWidth      : 2,
         height        : 128,
-        waveColor     : '#999',
-        progressColor : '#555',
+        waveColor     : '#555',
+        progressColor : '#f50',
         cursorColor   : '#333',
-        cursorWidth   : 1,
+        cursorWidth   : 0,
         skipLength    : 2,
         minPxPerSec   : 20,
         pixelRatio    : window.devicePixelRatio,
@@ -35,12 +36,13 @@ var WaveSurfer = {
         backend       : 'WebAudio',
         mediaType     : 'audio',
         autoCenter    : true,
+        visible       : true
     },
 
     init: function (params) {
-        // Extract relevant parameters (or defaults)
         this.mounted = true
 
+      // Extract relevant parameters (or defaults)
         this.params = WaveSurfer.util.extend({}, this.defaultParams, params);
 
         this.container = 'string' == typeof params.container ?
@@ -71,7 +73,9 @@ var WaveSurfer = {
         // cancelled on subsequent loads of audio
         this.tmpEvents = [];
 
-        this.createDrawer();
+        if (this.params.visible) {
+          this.createDrawer();
+        }
         this.createBackend();
     },
 
@@ -123,7 +127,10 @@ var WaveSurfer = {
         this.backend.on('pause', function () { my.fireEvent('pause'); });
 
         this.backend.on('audioprocess', function (time) {
-            my.drawer.progress(my.backend.getPlayedPercents());
+            if (my.params.visible) {
+              my.drawer.progress(my.backend.getPlayedPercents());
+            }
+
             my.fireEvent('audioprocess', time);
         });
     },
@@ -169,7 +176,9 @@ var WaveSurfer = {
 
     seekAndCenter: function (progress) {
         this.seekTo(progress);
-        this.drawer.recenter(progress);
+        if (this.params.visible) {
+          this.drawer.recenter(progress);
+        }
     },
 
     seekTo: function (progress) {
@@ -180,7 +189,10 @@ var WaveSurfer = {
             this.params.scrollParent = false;
         }
         this.backend.seekTo(progress * this.getDuration());
-        this.drawer.progress(this.backend.getPlayedPercents());
+
+        if (this.params.visible) {
+          this.drawer.progress(this.backend.getPlayedPercents());
+        }
 
         if (!paused) {
             this.backend.pause();
@@ -193,7 +205,10 @@ var WaveSurfer = {
     stop: function () {
         this.pause();
         this.seekTo(0);
-        this.drawer.progress(0);
+
+        if (this.params.visible) {
+          this.drawer.progress(0);
+        }
     },
 
     /**
@@ -268,7 +283,9 @@ var WaveSurfer = {
 
         this.params.scrollParent = true;
 
-        this.drawBuffer();
+        if (this.params.visible) {
+          this.drawBuffer();
+        }
 
         this.seekAndCenter(
             this.getCurrentTime() / this.getDuration()
@@ -290,7 +307,9 @@ var WaveSurfer = {
      */
     loadDecodedBuffer: function (buffer) {
         this.backend.load(buffer);
-        this.drawBuffer();
+        if (this.params.visible) {
+          this.drawBuffer();
+        }
         this.fireEvent('ready');
     },
 
@@ -342,7 +361,9 @@ var WaveSurfer = {
 
         this.tmpEvents.push(
             this.backend.once('canplay', (function () {
-                this.drawBuffer();
+                if (this.params.visible) {
+                  this.drawBuffer();
+                }
                 this.fireEvent('ready');
             }).bind(this)),
 
@@ -358,7 +379,9 @@ var WaveSurfer = {
             this.getArrayBuffer(url, (function (arraybuffer) {
                 this.decodeArrayBuffer(arraybuffer, (function (buffer) {
                     this.backend.buffer = buffer;
-                    this.drawBuffer();
+                    if (this.params.visible) {
+                      this.drawBuffer();
+                    }
                 }).bind(this));
             }).bind(this));
         }
@@ -436,21 +459,56 @@ var WaveSurfer = {
             this.backend.disconnectSource();
         }
         this.clearTmpEvents();
-        this.drawer.progress(0);
-        this.drawer.setWidth(0);
-        this.drawer.drawPeaks({ length: this.drawer.getWidth() }, 0);
+
+        if (this.params.visible) {
+          this.drawer.progress(0);
+          this.drawer.setWidth(0);
+          this.drawer.drawPeaks({ length: this.drawer.getWidth() }, 0);
+        }
     },
 
     /**
      * Remove events, elements and disconnect WebAudio nodes.
      */
     destroy: function () {
+        this.mounted = false
         this.fireEvent('destroy');
         this.clearTmpEvents();
         this.unAll();
         this.backend.destroy();
-        this.drawer.destroy();
-    }
+
+        if (this.params.visible) {
+          this.drawer.destroy();
+        }
+    },
+
+    dismount: function () {
+      this.mounted = false
+      this.clearTmpEvents()
+      if (this.params.visible) {
+        this.drawer.destroy()
+      }
+    },
+
+    remount: function (container, height, visible) {
+      this.mounted = true
+
+      this.container = container;
+      this.mediaContainer = container;
+
+      this.params.height = height
+
+      if (typeof visible === "undefined") {
+        this.params.visible = true;
+      } else {
+        this.params.visible = visible
+      }
+
+      if (this.params.visible) {
+        this.createDrawer();
+        this.drawBuffer();
+      }
+    },
 };
 
 WaveSurfer.create = function (params) {

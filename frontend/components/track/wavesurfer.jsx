@@ -20,11 +20,17 @@ module.exports = React.createClass({
   },
 
   _initWavesurfer: function () {
-    var track = this.props.track;
-    var type = this.props.type;
-    var height = 128;
+    var track = this.props.track,
+        type = this.props.type,
+        height = 128,
+        visible = true
+
     if (type === "show-wave") {
       height = 200;
+    }
+
+    if (type === "hidden-wave") {
+      visible = false;
     }
 
     var containerClass = "wave-" + track.id;
@@ -32,7 +38,7 @@ module.exports = React.createClass({
 
     if (PlayerStore.wavesurferExists(containerClass)) {
       setTimeout(function () {
-        PlayerActions.remountWavesurfer(container, height);
+        PlayerActions.remountWavesurfer(container, height, visible);
       }.bind(this), 0);
       return;
     }
@@ -41,11 +47,8 @@ module.exports = React.createClass({
 
     this.wavesurfer.init({
       container: container,
-      waveColor: '#555',
-      progressColor: '#f50',
-      barWidth: 2,
-      cursorWidth: 0,
-      height: height
+      height: height,
+      visible: visible
     });
 
     this.wavesurfer.load(track.audio_url);
@@ -55,6 +58,14 @@ module.exports = React.createClass({
         track: track,
         wavesurfer: this.wavesurfer
       });
+
+      this.wavesurfer.on('audioprocess', function () {
+        PlayerActions.progress();
+      })
+
+      // be sure to turn off when dismounting (unless currently playing)
+      // 'finish' PlayerActions.next();
+
     }.bind(this), 0);
   }
 });

@@ -24,4 +24,3 @@
 //= require mediaelement.js
 //= require drawer.js
 //= require drawer.canvas.js
-//= require html-init.js

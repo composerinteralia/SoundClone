@@ -10,22 +10,10 @@ var add = function (wavesurfer) {
   _wavesurfers[wavesurfer.track.id] = wavesurfer;
 };
 
-var remount = function (container, height) {
+var remount = function (container, height, visible) {
   var wavesurfer = _currentWavesurfer.wavesurfer;
-  var child = wavesurfer.container.children[0];
 
-  container.appendChild(child);
-
-  wavesurfer.container = container;
-  wavesurfer.mediaContainer = container;
-  wavesurfer.drawer.container = container;
-
-  wavesurfer.drawer.height = height;
-  wavesurfer.drawer.params.height = height;
-
-  wavesurfer.drawBuffer();
-
-  add(_currentWavesurfer);
+  wavesurfer.remount(container, height, visible);
 };
 
 var findWavesurfer = function (trackId) {
@@ -33,15 +21,19 @@ var findWavesurfer = function (trackId) {
 };
 
 var remove = function (trackId) {
-  var wavesurfer = _wavesurfers[trackId];
-  if (wavesurfer) {
-    wavesurfer.mounted = false;
+  var _wavesurfer = _wavesurfers[trackId];
+
+  if (_currentWavesurfer && _currentWavesurfer.track.id === trackId) {
+    _currentWavesurfer.wavesurfer.dismount();
+  } else if (_wavesurfer) {
+    _wavesurfer.wavesurfer.destroy();
   }
 
   delete _wavesurfers[trackId];
 };
 
 var play = function (trackId) {
+
   if (!_currentWavesurfer) {
     _currentWavesurfer = findWavesurfer(trackId);
   } else if (_currentWavesurfer.track.id !== trackId) {
@@ -57,8 +49,9 @@ var pause = function () {
 };
 
 var destroy = function (trackId) {
+  // fix this to actually destroy!
   if (_currentWavesurfer && _currentWavesurfer.track.id === trackId) {
-    pause();
+    _currentWavesurfer.wavesurfer.destroy();
     _currentWavesurfer = null;
   }
 };
@@ -77,7 +70,7 @@ PlayerStore.__onDispatch = function (payload) {
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOUNTED:
-      remount(payload.container, payload.waveType);
+      remount(payload.container, payload.height, payload.visible);
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOVED:
@@ -99,6 +92,10 @@ PlayerStore.__onDispatch = function (payload) {
     case PlayerConstants.RESET:
       reset();
       PlayerStore.__emitChange();
+      break;
+    case PlayerConstants.PROGRESS:
+      PlayerStore.__emitChange();
+      break;
   }
 };
 

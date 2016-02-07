@@ -104,9 +104,9 @@ module.exports = React.createClass({
                 {track.title}
               </Link>
 
-              <WaveSurfer track={track} type="wave" />
             </div>
           </div>
+          <WaveSurfer track={track} type="wave" />
 
           {likeButton}{trackButtons}
 
@@ -117,7 +117,7 @@ module.exports = React.createClass({
 
   _trackButtons: function () {
     return (
-      <div className="track-buttons">
+      <div className="track-buttons group">
         <i title="Edit Track" className="fa fa-pencil track-button"
           onClick={this._update}></i>
         <i title="Delete Track" className="fa fa-trash track-button"

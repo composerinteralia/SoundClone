@@ -168,9 +168,12 @@ WaveSurfer.WebAudio = {
     },
 
     decodeArrayBuffer: function (arraybuffer, callback, errback) {
+
         if (!this.offlineAc) {
             this.offlineAc = this.getOfflineAudioContext(this.ac ? this.ac.sampleRate : 44100);
         }
+
+
         this.offlineAc.decodeAudioData(arraybuffer, (function (data) {
             callback(data);
         }).bind(this), errback);
@@ -260,8 +263,8 @@ WaveSurfer.WebAudio = {
 
     createSource: function () {
         this.disconnectSource();
-        this.source = this.ac.createBufferSource();
 
+        this.source = this.ac.createBufferSource();
         //adjust for old browsers.
         this.source.start = this.source.start || this.source.noteGrainOn;
         this.source.stop = this.source.stop || this.source.noteOff;

@@ -23,42 +23,48 @@ WaveSurfer.util = {
         xhr.responseType = options.responseType || 'json';
 
         xhr.addEventListener('progress', function (e) {
+
           if (!wavesurfer.mounted) {
-            ajax.unall();
+            ajax.unAll();
             xhr.abort();
-          } else {
-            ajax.fireEvent('progress', e);
-            if (e.lengthComputable && e.loaded == e.total) {
-                fired100 = true;
-            }
+            return;
           }
+
+          ajax.fireEvent('progress', e);
+          if (e.lengthComputable && e.loaded == e.total) {
+              fired100 = true;
+          }
+
         });
 
         xhr.addEventListener('load', function (e) {
           if (!wavesurfer.mounted) {
-            ajax.unall();
+            ajax.unAll();
             xhr.abort();
-          } else {
-            if (!fired100) {
-                ajax.fireEvent('progress', e);
-            }
-            ajax.fireEvent('load', e);
-
-            if (200 == xhr.status || 206 == xhr.status) {
-                ajax.fireEvent('success', xhr.response, e);
-            } else {
-                ajax.fireEvent('error', e);
-            }
+            return;
           }
+
+          if (!fired100) {
+              ajax.fireEvent('progress', e);
+          }
+          ajax.fireEvent('load', e);
+
+          if (200 == xhr.status || 206 == xhr.status) {
+              ajax.fireEvent('success', xhr.response, e);
+          } else {
+              ajax.fireEvent('error', e);
+          }
+
         });
 
         xhr.addEventListener('error', function (e) {
           if (!wavesurfer.mounted) {
-            ajax.unall();
+            ajax.unAll();
             xhr.abort();
-          } else {
-            ajax.fireEvent('error', e);
+            return;
           }
+
+          ajax.fireEvent('error', e);
         });
 
         if (wavesurfer.mounted) {
