@@ -80,12 +80,12 @@ module.exports = React.createClass({
 
           <div className="controls">
             <i className="fa fa-step-backward playback-button"
-              onClick={this._playPrev.bind(null, track)}></i>
+              onClick={this._playPrev}></i>
 
             {this._playPauseButton()}
 
             <i className="fa fa-step-forward playback-button"
-              onClick={this._playNext.bind(null, track)}></i>
+              onClick={this._playNext}></i>
           </div>
 
           <div className="progress">

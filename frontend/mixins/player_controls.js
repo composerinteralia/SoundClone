@@ -10,19 +10,11 @@ module.exports = {
     PlayerActions.pause();
   },
 
-  _playNext: function (track) {
-    var nextTrack = TrackStore.next(track);
-
-    if (nextTrack) {
-      PlayerActions.play(nextTrack.id);
-    }
+  _playNext: function () {
+    PlayerActions.playNext()
   },
 
   _playPrev: function (track) {
-    var prevTrack = TrackStore.prev(track);
-
-    if (prevTrack) {
-      PlayerActions.play(prevTrack.id);
-    }
+    PlayerActions.playPrev()
   }
 };

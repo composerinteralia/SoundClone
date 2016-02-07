@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/dispatcher'),
     Store = require('flux/utils').Store,
-    PlayerConstants = require('../constants/player_constants');
+    PlayerConstants = require('../constants/player_constants'),
+    TrackStore = require('./track');
 
 // fine for now, but need a cache
 var _tracks = {},
@@ -51,6 +52,18 @@ var playPause = function () {
   _currentTrack && _currentTrack.wavesurfer.playPause();
 }
 
+var playNext = function () {
+  var nextTrack = TrackStore.next(_currentTrack.track);
+
+  play(nextTrack.id)
+}
+
+var playPrev = function () {
+  var prevTrack = TrackStore.prev(_currentTrack.track);
+
+  play(prevTrack.id)
+}
+
 var destroy = function (trackId) {
   findTrack(trackId).wavesurfer.destroy()
 
@@ -96,6 +109,12 @@ PlayerStore.__onDispatch = function (payload) {
     case PlayerConstants.PLAY_PAUSED:
       playPause();
       PlayerStore.__emitChange();
+      break;
+    case PlayerConstants.NEXT:
+      playNext();
+      break;
+    case PlayerConstants.PREV:
+      playPrev();
       break;
     case PlayerConstants.DESTROYED:
       destroy(payload.trackId);

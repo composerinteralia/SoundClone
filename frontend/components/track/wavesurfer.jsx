@@ -69,7 +69,9 @@ module.exports = React.createClass({
         PlayerActions.progress();
       })
 
-      // 'finish' PlayerActions.next();
+      this.wavesurfer.on('finish', function () {
+        PlayerActions.playNext();
+      })
 
     }.bind(this), 0);
   }

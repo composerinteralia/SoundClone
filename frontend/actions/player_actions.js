@@ -45,6 +45,18 @@ module.exports = {
     });
   },
 
+  playNext: function () {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.NEXT
+    });
+  },
+
+  playPrev: function () {
+    AppDispatcher.dispatch({
+      actionType: PlayerConstants.PREV
+    });
+  },
+
   destroy: function (trackId) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.DESTROYED,
