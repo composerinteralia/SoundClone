@@ -23,27 +23,13 @@ WaveSurfer.util = {
         xhr.responseType = options.responseType || 'json';
 
         xhr.addEventListener('progress', function (e) {
-
-          if (!wavesurfer.mounted) {
-            ajax.unAll();
-            xhr.abort();
-            return;
-          }
-
           ajax.fireEvent('progress', e);
           if (e.lengthComputable && e.loaded == e.total) {
               fired100 = true;
           }
-
         });
 
         xhr.addEventListener('load', function (e) {
-          if (!wavesurfer.mounted) {
-            ajax.unAll();
-            xhr.abort();
-            return;
-          }
-
           if (!fired100) {
               ajax.fireEvent('progress', e);
           }
@@ -54,22 +40,13 @@ WaveSurfer.util = {
           } else {
               ajax.fireEvent('error', e);
           }
-
         });
 
         xhr.addEventListener('error', function (e) {
-          if (!wavesurfer.mounted) {
-            ajax.unAll();
-            xhr.abort();
-            return;
-          }
-
           ajax.fireEvent('error', e);
         });
 
-        if (wavesurfer.mounted) {
-          xhr.send();
-        }
+        xhr.send();
         ajax.xhr = xhr;
         return ajax;
     }

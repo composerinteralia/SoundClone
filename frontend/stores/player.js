@@ -2,64 +2,63 @@ var AppDispatcher = require('../dispatcher/dispatcher'),
     Store = require('flux/utils').Store,
     PlayerConstants = require('../constants/player_constants');
 
-var _wavesurfers = {},
-    _currentWavesurfer = null,
+// fine for now, but need a cache
+var _tracks = {},
+    _currentTrack = null,
     PlayerStore = new Store(AppDispatcher);
 
 var add = function (wavesurfer) {
-  _wavesurfers[wavesurfer.track.id] = wavesurfer;
+  _tracks[wavesurfer.track.id] = wavesurfer;
 };
 
-var remount = function (container, height, visible) {
-  var wavesurfer = _currentWavesurfer.wavesurfer;
-
-  wavesurfer.remount(container, height, visible);
+var remount = function (trackId, container, height, visible) {
+  findTrack(trackId).wavesurfer.remount(container, height, visible);
 };
 
-var findWavesurfer = function (trackId) {
-  return _wavesurfers[trackId];
-};
-
-var remove = function (trackId) {
-  var _wavesurfer = _wavesurfers[trackId];
-
-  if (_currentWavesurfer && _currentWavesurfer.track.id === trackId) {
-    _currentWavesurfer.wavesurfer.dismount();
-  } else if (_wavesurfer) {
-    _wavesurfer.wavesurfer.destroy();
+var unmount = function (trackId) {
+  var currentlyPlaying = false;
+  if (isCurrentTrack(trackId)) {
+    currentlyPlaying = true;
   }
 
-  delete _wavesurfers[trackId];
+  findTrack(trackId).wavesurfer.dismount(currentlyPlaying);
+};
+
+var isCurrentTrack = function (trackId) {
+  return (_currentTrack && _currentTrack.track.id === trackId)
+}
+
+var findTrack = function (trackId) {
+  if (isCurrentTrack(trackId)) {
+    return _currentTrack
+  }
+
+  return _tracks[trackId];
 };
 
 var play = function (trackId) {
+  pause();
 
-  if (!_currentWavesurfer) {
-    _currentWavesurfer = findWavesurfer(trackId);
-  } else if (_currentWavesurfer.track.id !== trackId) {
-    _currentWavesurfer.wavesurfer.pause();
-    _currentWavesurfer = findWavesurfer(trackId);
-  }
-
-  _currentWavesurfer.wavesurfer.play();
+  _currentTrack = findTrack(trackId);
+  _currentTrack.wavesurfer.play();
 };
 
 var pause = function () {
-  _currentWavesurfer.wavesurfer.pause();
+  _currentTrack && _currentTrack.wavesurfer.pause();
 };
 
 var destroy = function (trackId) {
-  // fix this to actually destroy!
-  if (_currentWavesurfer && _currentWavesurfer.track.id === trackId) {
-    _currentWavesurfer.wavesurfer.destroy();
-    _currentWavesurfer = null;
+  findTrack(trackId).wavesurfer.destroy()
+
+  if (isCurrentTrack(trackId)) {
+    _currentTrack = null;
   }
 };
 
 var reset = function () {
-  if (_currentWavesurfer) {
+  if (_currentTrack) {
     pause();
-    _currentWavesurfer = null;
+    _currentTrack = null;
   }
 };
 
@@ -70,11 +69,16 @@ PlayerStore.__onDispatch = function (payload) {
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOUNTED:
-      remount(payload.container, payload.height, payload.visible);
+      remount(
+        payload.trackId,
+        payload.container,
+        payload.height,
+        payload.visible
+      );
       PlayerStore.__emitChange();
       break;
-    case PlayerConstants.REMOVED:
-      remove(payload.trackId);
+    case PlayerConstants.UNMOUNTED:
+      unmount(payload.trackId);
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.PLAYED:
@@ -97,31 +101,30 @@ PlayerStore.__onDispatch = function (payload) {
       PlayerStore.__emitChange();
       break;
   }
-};
+}
 
-PlayerStore.wavesurferExists = function (containerClass) {
-  return _currentWavesurfer &&
-    _currentWavesurfer.wavesurfer.container.classList[1] === containerClass;
+PlayerStore.wavesurferExists = function (trackId) {
+  return !!findTrack(trackId)
 };
 
 PlayerStore.track = function () {
-  return (_currentWavesurfer && _currentWavesurfer.track) || undefined ;
+  return (_currentTrack && _currentTrack.track) || undefined ;
 };
 
 PlayerStore.isCurrentTrack = function (trackId) {
-  return _currentWavesurfer && _currentWavesurfer.track.id === parseInt(trackId);
+  return _currentTrack && _currentTrack.track.id === parseInt(trackId);
 };
 
 PlayerStore.isPlaying = function () {
-  return _currentWavesurfer && _currentWavesurfer.wavesurfer.isPlaying();
+  return _currentTrack && _currentTrack.wavesurfer.isPlaying();
 };
 
 PlayerStore.currentTime = function () {
-  return (_currentWavesurfer && _currentWavesurfer.wavesurfer.getCurrentTime()) || 0;
+  return (_currentTrack && _currentTrack.wavesurfer.getCurrentTime()) || 0;
 };
 
 PlayerStore.totalTime = function () {
-  return (_currentWavesurfer && _currentWavesurfer.wavesurfer.getDuration()) || 0;
+  return (_currentTrack && _currentTrack.wavesurfer.getDuration()) || 0;
 };
 
 module.exports = PlayerStore;

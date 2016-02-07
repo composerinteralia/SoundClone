@@ -5,11 +5,12 @@ var React = require('react'),
 module.exports = React.createClass({
   componentDidMount: function () {
     this._initWavesurfer();
+    this.loaded = false;
   },
 
   componentWillUnmount: function () {
     setTimeout(function () {
-      PlayerActions.removeWavesurfer(this.props.track.id);
+      PlayerActions.unmountWavesurfer(this.props.track.id);
     }.bind(this), 0);
   },
 
@@ -36,9 +37,14 @@ module.exports = React.createClass({
     var containerClass = "wave-" + track.id;
     var container = $("." + containerClass)[0];
 
-    if (PlayerStore.wavesurferExists(containerClass)) {
+    if (PlayerStore.wavesurferExists(track.id)) {
       setTimeout(function () {
-        PlayerActions.remountWavesurfer(container, height, visible);
+        PlayerActions.remountWavesurfer(
+          track.id,
+          container,
+          height,
+          visible
+      );
       }.bind(this), 0);
       return;
     }
@@ -63,7 +69,6 @@ module.exports = React.createClass({
         PlayerActions.progress();
       })
 
-      // be sure to turn off when dismounting (unless currently playing)
       // 'finish' PlayerActions.next();
 
     }.bind(this), 0);

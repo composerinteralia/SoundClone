@@ -9,18 +9,19 @@ module.exports = {
     });
   },
 
-  remountWavesurfer: function (container, height, visible) {
+  remountWavesurfer: function (trackId, container, height, visible, onAudioprocess) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.REMOUNTED,
+      trackId: trackId,
       container: container,
       height: height,
       visible: visible
     });
   },
 
-  removeWavesurfer: function (trackId) {
+  unmountWavesurfer: function (trackId) {
     AppDispatcher.dispatch({
-      actionType: PlayerConstants.REMOVED,
+      actionType: PlayerConstants.UNMOUNTED,
       trackId: trackId
     });
   },

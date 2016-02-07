@@ -187,6 +187,7 @@ WaveSurfer.WebAudio = {
      * of peaks consisting of (max, min) values for each subrange.
      */
     getPeaks: function (length) {
+
         var sampleSize = this.buffer.length / length;
         var sampleStep = ~~(sampleSize / 10) || 1;
         var channels = this.buffer.numberOfChannels;
@@ -323,9 +324,7 @@ WaveSurfer.WebAudio = {
      */
     play: function (start, end) {
         // will keep trying to play until loaded
-        // Interval cleared if paused
         if (!this.buffer) {
-          this.setState(this.PLAYING_STATE);
           this.tryPlay = setTimeout(function () {
             this.play();
           }.bind(this), 0);
@@ -353,7 +352,8 @@ WaveSurfer.WebAudio = {
      * Pauses the loaded audio.
      */
     pause: function () {
-        clearInterval(this.tryPlay)
+        clearTimeout(this.tryPlay)
+        if (!this.buffer) return;
 
         this.scheduledPause = null;
 

@@ -41,6 +41,7 @@ var WaveSurfer = {
 
     init: function (params) {
         this.mounted = true
+        this.drawn = false
 
       // Extract relevant parameters (or defaults)
         this.params = WaveSurfer.util.extend({}, this.defaultParams, params);
@@ -262,6 +263,15 @@ var WaveSurfer = {
     },
 
     drawBuffer: function () {
+      if (this.drawn || !this.mounted) return;
+
+      if (!this.backend.buffer) {
+        setTimeout(function () {
+          this.drawBuffer();
+        }.bind(this), 1);
+        return;
+      }
+
         var nominalWidth = Math.round(
             this.getDuration() * this.params.minPxPerSec * this.params.pixelRatio
         );
@@ -273,9 +283,12 @@ var WaveSurfer = {
             width = parentWidth;
         }
 
+
         var peaks = this.backend.getPeaks(width);
         this.drawer.drawPeaks(peaks, width);
         this.fireEvent('redraw', peaks, width);
+
+        this.drawn = true
     },
 
     zoom: function (pxPerSec) {
@@ -479,14 +492,20 @@ var WaveSurfer = {
 
         if (this.params.visible) {
           this.drawer.destroy();
+          this.drawn = false;
         }
     },
 
-    dismount: function () {
+    dismount: function (currentlyPlaying) {
       this.mounted = false
-      this.clearTmpEvents()
+
+      if (!currentlyPlaying) {
+        this.seekTo(0);
+      }
+
       if (this.params.visible) {
-        this.drawer.destroy()
+        this.drawer.destroy();
+        this.drawn = false;
       }
     },
 
@@ -496,12 +515,12 @@ var WaveSurfer = {
       this.container = container;
       this.mediaContainer = container;
 
-      this.params.height = height
+      this.params.height = height;
 
       if (typeof visible === "undefined") {
         this.params.visible = true;
       } else {
-        this.params.visible = visible
+        this.params.visible = visible;
       }
 
       if (this.params.visible) {
