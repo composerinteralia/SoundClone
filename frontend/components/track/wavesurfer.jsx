@@ -70,8 +70,9 @@ module.exports = React.createClass({
       })
 
       this.wavesurfer.on('finish', function () {
+        this.wavesurfer.seekTo(0)
         PlayerActions.playNext();
-      })
+      }.bind(this))
 
     }.bind(this), 0);
   }
