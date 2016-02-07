@@ -611,14 +611,15 @@ wave {
   color: #fff;
 }
 
-.play-button-explore {
+.explore-image > .play-button {
   position: absolute;
   top: 45px;
   left: 45px;
   display: none;
+
 }
 
-.explore-item:hover .play-button-explore {
+.explore-item:hover .play-button {
   display: block;
 }
 

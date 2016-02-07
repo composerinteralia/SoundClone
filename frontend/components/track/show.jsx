@@ -1,16 +1,16 @@
 var React = require('react'),
     Link = require('react-router').Link,
+    LikeMixin = require('../../mixins/like_mixin'),
     TrackStore = require('../../stores/track'),
     PlayerStore = require('../../stores/player'),
     PlayerActions = require('../../actions/player_actions'),
     CurrentUserStore = require('../../stores/current_user'),
     TrackUtil = require('../../util/track_util'),
     WaveSurfer = require('./wavesurfer'),
-    PlayerControls = require('../../mixins/player_controls'),
-    LikeMixin = require('../../mixins/like_mixin');
+    PlayPauseButton = require('./play_pause_button')
 
 module.exports = React.createClass({
-  mixins: [PlayerControls, LikeMixin],
+  mixins: [LikeMixin],
 
   getInitialState: function () {
     return {
@@ -42,21 +42,6 @@ module.exports = React.createClass({
       return <div>User not found!</div>;
     }
 
-    if (this.state.playing && PlayerStore.isPlaying()) {
-      playPauseButton = (
-        <div className="play-button" onClick={this._pauseTrack}>
-          <div className="pause-line left"></div>
-          <div className="pause-line"></div>
-        </div>
-      );
-    } else {
-      playPauseButton = (
-        <div className="play-button" onClick={this._playTrack.bind(null, track)}>
-          <div className="play-arrow"></div>
-        </div>
-      );
-    }
-
     var currentUser = CurrentUserStore.currentUser();
     var likeButton, followButton;
     if (currentUser && currentUser.id !== track.user_id) {
@@ -83,7 +68,7 @@ module.exports = React.createClass({
         <header className="track-header group">
 
           <div className="track-header-left">
-              {playPauseButton}
+              <PlayPauseButton playing={this.state.playing} track={track}/>
 
               <div className="track-names header-names">
                 <Link

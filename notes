@@ -22,6 +22,7 @@ Allow logged out users to see more
 
 ------------------
 Now:
+Plays
 
 Connect Stream and Explore
 
@@ -40,8 +41,8 @@ __________________
 
 Essential:
 
+Pagination/InfiniteScroll
 Search
-Infinite Scroll
 Multiple Sessions
 
 scroll to top whenever you navigate to new page

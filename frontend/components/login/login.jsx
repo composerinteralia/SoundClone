@@ -2,9 +2,9 @@ var React = require('react'),
     History = require('react-router').History,
     ModalStore = require('../../stores/modal'),
     ModalActions = require('../../actions/modal_actions'),
+    SessionsApiUtil = require('../../util/sessions_api_util'),
     SessionForm = require('./session_form'),
     NewUserForm = require('../user/new_form'),
-    SessionsApiUtil = require('../../util/sessions_api_util'),
     Explore = require('../track/explore'),
     Playbar = require('../playbar');
 
@@ -26,42 +26,42 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div>
-      <main className="login main">
-        {this.state.modal}
-        <header className="login-header">
-          <div className="group">
+        <main className="login main">
+          {this.state.modal}
 
-            <figure className="login-sheep"></figure>
-            <span className="soundclone">SOUNDCLONE</span>
+          <header className="login-header">
+            <div className="group">
 
-            <div className="login-buttons">
+              <figure className="login-sheep"></figure>
+              <span className="soundclone">SOUNDCLONE</span>
 
-              <button className="guest" onClick={this._guestLogin}>
-                Guest
-              </button>
+              <div className="login-buttons">
 
-              <button className="sign-in" onClick={this._sessionModal} >
-                Sign In
-              </button>
+                <button className="guest" onClick={this._guestLogin}>
+                  Guest
+                </button>
 
-              <button className="create" onClick={this._newUserModal}>
-                Create Account
-              </button>
+                <button className="sign-in" onClick={this._sessionModal} >
+                  Sign In
+                </button>
 
+                <button className="create" onClick={this._newUserModal}>
+                  Create Account
+                </button>
+
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
 
-        <Explore />
-      </main>
+          <Explore />
+        </main>
+
         <Playbar />
       </div>
     );
   },
 
-  _guestLogin: function (e) {
-    e.preventDefault();
-
+  _guestLogin: function () {
     SessionsApiUtil.login(
       { email: "composerinteralia@example.com", password: "password" },
       function () {

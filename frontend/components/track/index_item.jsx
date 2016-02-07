@@ -1,19 +1,19 @@
 var React = require('react'),
     Link = require('react-router').Link,
+    LikeMixin = require('../../mixins/like_mixin'),
     TrackUtil = require('../../util/track_util'),
-    ModalActions = require('../../actions/modal_actions'),
+    DialogStore = require('../../stores/dialog'),
     DialogActions = require('../../actions/dialog_actions'),
-    UpdateTrackForm = require('./update_form'),
+    ModalActions = require('../../actions/modal_actions'),
     PlayerActions = require('../../actions/player_actions'),
     PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
-    DialogStore = require('../../stores/dialog'),
+    UpdateTrackForm = require('./update_form'),
     WaveSurfer = require('./wavesurfer'),
-    PlayerControls = require('../../mixins/player_controls'),
-    LikeMixin = require('../../mixins/like_mixin');
+    PlayPauseButton = require('./play_pause_button');
 
 module.exports = React.createClass({
-  mixins: [PlayerControls, LikeMixin],
+  mixins: [LikeMixin],
 
   getInitialState: function () {
     return ({
@@ -36,8 +36,7 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var playPauseButton,
-        likeButton,
+    var likeButton,
         trackButtons,
         track = this.props.track,
         display_name = track.display_name,
@@ -65,21 +64,6 @@ module.exports = React.createClass({
       }
     }
 
-    if (this.state.playing && PlayerStore.isPlaying()) {
-      playPauseButton = (
-        <div className="play-button" onClick={this._pauseTrack}>
-          <div className="pause-line left"></div>
-          <div className="pause-line"></div>
-        </div>
-      );
-    } else {
-      playPauseButton = (
-        <div className="play-button" onClick={this._playTrack.bind(null, track)}>
-          <div className="play-arrow"></div>
-        </div>
-      );
-    }
-
     return (
       <li className="track group">
         <Link to={"/tracks/" + track.id} className="track-image">
@@ -89,7 +73,7 @@ module.exports = React.createClass({
         <section className="track-detail-container">
 
           <div className="group">
-            {playPauseButton}
+            <PlayPauseButton playing={this.state.playing} track={track}/>
 
             <div className="track-naming">
 

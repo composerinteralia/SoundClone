@@ -1,13 +1,13 @@
 var React = require('react'),
     Link = require('react-router').Link,
+    LikeMixin = require('../../mixins/like_mixin'),
     PlayerStore = require('../../stores/player'),
     CurrentUserStore = require('../../stores/current_user'),
     WaveSurfer = require('./wavesurfer'),
-    PlayerControls = require('../../mixins/player_controls'),
-    LikeMixin = require('../../mixins/like_mixin');
+    PlayPauseButton = require('./play_pause_button');
 
 module.exports = React.createClass({
-  mixins: [PlayerControls, LikeMixin],
+  mixins: [LikeMixin],
 
   getInitialState: function () {
     return { playing: PlayerStore.isCurrentTrack(this.props.track.id) };
@@ -23,22 +23,7 @@ module.exports = React.createClass({
 
   render: function () {
     var track = this.props.track;
-    var playPauseButton, likeButton;
-
-    if (this.state.playing && PlayerStore.isPlaying()) {
-      playPauseButton = (
-        <div className="play-button play-button-explore" onClick={this._pauseTrack}>
-          <div className="pause-line left"></div>
-          <div className="pause-line"></div>
-        </div>
-      );
-    } else {
-      playPauseButton = (
-        <div className="play-button play-button-explore" onClick={this._playTrack.bind(null, track)}>
-          <div className="play-arrow"></div>
-        </div>
-      );
-    }
+    var likeButton;
 
     if (CurrentUserStore.isLoggedIn()) {
       if (track.liker_ids.includes(CurrentUserStore.currentUser().id)) {
@@ -65,7 +50,7 @@ module.exports = React.createClass({
       <li className="explore-item">
         <figure className="explore-image">
           <img src={track.image_url}/>
-          {playPauseButton}
+          <PlayPauseButton playing={this.state.playing} track={track}/>
           {likeButton}
         </figure>
 
