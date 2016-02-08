@@ -41,7 +41,7 @@ module.exports = React.createClass({
         <i title="Edit profile" className="fa fa-pencil"
           onClick={this._updateUser}> Edit</i>
       );
-    } else if (CurrentUserStore.isLoggedIn()){
+    } else if (CurrentUserStore.isLoggedIn()) {
 
       if (user.follower_ids.includes(CurrentUserStore.currentUser().id)) {
         followButton = (
