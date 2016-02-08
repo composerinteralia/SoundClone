@@ -1,26 +1,15 @@
 ----------------
-login explore needs margin-bottom
-
- Display errors on forms (check out Robert's awesome forms)
--- submit function triggers action to clear message store
--- ajax errors trigger action to send messages to store
--- modals listen to the message store (this.state.errors)
--- Error component passed this.state.errors as props
--- ul with li of props (list-style bullet)
-more efficient FormData appending?
--- drag and drop image upload
-
+Style all the forms!
 ----------------
 
 Fix likes (and probably follows, while I am at it)
   deleting tracks needs to close playbar
-Add Plays
 
 ------------------
-
 Allow logged out users to see more
 
 Connect Stream and Explore
+  Login explore needs margin-bottom
   explore format error when text too long!
   no need to explore already-likes tracks
 
@@ -36,12 +25,9 @@ Track show
 
 Profile (and Sidebar)
   Users load with like count, follow count, follower count
-
-404 if fetched but not found
-
-image sizes (paperclip)
-  cropping?
 __________________
+
+Add Plays
 
 Pagination/InfiniteScroll
 Search
@@ -49,13 +35,19 @@ Multiple Sessions
 
 comments
 tags
+
+404 if fetched but not found
+
+image sizes (paperclip)
+  cropping?
 __________________
 
 Play
   wavesurfer cache
   for explore -> could potentially avoid initializing wavesurfer until play button first clicked...
 
-
+more efficient FormData appending?
+drag and drop image upload
 
 media queries (resizing window)
 
