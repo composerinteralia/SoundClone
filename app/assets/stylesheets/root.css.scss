@@ -374,7 +374,7 @@ h2.header-name, a.header-name {
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(200, 200, 200, .7);
+  background: rgba(40, 40, 40, .7);
   z-index: 1001;
 }
 
@@ -382,12 +382,13 @@ h2.header-name, a.header-name {
   background: #fff;
   margin: 76px auto;
   width: 800px;
-  padding: 25px
+  padding: 25px;
+  border-radius: 5px;
 }
 
 .modal-container.small {
   width: 500px;
-  margin-top: 150px;
+  margin-top: 160px;
 }
 
 .modal-container > h2 {
