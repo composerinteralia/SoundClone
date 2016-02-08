@@ -1,29 +1,21 @@
 ----------------
-Do Yesterday:
+ Display errors on forms (check out Robert's awesome forms)
+-- submit function triggers action to clear message store
+-- ajax errors trigger action to send messages to store
+-- modals listen to the message store (this.state.errors)
+-- Error component passed this.state.errors as props
+-- ul with li of props (list-style bullet)
+more efficient FormData appending?
+-- drag and drop image upload
 
-Play
-  wavesurfer cache
+----------------
 
 Fix likes (and probably follows, while I am at it)
-
-Display errors on forms (check out Robert's awesome forms)
-  -- submit function triggers action to clear message store
-  -- ajax errors trigger action to send messages to store
-  -- modals listen to the message store (this.state.errors)
-  -- Error component passed this.state.errors as props
-  -- ul with li of props (list-style bullet)
-  more efficient FormData appending?
-  -- drag and drop image upload
-
-image sizes (paperclip)
-  cropping?
-
-Allow logged out users to see more
+Add Plays
 
 ------------------
-Now:
 
-Plays
+Allow logged out users to see more
 
 Connect Stream and Explore
 
@@ -41,10 +33,10 @@ Profile (and Sidebar)
   Users load with like count, follow count, follower count
 
 404 if fetched but not found
+
+image sizes (paperclip)
+  cropping?
 __________________
-
-Essential:
-
 
 Pagination/InfiniteScroll
 Search
@@ -52,7 +44,9 @@ Multiple Sessions
 
 __________________
 
-Optional:
+
+Play
+  wavesurfer cache
 
 comments
 
