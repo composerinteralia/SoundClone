@@ -1,4 +1,6 @@
 ----------------
+login explore needs margin-bottom
+
  Display errors on forms (check out Robert's awesome forms)
 -- submit function triggers action to clear message store
 -- ajax errors trigger action to send messages to store

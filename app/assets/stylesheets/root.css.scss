@@ -34,22 +34,37 @@ img {
 }
 
 input, textarea, button {
-  border: 1px solid #ccc;
   padding: 5px 8px;
-  font-size: 13px;
   border-radius: 4px;
+}
+
+input, textarea {
+  font-size: 13px;
+  border: 1px solid #ccc;
 }
 
 button {
   cursor: pointer;
-}
-
-button:hover {
-  border: 1px solid #999;
+  font-size: 14px;
 }
 
 button.cancel {
   border: none;
+  float: right;
+}
+
+button.cancel:hover {
+  color: #888;
+}
+
+button.submit {
+  background: #f50;
+  color: #fff;
+  float: right;
+}
+
+button.submit:hover {
+  background: #e42;
 }
 
 .hidden-submit {
@@ -227,10 +242,9 @@ button.cancel {
 
 .facebook {
   display: block;
-  margin: auto;
   height: 43px;
   width: 180px;
-  margin-top: 20px;
+  margin: 0 auto 20px;
 }
 
 .facebook > div {
@@ -244,6 +258,36 @@ button.cancel {
   background: #f90;
   border-radius: 5px;
 }
+
+.email-login {
+  border-top: 1px solid #eee;
+}
+
+.email-login > span {
+  display: block;
+  width: 26px;
+  margin: auto;
+  background: #fff;
+  position: relative;
+  top: -9px;
+  text-align: center;
+}
+
+.login-form {
+  display: block;
+  width: 300px;
+  margin: auto;
+}
+
+.login-form > form > input {
+  width: 280px;
+}
+
+.login-form button {
+  margin-top: 10px;
+}
+
+
 
 // profile
 
@@ -341,6 +385,11 @@ h2.header-name, a.header-name {
   padding: 25px
 }
 
+.modal-container.small {
+  width: 500px;
+  margin-top: 150px;
+}
+
 .modal-container > h2 {
   border-bottom: 1px solid #eee;
   font-size: 20px;
@@ -423,6 +472,14 @@ h2.header-name, a.header-name {
 
 .heart {
   font-size: 15px;
+}
+
+button.like {
+  border: 1px solid #ccc;
+}
+
+button.like:hover {
+  border: 1px solid #999;
 }
 
 button.unlike {

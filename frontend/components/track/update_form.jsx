@@ -39,7 +39,7 @@ module.exports = React.createClass({
 
     return (
       <div className="modal" onClick={this._cancel}>
-        <div className="modal-container" onClick={this._stopPropogation}>
+        <div className="modal-container group" onClick={this._stopPropogation}>
           <h2>Edit Track</h2>
 
             <form onSubmit={this._submit} className="track-update-form">
@@ -68,8 +68,8 @@ module.exports = React.createClass({
               </input>
             </form>
 
+          <button className="submit" onClick={this._submit}>Save Changes</button>
           <button className="cancel" onClick={this._cancel}>Cancel</button>
-          <button onClick={this._submit}>Save Changes</button>
         </div>
       </div>
     );
