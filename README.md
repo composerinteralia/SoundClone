@@ -7,10 +7,10 @@ View it live at [sound-clone.com](http://www.sound-clone.com/)
 
 ###Features:
 * Sign up/in with email or Facebook
-* Stream shows the most recent tracks posted by your followers
+* Stream shows your followers' most recent tracks
 * Explore shows a random sampling of tracks
 * Waveform visuals show play progress
-* Playbar stays at the bottom of the page, showing controls, progress, link to track show page, and like button
+* Playbar fixed to the bottom of the page---showing controls, progress, link, and like button
 * Continuous track play
 * Spacebar to pause
 * Upload your own tracks
@@ -18,8 +18,9 @@ View it live at [sound-clone.com](http://www.sound-clone.com/)
 * Follow other users
 
 ###Technical Details:
+  Coming soon
 
-###To-Do:q
+###To-Do:
 * [ ] Provide feedback on forms
 * [ ] Notifications
 * [ ] Index views for liked tracks, followers, and followees
@@ -31,4 +32,4 @@ View it live at [sound-clone.com](http://www.sound-clone.com/)
 * [ ] Reposts
 
 
-###[Original Design Docs](./docs/README.md)
+[Original Design Docs](./docs/README.md)
