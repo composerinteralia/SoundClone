@@ -22,9 +22,9 @@ ul {
 }
 
 body {
-  font-family: Arial;
+  font-family: 'Source Sans Pro', Arial;
   background: #f2f2f2;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 img {
@@ -45,7 +45,6 @@ input, textarea {
 
 button {
   cursor: pointer;
-  font-size: 14px;
 }
 
 button.cancel {
@@ -133,7 +132,7 @@ button.submit:hover {
 }
 
 .stream, .explore {
-  padding: 15px 25px;
+  padding: 13px 25px;
   border-right: 1px solid #111;
 }
 
@@ -143,16 +142,16 @@ button.submit:hover {
 
 .current-user {
   vertical-align: center;
-  padding: 8px 15px;
+  padding: 7px 15px;
 }
 
 .current-user > span {
   float: left;
-  padding: 6.5px 0 6.5px 10px;
+  padding: 6px 0 6px 10px;
 }
 
 .nav-upload, .logout {
-  padding: 15px 15px;
+  padding: 13px 15px;
 }
 
 .navbar-thumb {
@@ -209,8 +208,7 @@ button.submit:hover {
   color: #fff;
   opacity: .85;
   letter-spacing: 1.5px;
-  font-size: 14px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .login-buttons {
@@ -221,7 +219,6 @@ button.submit:hover {
 
 .sign-in, .guest {
   border: 1px solid #bbb;
-  font-size: 14px;
   margin-right: 15px;
 }
 
@@ -232,7 +229,6 @@ button.submit:hover {
 .create {
   background: #f50;
   border: 1px solid #f50;
-  font-size: 14px;
 }
 
 .create:hover {
@@ -324,12 +320,12 @@ button.submit:hover {
 }
 
 h1.header-name {
-  font-size: 24px;
+  font-size: 26px;
   color: #fff;
 }
 
 h2.header-name, a.header-name {
-  font-size: 16px;
+  font-size: 17px;
   padding: 5px;
   color: #ccc;
 }
@@ -424,7 +420,6 @@ h2.header-name, a.header-name {
 .file-upload-btn {
   border: 1px solid #ccc;
   padding: 5px 8px;
-  font-size: 13px;
   border-radius: 4px;
   cursor: pointer;
 }
@@ -439,9 +434,9 @@ h2.header-name, a.header-name {
 
 .audio-upload-btn {
   border: none;
-  font-size: 16px;
+  font-size: 17px;
   display: block;
-  width: 170px;
+  width: 164px;
   margin: auto;
   background: #f50;
   color: #fff;
@@ -612,7 +607,6 @@ wave {
 
 .track-user {
   font-size: 13px;
-  margin-bottom: 1px;
   color: #999;
 }
 
@@ -804,7 +798,7 @@ wave {
 .progress {
   float: left;
   padding: 14px 70px;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 .progress > * {
@@ -833,7 +827,7 @@ wave {
 
 .track-info {
   float: right;
-  padding: 1px 15px 2px;
+  padding: 1px 15px;
 }
 
 .track-info:hover {
