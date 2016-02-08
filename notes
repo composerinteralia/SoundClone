@@ -18,6 +18,7 @@ Add Plays
 Allow logged out users to see more
 
 Connect Stream and Explore
+  no need to explore already-likes tracks
 
 Collection
   Like index (gets a user's liked tracks)
@@ -44,9 +45,9 @@ Multiple Sessions
 
 __________________
 
-
 Play
   wavesurfer cache
+  for explore -> could potentially avoid initializing wavesurfer until play button first clicked...
 
 comments
 
