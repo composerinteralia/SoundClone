@@ -3,7 +3,9 @@ var React = require('react'),
     TrackUtil = require('../../util/track_util'),
     ModalActions = require('../../actions/modal_actions'),
     TrackStore = require('../../stores/track'),
-    ModalSpinner = require('../modal_spinner');
+    ModalSpinner = require('../modal_spinner'),
+    FormErrorStore = require('../../stores/form_error'),
+    FormErrors = require('../form_errors');
 
 module.exports = React.createClass({
   mixins: [LinkedState],
@@ -23,8 +25,17 @@ module.exports = React.createClass({
       description: description,
       imageFile: null,
       imageUrl: imageUrl,
-      submitted: false
+      submitted: false,
+      errorMessages: []
     };
+  },
+
+  componentDidMount: function () {
+    this.formErrorChange = FormErrorStore.addListener(this._onFormError);
+  },
+
+  componentWillUnmount: function () {
+    this.formErrorChange.remove();
   },
 
   render: function () {
@@ -42,31 +53,33 @@ module.exports = React.createClass({
         <div className="modal-container group" onClick={this._stopPropogation}>
           <h2>Edit Track</h2>
 
-            <form onSubmit={this._submit} className="track-update-form">
-              <div className="form-image">
-                {image}
-              </div>
-              <input type="file" onChange={this._imageUpload} />
+          <FormErrors messages={ this.state.errorMessages } />
 
-              <label htmlFor="title">Title</label>
-              <input
-                id="title"
-                type="text"
-                valueLink={this.linkState('title')}>
-              </input>
+          <form onSubmit={this._submit} className="track-update-form">
+            <div className="form-image">
+              {image}
+            </div>
+            <input type="file" onChange={this._imageUpload} />
 
-              <label htmlFor="description">Description</label>
-              <textarea
-                id="description"
-                valueLink={this.linkState('description')}>
-              </textarea>
+            <label htmlFor="title">Title</label>
+            <input
+              id="title"
+              type="text"
+              valueLink={this.linkState('title')}>
+            </input>
 
-              <input
-                type="submit"
-                className="hidden-submit"
-                tabIndex="-1" >
-              </input>
-            </form>
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              valueLink={this.linkState('description')}>
+            </textarea>
+
+            <input
+              type="submit"
+              className="hidden-submit"
+              tabIndex="-1" >
+            </input>
+          </form>
 
           <button className="submit" onClick={this._submit}>Save Changes</button>
           <button className="cancel" onClick={this._cancel}>Cancel</button>
@@ -109,7 +122,15 @@ module.exports = React.createClass({
       formData.append("track[track_art]", this.state.imageFile);
     }
 
-    TrackUtil.updateTrack (this.props.track.id, formData);
+    var error = function () {
+      this.setState({ submitted: false })
+    }.bind(this)
+
+    TrackUtil.updateTrack (this.props.track.id, formData, error);
+  },
+
+  _onFormError: function () {
+    this.setState({ errorMessages: FormErrorStore.all() })
   },
 
   _stopPropogation: function (e) {

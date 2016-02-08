@@ -39,7 +39,7 @@ module.exports = React.createClass({
     if (CurrentUserStore.currentUser().id === user.id) {
       editButton = (
         <i title="Edit profile" className="fa fa-pencil"
-          onClick={this._updateUser}></i>
+          onClick={this._updateUser}> Edit</i>
       );
     } else if (CurrentUserStore.isLoggedIn()){
 

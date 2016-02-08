@@ -1,5 +1,6 @@
 var ApiActions = require('../actions/api_actions'),
-    ModalActions = require('../actions/modal_actions');
+    ModalActions = require('../actions/modal_actions'),
+    FormActions = require('../actions/form_actions');
 
 module.exports = {
   fetchExploreTracks: function () {
@@ -51,7 +52,7 @@ module.exports = {
     });
   },
 
-  createTrack: function (formData, success) {
+  createTrack: function (formData, success, error) {
     $.ajax({
       url: "api/tracks",
       method: "post",
@@ -63,12 +64,13 @@ module.exports = {
         if (success) success(track.id);
       },
       error: function (data) {
-        console.log(data);
+        FormActions.receiveMessages(data.responseJSON);
+        if (error) error();
       }
     });
   },
 
-  updateTrack: function (trackId, formData) {
+  updateTrack: function (trackId, formData, error) {
     $.ajax({
       url: "/api/tracks/" + trackId,
       method: "patch",
@@ -80,7 +82,8 @@ module.exports = {
         ModalActions.destroyModal();
       },
       error: function (data) {
-        console.log(data);
+        FormActions.receiveMessages(data.responseJSON);
+        if (error) error();
       }
     });
   },

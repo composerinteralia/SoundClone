@@ -60,7 +60,7 @@ module.exports = React.createClass({
         return (
           <button
             title="Unlike track"
-            className="unlike small-like"
+            className="small-unlike small-like-btn"
             onClick={this._unlikeTrack.bind(this, track.id)}>
             <span className="heart">♥</span>
           </button>
@@ -70,7 +70,7 @@ module.exports = React.createClass({
         return (
           <button
             title="Like track"
-            className="like small-like"
+            className="small-like small-like-btn"
             onClick={this._likeTrack.bind(this, track.id)}>
             <span className="heart">♥</span>
           </button>

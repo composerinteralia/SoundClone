@@ -13,6 +13,7 @@ more efficient FormData appending?
 ----------------
 
 Fix likes (and probably follows, while I am at it)
+  deleting tracks needs to close playbar
 Add Plays
 
 ------------------
@@ -20,6 +21,7 @@ Add Plays
 Allow logged out users to see more
 
 Connect Stream and Explore
+  explore format error when text too long!
   no need to explore already-likes tracks
 
 Collection
@@ -45,13 +47,15 @@ Pagination/InfiniteScroll
 Search
 Multiple Sessions
 
+comments
+tags
 __________________
 
 Play
   wavesurfer cache
   for explore -> could potentially avoid initializing wavesurfer until play button first clicked...
 
-comments
+
 
 media queries (resizing window)
 

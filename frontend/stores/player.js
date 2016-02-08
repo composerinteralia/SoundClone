@@ -22,7 +22,12 @@ var unmount = function (trackId) {
     currentlyPlaying = true;
   }
 
-  findTrack(trackId).wavesurfer.dismount(currentlyPlaying);
+  var track = findTrack(trackId)
+
+  if (track) {
+    track.wavesurfer.dismount(currentlyPlaying);
+  }
+
 };
 
 var isCurrentTrack = function (trackId) {

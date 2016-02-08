@@ -1,9 +1,10 @@
 var ApiActions = require('../actions/api_actions'),
     ModalActions = require('../actions/modal_actions'),
-    CurrentUserActions = require('../actions/current_user_actions');
+    CurrentUserActions = require('../actions/current_user_actions'),
+    FormActions = require('../actions/form_actions');
 
 module.exports = {
-  createUser: function (formData, success) {
+  createUser: function (formData, success, error) {
     $.ajax({
       url: "/api/users",
       method: "post",
@@ -16,7 +17,8 @@ module.exports = {
         if (success) success();
       },
       error: function (data) {
-        console.log(data);
+        FormActions.receiveMessages(data.responseJSON);
+        if (error) error();
       }
     });
   },
@@ -33,7 +35,7 @@ module.exports = {
     });
   },
 
-  updateUser: function (formData) {
+  updateUser: function (formData, error) {
     $.ajax({
       url: "/api/user",
       method: "patch",
@@ -46,7 +48,8 @@ module.exports = {
         ModalActions.destroyModal();
       },
       error: function (data) {
-        console.log(data);
+        FormActions.receiveMessages(data.responseJSON);
+        if (error) error();
       }
     });
   },

@@ -1,7 +1,8 @@
-var CurrentUserActions = require("../actions/current_user_actions");
+var CurrentUserActions = require('../actions/current_user_actions'),
+    FormActions = require('../actions/form_actions');
 
 module.exports = {
-  login: function (credentials, success) {
+  login: function (credentials, success, error) {
     $.ajax({
       url: '/api/session',
       type: 'POST',
@@ -11,7 +12,8 @@ module.exports = {
         if (success) success();
       },
       error: function (data) {
-        console.log(data);
+        FormActions.receiveMessages(["Username and password do not match"]);
+        if (error) error();
       }
     });
   },

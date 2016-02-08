@@ -3,7 +3,9 @@ var React = require('react'),
     LinkState = require('react-addons-linked-state-mixin'),
     UserUtil = require('../../util/user_util'),
     ModalActions = require('../../actions/modal_actions'),
-    ModalSpinner = require('../modal_spinner');
+    ModalSpinner = require('../modal_spinner'),
+    FormErrorStore = require('../../stores/form_error'),
+    FormErrors = require('../form_errors');
 
 module.exports = React.createClass({
   mixins: [History, LinkState],
@@ -17,8 +19,17 @@ module.exports = React.createClass({
       lname: "",
       imageFile: null,
       imageUrl: "",
-      submitted: false
+      submitted: false,
+      errorMessages: []
     };
+  },
+
+  componentDidMount: function () {
+    this.formErrorChange = FormErrorStore.addListener(this._onFormError);
+  },
+
+  componentWillUnmount: function () {
+    this.formErrorChange.remove();
   },
 
   render: function () {
@@ -35,6 +46,8 @@ module.exports = React.createClass({
       <div className="modal" onClick={this._cancel}>
         <div className="modal-container group" onClick={this._stopPropogation}>
           <h2>Create Account</h2>
+
+          <FormErrors messages={ this.state.errorMessages } />
 
           <form onSubmit={this._submit} className="user-form">
             <div className="form-image">
@@ -124,9 +137,20 @@ module.exports = React.createClass({
       formData.append("user[profile_image]", this.state.imageFile);
     }
 
-    UserUtil.createUser(formData, function () {
+
+    var success = function () {
       this.history.pushState({}, "/");
-    }.bind(this));
+    }.bind(this)
+
+    var error = function () {
+      this.setState({ submitted: false })
+    }.bind(this)
+
+    UserUtil.createUser(formData, success, error);
+  },
+
+  _onFormError: function () {
+    this.setState({ errorMessages: FormErrorStore.all() })
   },
 
   _stopPropogation: function (e) {

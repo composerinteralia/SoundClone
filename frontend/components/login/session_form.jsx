@@ -3,7 +3,9 @@ var React = require('react'),
     LinkState = require('react-addons-linked-state-mixin'),
     SessionsApiUtil = require('../../util/sessions_api_util'),
     ModalActions = require('../../actions/modal_actions'),
-    ModalSpinner = require('../modal_spinner');
+    ModalSpinner = require('../modal_spinner'),
+    FormErrorStore = require('../../stores/form_error'),
+    FormErrors = require('../form_errors');
 
 module.exports = React.createClass({
   mixins: [History, LinkState],
@@ -12,13 +14,22 @@ module.exports = React.createClass({
     return {
       email: "",
       password: "",
-      submitted: false
+      submitted: false,
+      errorMessages: []
     };
+  },
+
+  componentDidMount: function () {
+    this.formErrorChange = FormErrorStore.addListener(this._onFormError);
+  },
+
+  componentWillUnmount: function () {
+    this.formErrorChange.remove();
   },
 
   render: function() {
     if (this.state.submitted) {
-      return <ModalSpinner/>;
+      return <ModalSpinner type="small"/>;
     }
 
     return (
@@ -29,6 +40,8 @@ module.exports = React.createClass({
 
           <div className="email-login group">
             <span>or</span>
+
+            <FormErrors messages={ this.state.errorMessages } />
 
             <div className="login-form">
               <form onSubmit={ this._submit } >
@@ -73,9 +86,19 @@ module.exports = React.createClass({
 
     this.setState({ submitted: true })
 
-    SessionsApiUtil.login(this.state, function () {
+    var success = function () {
       this.history.pushState({}, "/");
-    }.bind(this));
+    }.bind(this)
+
+    var error = function () {
+      this.setState({ submitted: false })
+    }.bind(this)
+
+    SessionsApiUtil.login(this.state, success, error);
+  },
+
+  _onFormError: function () {
+    this.setState({ errorMessages: FormErrorStore.all() })
   },
 
   _stopPropogation: function (e) {

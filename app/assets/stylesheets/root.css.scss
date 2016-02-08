@@ -287,7 +287,10 @@ button.submit:hover {
   margin-top: 10px;
 }
 
-
+.form-errors {
+  text-align: center;
+  color: red;
+}
 
 // profile
 
@@ -477,6 +480,7 @@ h2.header-name, a.header-name {
 
 button.like {
   border: 1px solid #ccc;
+  font-size: 13px;
 }
 
 button.like:hover {
@@ -484,12 +488,9 @@ button.like:hover {
 }
 
 button.unlike {
+  font-size: 13px;
   border: 1px solid #f50;
   color: #f50;
-}
-
-button.small-like {
-  border: none;
 }
 
 .playbar-like {
@@ -701,25 +702,29 @@ wave {
   overflow: hidden;
 }
 
-.small-like {
+.small-like-btn {
   position:absolute;
   right: 0;
   bottom: 2px;
   padding: 0 5px;
-  text-shadow: 0 0 25px black;
+  text-shadow: 0 0 10px #555;
   visibility: hidden;
 }
 
-.explore-item:hover .small-like {
+.explore-item:hover .small-like-btn {
   visibility: visible;
 }
 
-.small-like > .heart {
+.small-like-btn > .heart {
   font-size: 24px;
 }
 
-.like.small-like {
+.small-like {
   color: #fff;
+}
+
+.small-unlike {
+  color: #f50;
 }
 
 .explore-image > .play-button {

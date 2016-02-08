@@ -4,7 +4,9 @@ var React = require('react'),
     UserUtil = require('../../util/user_util'),
     ModalActions = require('../../actions/modal_actions'),
     CurrentUserStore = require('../../stores/current_user'),
-    ModalSpinner = require('../modal_spinner');
+    ModalSpinner = require('../modal_spinner'),
+    FormErrorStore = require('../../stores/form_error'),
+    FormErrors = require('../form_errors');
 
 module.exports = React.createClass({
   mixins: [LinkState],
@@ -17,8 +19,17 @@ module.exports = React.createClass({
       display_name: user.display_name,
       imageFile: null,
       imageUrl: user.profile_image_url,
-      submitted: false
+      submitted: false,
+      errorMessages: []
     };
+  },
+
+  componentDidMount: function () {
+    this.formErrorChange = FormErrorStore.addListener(this._onFormError);
+  },
+
+  componentWillUnmount: function () {
+    this.formErrorChange.remove();
   },
 
   render: function () {
@@ -33,8 +44,10 @@ module.exports = React.createClass({
 
     return (
       <div className="modal" onClick={this._cancel}>
-        <div className="modal-container" onClick={this._stopPropogation}>
+        <div className="modal-container group" onClick={this._stopPropogation}>
           <h2>Edit your Profile</h2>
+
+          <FormErrors messages={ this.state.errorMessages } />
 
           <form onSubmit={this._submit} className="user-form">
             <div className="form-image">
@@ -67,8 +80,8 @@ module.exports = React.createClass({
 
           </form>
 
+          <button className="submit" onClick={this._submit}>Save Changes</button>
           <button className="cancel" onClick={this._cancel}>Cancel</button>
-          <button onClick={this._submit}>Save Changes</button>
         </div>
       </div>
     );
@@ -110,7 +123,15 @@ module.exports = React.createClass({
       formData.append("user[profile_image]", this.state.imageFile);
     }
 
-    UserUtil.updateUser(formData);
+    var error = function () {
+      this.setState({ submitted: false })
+    }.bind(this)
+
+    UserUtil.updateUser(formData, error);
+  },
+
+  _onFormError: function () {
+    this.setState({ errorMessages: FormErrorStore.all() })
   },
 
   _stopPropogation: function (e) {
