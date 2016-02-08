@@ -29,4 +29,4 @@
     } else {
         window.addEventListener('load', init);
     }
-}());
+})();
