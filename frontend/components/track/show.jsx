@@ -42,27 +42,6 @@ module.exports = React.createClass({
       return <div>User not found!</div>;
     }
 
-    var currentUser = CurrentUserStore.currentUser();
-    var likeButton, followButton;
-    if (currentUser && currentUser.id !== track.user_id) {
-      if (track.liker_ids.includes(currentUser.id)) {
-        likeButton =
-          <button
-            className="unlike"
-            onClick={this._unlikeTrack.bind(this, track.id)}>
-            <span className="heart">♥</span> Liked
-          </button>;
-
-      } else {
-        likeButton =
-          <button
-            className="like"
-            onClick={this._likeTrack.bind(this, track.id)}>
-            <span className="heart">♥</span> Like
-          </button>;
-      }
-    }
-
     return (
       <main className="main">
         <header className="track-header group">
@@ -80,11 +59,10 @@ module.exports = React.createClass({
                 <div className="track-name group">
                   <h1 className="header-name">{track.title}</h1>
                 </div>
-
               </div>
+
               <WaveSurfer track={track} type="show-wave" />
           </div>
-
 
           <figure className="track-header-image">
             <img src={track.image_url}/>
@@ -93,13 +71,38 @@ module.exports = React.createClass({
         </header>
 
         <section className="content">
-          {likeButton}
-          <div>{track.description}</div>
-
+          {this._likeButton()}
+          <p>{track.description}</p>
         </section>
 
       </main>
     );
+  },
+
+  _likeButton: function () {
+    var track = this.state.track;
+    var currentUser = CurrentUserStore.currentUser();
+
+    if (currentUser && currentUser.id !== track.user_id) {
+      if (track.liker_ids.includes(currentUser.id)) {
+        return (
+          <button
+            className="unlike"
+            onClick={this._unlikeTrack.bind(this, track.id)}>
+            <span className="heart">♥</span> Liked
+          </button>
+        )
+
+      } else {
+        return (
+          <button
+            className="like"
+            onClick={this._likeTrack.bind(this, track.id)}>
+            <span className="heart">♥</span> Like
+          </button>
+        )
+      }
+    }
   },
 
   _onChange: function () {

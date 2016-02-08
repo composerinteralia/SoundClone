@@ -36,36 +36,22 @@ module.exports = React.createClass({
   },
 
   render: function () {
-    var likeButton,
-        trackButtons,
+    var trackButtons;
         track = this.props.track,
         display_name = track.display_name,
         currentUser = CurrentUserStore.currentUser();
 
     if (currentUser && currentUser.id === track.user_id) {
-      trackButtons = this._trackButtons();
+      trackButtons = this._UDButtons();
       display_name = currentUser.display_name;
-    } else if (currentUser) {
-      if (track.liker_ids.includes(currentUser.id)) {
-        likeButton =
-          <button
-            className="unlike index-like"
-            onClick={this._unlikeTrack.bind(this, track.id)}>
-            <span className="heart">♥</span> {track.liker_ids.length}
-        </button>;
 
-      } else {
-        likeButton =
-          <button
-            className="like index-like"
-            onClick={this._likeTrack.bind(this, track.id)}>
-            <span className="heart">♥</span> Like
-        </button>;
-      }
+    } else if (currentUser) {
+      trackButtons = this._likeButton();
     }
 
     return (
       <li className="track group">
+
         <Link to={"/tracks/" + track.id} className="track-image">
           <img src={track.image_url}/>
         </Link>
@@ -76,7 +62,6 @@ module.exports = React.createClass({
             <PlayPauseButton playing={this.state.playing} track={track}/>
 
             <div className="track-naming">
-
               <Link
                 className="track-user"
                 to={"/users/" + track.user_id}>{display_name}
@@ -87,19 +72,20 @@ module.exports = React.createClass({
                 to={"/tracks/" + track.id}>
                 {track.title}
               </Link>
-
             </div>
+
           </div>
+
           <WaveSurfer track={track} type="wave" />
 
-          {likeButton}{trackButtons}
+          {trackButtons}
 
         </section>
       </li>
     );
   },
 
-  _trackButtons: function () {
+  _UDButtons: function () {
     return (
       <div className="track-buttons group">
         <i title="Edit Track" className="fa fa-pencil track-button"
@@ -110,6 +96,29 @@ module.exports = React.createClass({
         {this.state.dialog}
       </div>
     );
+  },
+
+  _likeButton: function () {
+    var track = this.props.track;
+
+    if (track.liker_ids.includes(currentUser.id)) {
+      return (
+        <button
+          className="unlike index-like"
+          onClick={this._unlikeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span> {track.liker_ids.length}
+        </button>
+      );
+
+    } else {
+      return (
+        <button
+          className="like index-like"
+          onClick={this._likeTrack.bind(this, track.id)}>
+          <span className="heart">♥</span> Like
+        </button>
+      );
+    }
   },
 
   _update: function () {
