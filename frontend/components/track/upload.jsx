@@ -5,7 +5,7 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return {audioFile: null, modal: null};
+    return {audioFile: null, modal: null };
   },
 
   componentDidMount: function () {
@@ -18,10 +18,20 @@ module.exports = React.createClass({
 
   render: function () {
     return(
-      <div className="main">
+      <div className="main content">
         {this.state.modal}
-        <label htmlFor="audio">Upload Audio</label>
-        <input id="audio" type="file" onChange={this._audioUpload} />
+
+        <section className="audio-upload">
+
+          <h2>Upload to SoundClone</h2>
+
+          <label className="file-upload-btn audio-upload-btn">
+            Choose a file to upload
+            <input className="hidden-file-upload" type="file" onChange={this._audioUpload} />
+          </label>
+
+        </section>
+
       </div>
     );
   },

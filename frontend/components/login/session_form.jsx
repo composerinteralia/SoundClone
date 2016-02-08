@@ -2,16 +2,25 @@ var React = require('react'),
     History = require('react-router').History,
     LinkState = require('react-addons-linked-state-mixin'),
     SessionsApiUtil = require('../../util/sessions_api_util'),
-    ModalActions = require('../../actions/modal_actions');
+    ModalActions = require('../../actions/modal_actions'),
+    ModalSpinner = require('../modal_spinner');
 
 module.exports = React.createClass({
   mixins: [History, LinkState],
 
   getInitialState: function () {
-    return { email: "", password: "" };
+    return {
+      email: "",
+      password: "",
+      submitted: false
+    };
   },
 
   render: function() {
+    if (this.state.submitted) {
+      return <ModalSpinner/>;
+    }
+
     return (
       <div className="modal" onClick={this._cancel}>
         <div className="modal-container" onClick={this._stopPropogation}>
@@ -47,6 +56,8 @@ module.exports = React.createClass({
 
   _submit: function (e) {
     e.preventDefault();
+
+    this.setState({ submitted: true })
 
     SessionsApiUtil.login(this.state, function () {
       this.history.pushState({}, "/");

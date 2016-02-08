@@ -2,7 +2,8 @@ var React = require('react'),
     History = require('react-router').History,
     LinkState = require('react-addons-linked-state-mixin'),
     UserUtil = require('../../util/user_util'),
-    ModalActions = require('../../actions/modal_actions');
+    ModalActions = require('../../actions/modal_actions'),
+    ModalSpinner = require('../modal_spinner');
 
 module.exports = React.createClass({
   mixins: [History, LinkState],
@@ -15,13 +16,17 @@ module.exports = React.createClass({
       fname: "",
       lname: "",
       imageFile: null,
-      imageUrl: ""
+      imageUrl: "",
+      submitted: false
     };
   },
 
   render: function () {
+    if (this.state.submitted) {
+      return <ModalSpinner/>;
+    }
+
     var image;
-    
     if (this.state.image_url) {
       image = (<img src={this.state.image_url} />);
     }
@@ -104,6 +109,8 @@ module.exports = React.createClass({
 
   _submit: function (e) {
     e.preventDefault();
+
+    this.setState({ submitted: true })
 
     var formData = new FormData();
 

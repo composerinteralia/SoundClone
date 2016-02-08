@@ -1,6 +1,5 @@
 var ApiActions = require('../actions/api_actions'),
-    ModalActions = require('../actions/modal_actions'),
-    DialogActions = require('../actions/dialog_actions');
+    ModalActions = require('../actions/modal_actions');
 
 module.exports = {
   fetchExploreTracks: function () {
@@ -92,8 +91,6 @@ module.exports = {
       method: "delete",
       success: function (track) {
         ApiActions.removeTrack(track);
-        DialogActions.clearDialog();
-        if (success) success();
       },
       error: function (data) {
         console.log(data);

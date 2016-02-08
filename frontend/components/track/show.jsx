@@ -7,7 +7,8 @@ var React = require('react'),
     CurrentUserStore = require('../../stores/current_user'),
     TrackUtil = require('../../util/track_util'),
     WaveSurfer = require('./wavesurfer'),
-    PlayPauseButton = require('./play_pause_button')
+    PlayPauseButton = require('./play_pause_button'),
+    Spinner = require('../spinner');
 
 module.exports = React.createClass({
   mixins: [LikeMixin],
@@ -32,6 +33,7 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps) {
+    this.setState({ track: null })
     TrackUtil.fetchSingleTrack(newProps.params.id);
   },
 
@@ -39,7 +41,7 @@ module.exports = React.createClass({
     var track = this.state.track;
 
     if (!track) {
-      return <div>User not found!</div>;
+      return <Spinner />;
     }
 
     return (

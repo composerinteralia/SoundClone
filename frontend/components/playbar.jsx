@@ -144,6 +144,8 @@ module.exports = React.createClass({
   },
 
   _onChange: function () {
+    // this all stinks
+
     var playingTrack = PlayerStore.track();
     var track;
 
@@ -161,10 +163,13 @@ module.exports = React.createClass({
   },
 
   _onKeypress: function  (e) {
-    e.preventDefault()
-
     if (e.keyCode === 32) {
-      PlayerActions.playPause();
+      if (e.target.localName !== "input" &&
+          e.target.localName !== "textarea") {
+
+        e.preventDefault();
+        PlayerActions.playPause();
+      }
     }
   }
 });

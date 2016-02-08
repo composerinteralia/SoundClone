@@ -7,7 +7,9 @@ module.exports = React.createClass({
     return (
       <div>
         <Navbar />
-        {this.props.children}
+        <div className="main">
+          {this.props.children}
+        </div>
         <Playbar />
       </div>
     );

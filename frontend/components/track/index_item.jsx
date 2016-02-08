@@ -147,9 +147,10 @@ module.exports = React.createClass({
 
   _reallyDelete: function () {
     var trackId = this.props.track.id;
-    TrackUtil.destroyTrack(trackId, function () {
-      PlayerActions.destroy(trackId);
-    });
+
+    DialogActions.clearDialog();
+    PlayerActions.destroy(trackId);
+    TrackUtil.destroyTrack(trackId);
   },
 
   _onCurrentUserChange: function () {

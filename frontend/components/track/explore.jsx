@@ -1,7 +1,8 @@
 var React = require('react'),
     TrackStore = require('../../stores/track'),
     TrackUtil = require('../../util/track_util'),
-    ExploreIndexItem = require('./explore_index_item');
+    ExploreIndexItem = require('./explore_index_item'),
+    Spinner = require('../spinner');
 
 module.exports = React.createClass({
   getInitialState: function () {
@@ -22,23 +23,19 @@ module.exports = React.createClass({
     var tracks = this.state.tracks;
 
     if (tracks === null) {
-      return <div>Loading...</div>;
+      return <Spinner />;
     }
 
     return (
-      <main className="main content">
+      <main className="content">
         {this.state.modal}
 
           <ul className="group">
-            {
-              tracks.map(function (track) {
-                return (
-                  <ExploreIndexItem key={track.id} track={track} />
-                );
-              })
-            }
+            {tracks.map(function (track) {
+              return <ExploreIndexItem key={track.id} track={track} />;
+            })}
           </ul>
-  
+
       </main>
     );
   },

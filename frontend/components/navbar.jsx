@@ -35,7 +35,7 @@ module.exports = React.createClass({
           <Link to="/explore" className="explore">Explore</Link>
 
           <div className="navbar-right group">
-            <Link to="/upload" className="upload">Upload</Link>
+            <Link to="/upload" className="nav-upload">Upload</Link>
 
             <Link to={"/users/" + user.id} className="current-user">
               <div className="navbar-thumb">

@@ -4,12 +4,12 @@ var React = require('react'),
     ModalStore = require('../../stores/modal'),
     ModalActions = require('../../actions/modal_actions'),
     UserUtil = require('../../util/user_util'),
-    UpdateUserForm = require('./update_form');
+    UpdateUserForm = require('./update_form'),
+    Spinner = require('../spinner');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    var user = UserStore.find(this.props.params.id);
-    return { user: user, modal: null };
+    return { user: null, modal: null };
   },
 
   componentDidMount: function () {
@@ -31,8 +31,8 @@ module.exports = React.createClass({
   render: function () {
     var user = this.state.user;
 
-    if (typeof user === "undefined") {
-      return <div>User not found!</div>;
+    if (user === null) {
+      return <Spinner />
     }
 
     var editButton, followButton;

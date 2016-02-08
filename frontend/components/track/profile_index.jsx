@@ -1,15 +1,17 @@
 var React = require('react'),
     TrackIndexItem = require('./index_item'),
     TrackStore = require('../../stores/track'),
-    TrackUtil = require('../../util/track_util');
+    TrackUtil = require('../../util/track_util'),
+    Spinner = require('../spinner');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return ({ tracks: []});
+    return ({ tracks: null});
   },
 
   componentDidMount: function () {
     this.onChangeToken = TrackStore.addListener(this._onChange);
+
     TrackUtil.fetchUserTracks(this.props.params.id);
   },
 
@@ -18,11 +20,18 @@ module.exports = React.createClass({
   },
 
   componentWillReceiveProps: function (newProps) {
+    this.setState({ tracks: null });
+
     TrackUtil.fetchUserTracks(newProps.params.id);
   },
 
   render: function () {
     var tracks = this.state.tracks;
+
+    if (tracks === null) {
+      return <Spinner />;
+    }
+
     return (
       <ul className="tracks-list">
         {

@@ -13,7 +13,7 @@ var React = require('react'),
     Explore = require('./components/track/explore'),
     Upload = require('./components/track/upload'),
     Profile = require('./components/user/profile'),
-    TracksIndex = require('./components/track/index'),
+    ProfileTracksIndex = require('./components/track/profile_index'),
     Track = require('./components/track/show'),
     Login = require('./components/login/login');
 
@@ -49,13 +49,13 @@ var _ensureLoggedOut = function (nextState, replace, callback) {
 };
 
 var router = (
-  <Router>
+  <Router onUpdate={ () => window.scrollTo(0, 0) } >
     <Route path="/" component={ App } onEnter={_ensureLoggedIn} >
       <IndexRoute component={ Stream } />
       <Route path="explore" component={ Explore } />
       <Route path="upload" component={ Upload } />
       <Route path="users/:id" component={ Profile } >
-        <IndexRoute component={ TracksIndex } />
+        <IndexRoute component={ ProfileTracksIndex } />
       </Route>
       <Route path="tracks/:id" component={ Track } />
     </Route>

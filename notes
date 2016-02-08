@@ -2,7 +2,9 @@
 Do Yesterday:
 
 Play
-  wavesurfer cache!!!
+  wavesurfer cache
+
+Fix likes (and probably follows, while I am at it)
 
 Display errors on forms (check out Robert's awesome forms)
   -- submit function triggers action to clear message store
@@ -16,12 +18,11 @@ Display errors on forms (check out Robert's awesome forms)
 image sizes (paperclip)
   cropping?
 
-Spinners galore! (especially audio upload)
-
 Allow logged out users to see more
 
 ------------------
 Now:
+
 Plays
 
 Connect Stream and Explore
@@ -34,24 +35,26 @@ Track show
   show edit buttons if belongs to current user
   show total number of likes
   number of plays (and on track index item)
+  show user info
 
 Profile (and Sidebar)
   Users load with like count, follow count, follower count
+
+404 if fetched but not found
 __________________
 
 Essential:
+
 
 Pagination/InfiniteScroll
 Search
 Multiple Sessions
 
-scroll to top whenever you navigate to new page
-
-Like store would have been cleaner after all...
-
 __________________
 
 Optional:
+
+comments
 
 media queries (resizing window)
 
