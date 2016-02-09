@@ -43013,6 +43013,8 @@ return jQuery;
 	
 	    if (playingTrack) {
 	      track = TrackStore.find(playingTrack.id);
+	    } else {
+	      this.setState({ track: null });
 	    }
 	
 	    if (track) {
@@ -43781,13 +43783,13 @@ return jQuery;
 	      ),
 	      React.createElement(
 	        'button',
-	        { className: 'cancel', onClick: this._cancelDelete },
-	        'Cancel'
+	        { className: 'submit', onClick: this._reallyDelete },
+	        'Delete'
 	      ),
 	      React.createElement(
 	        'button',
-	        { onClick: this._reallyDelete },
-	        'Delete'
+	        { className: 'cancel', onClick: this._cancelDelete },
+	        'Cancel'
 	      ),
 	      React.createElement('div', { className: 'popup-arrow' })
 	    );

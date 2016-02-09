@@ -151,6 +151,8 @@ module.exports = React.createClass({
 
     if (playingTrack) {
       track = TrackStore.find(playingTrack.id);
+    } else {
+      this.setState({ track: null })
     }
 
     if (track) {

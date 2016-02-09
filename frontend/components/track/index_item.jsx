@@ -130,8 +130,8 @@ module.exports = React.createClass({
     var dialog = (
       <div className="popup">
         <p>Are you sure you want to permanently delete this track?</p>
+        <button className="submit" onClick={this._reallyDelete}>Delete</button>
         <button className="cancel" onClick={this._cancelDelete}>Cancel</button>
-        <button onClick={this._reallyDelete}>Delete</button>
         <div className="popup-arrow"></div>
       </div>
     );
