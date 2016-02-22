@@ -58,9 +58,9 @@ TrackStore.all = function () {
   return _tracks.slice();
 };
 
-TrackStore.next = function (currentTrack) {
+TrackStore.next = function (currentTrackId) {
   var oldTrack = _tracks.find(function (track) {
-    return track.id === currentTrack.id;
+    return track.id === currentTrackId;
   });
 
   var index = -1;
@@ -76,9 +76,9 @@ TrackStore.next = function (currentTrack) {
   return _tracks[index];
 };
 
-TrackStore.prev = function (currentTrack) {
+TrackStore.prev = function (currentTrackId) {
   var oldTrack = _tracks.find(function (track) {
-    return track.id === currentTrack.id;
+    return track.id === currentTrackId;
   });
 
   var index = _tracks.length;

@@ -49,7 +49,7 @@ var _ensureLoggedOut = function (nextState, replace, callback) {
 };
 
 var router = (
-  <Router onUpdate={ () => window.scrollTo(0, 0) } >
+  <Router onUpdate={ function () { window.scrollTo(0, 0) } }>
     <Route path="/" component={ App } onEnter={_ensureLoggedIn} >
       <IndexRoute component={ Stream } />
       <Route path="explore" component={ Explore } />

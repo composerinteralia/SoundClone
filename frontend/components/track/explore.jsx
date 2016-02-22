@@ -27,7 +27,7 @@ module.exports = React.createClass({
     }
 
     return (
-      <main className="content">
+      <main className="content explore-content">
         {this.state.modal}
 
           <ul className="group">

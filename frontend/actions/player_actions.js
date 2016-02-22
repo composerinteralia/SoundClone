@@ -2,14 +2,14 @@ var AppDispatcher = require('../dispatcher/dispatcher'),
     PlayerConstants = require('../constants/player_constants');
 
 module.exports = {
-  receiveWavesurfer: function (wavesurfer) {
+  receiveWavesurfer: function (track) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.RECEIVED,
-      wavesurfer: wavesurfer
+      track: track
     });
   },
 
-  remountWavesurfer: function (trackId, container, height, visible, onAudioprocess) {
+  remountWavesurfer: function (trackId, container, height, visible) {
     AppDispatcher.dispatch({
       actionType: PlayerConstants.REMOUNTED,
       trackId: trackId,

@@ -1,19 +1,24 @@
 var AppDispatcher = require('../dispatcher/dispatcher'),
     Store = require('flux/utils').Store,
     PlayerConstants = require('../constants/player_constants'),
-    TrackStore = require('./track');
+    TrackStore = require('./track')
+    Cache = require('../lib/cache');
 
-// fine for now, but need a cache
-var _tracks = {},
+var _trackCache = new Cache(50),
+    _mountedTracks = {},
     _currentTrack = null,
     PlayerStore = new Store(AppDispatcher);
 
-var add = function (wavesurfer) {
-  _tracks[wavesurfer.track.id] = wavesurfer;
+var add = function (track) {
+  _mountedTracks[track.trackInfo.id] = track;
 };
 
 var remount = function (trackId, container, height, visible) {
-  findTrack(trackId).wavesurfer.remount(container, height, visible);
+  var cached = _trackCache.remove(trackId).value;
+
+  cached.wavesurfer.remount(container, height, visible);
+
+  _mountedTracks[trackId] = cached
 };
 
 var unmount = function (trackId) {
@@ -22,30 +27,24 @@ var unmount = function (trackId) {
     currentlyPlaying = true;
   }
 
-  var track = findTrack(trackId)
+  var track = _mountedTracks[trackId]
 
   if (track) {
     track.wavesurfer.dismount(currentlyPlaying);
+    _trackCache.add(trackId, track)
+    delete _mountedTracks[trackId]
   }
 
 };
 
 var isCurrentTrack = function (trackId) {
-  return (_currentTrack && _currentTrack.track.id === trackId)
+  return (_currentTrack && _currentTrack.trackInfo.id === trackId);
 }
-
-var findTrack = function (trackId) {
-  if (isCurrentTrack(trackId)) {
-    return _currentTrack
-  }
-
-  return _tracks[trackId];
-};
 
 var play = function (trackId) {
   pause();
 
-  _currentTrack = findTrack(trackId);
+  _currentTrack = _mountedTracks[trackId];
   _currentTrack.wavesurfer.play();
 };
 
@@ -58,19 +57,19 @@ var playPause = function () {
 }
 
 var playNext = function () {
-  var nextTrack = TrackStore.next(_currentTrack.track);
+  var nextTrack = TrackStore.next(_currentTrack.trackInfo.id);
 
   play(nextTrack.id)
 }
 
 var playPrev = function () {
-  var prevTrack = TrackStore.prev(_currentTrack.track);
+  var prevTrack = TrackStore.prev(_currentTrack.trackInfo.id);
 
   play(prevTrack.id)
 }
 
 var destroy = function (trackId) {
-  findTrack(trackId).wavesurfer.destroy()
+  _mountedTracks[trackId].wavesurfer.destroy()
 
   if (isCurrentTrack(trackId)) {
     _currentTrack = null;
@@ -87,7 +86,7 @@ var reset = function () {
 PlayerStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case PlayerConstants.RECEIVED:
-      add(payload.wavesurfer);
+      add(payload.track);
       PlayerStore.__emitChange();
       break;
     case PlayerConstants.REMOUNTED:
@@ -136,19 +135,19 @@ PlayerStore.__onDispatch = function (payload) {
 }
 
 PlayerStore.wavesurferExists = function (trackId) {
-  return !!findTrack(trackId)
+  return !!_mountedTracks[trackId] || _trackCache.includes(trackId)
 };
 
 PlayerStore.track = function () {
-  return (_currentTrack && _currentTrack.track) || undefined ;
+  return (_currentTrack && _currentTrack.trackInfo) || undefined ;
 };
 
 PlayerStore.isCurrentTrack = function (trackId) {
-  return _currentTrack && _currentTrack.track.id === parseInt(trackId);
+  return _currentTrack && _currentTrack.trackInfo.id === parseInt(trackId);
 };
 
 PlayerStore.isPlaying = function () {
-  return _currentTrack && _currentTrack.wavesurfer.isPlaying();
+  return !!_currentTrack && _currentTrack.wavesurfer.isPlaying();
 };
 
 PlayerStore.currentTime = function () {

@@ -61,7 +61,7 @@ module.exports = React.createClass({
 
     setTimeout(function () {
       PlayerActions.receiveWavesurfer({
-        track: track,
+        trackInfo: track,
         wavesurfer: this.wavesurfer
       });
 
