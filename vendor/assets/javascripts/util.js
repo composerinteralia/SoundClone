@@ -14,7 +14,7 @@ WaveSurfer.util = {
         return 'wavesurfer_' + Math.random().toString(32).substring(2);
     },
 
-    ajax: function (options, wavesurfer) {
+    ajax: function (options) {
         var ajax = Object.create(WaveSurfer.Observer);
         var xhr = new XMLHttpRequest();
         var fired100 = false;

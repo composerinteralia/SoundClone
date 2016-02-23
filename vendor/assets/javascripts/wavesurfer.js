@@ -485,6 +485,7 @@ var WaveSurfer = {
      */
     destroy: function () {
         this.mounted = false
+        
         this.fireEvent('destroy');
         this.clearTmpEvents();
         this.unAll();
@@ -527,7 +528,7 @@ var WaveSurfer = {
         this.createDrawer();
         this.drawBuffer();
       }
-    },
+    }
 };
 
 WaveSurfer.create = function (params) {
