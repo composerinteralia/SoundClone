@@ -380,7 +380,7 @@ h2.header-name, a.header-name {
 .modal-container {
   background: #fff;
   margin: 76px auto;
-  width: 800px;
+  width: 540px;
   padding: 25px;
   border-radius: 5px;
 }
@@ -407,12 +407,17 @@ h2.header-name, a.header-name {
 
 .modal input, .modal textarea {
   width: 250px;
-  margin: 5px 0 20px;
+  margin: 5px 0;
 }
 
 .form-image {
-  width: 50px;
-  height: 50px;
+  height: 100%;
+}
+
+.form-fields {
+  float: left;
+  margin-left: 55px;
+  margin-bottom: 10px;
 }
 
 // file upload
@@ -465,6 +470,37 @@ h2.header-name, a.header-name {
   text-align: center;
   letter-spacing: 1.2px;
   margin-bottom: 82px;
+}
+
+.image-upload-btn {
+  float: left;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 200px;
+  width: 200px;
+  overflow:hidden;
+  margin-top: 22px;
+  margin-left: 15px;
+  position: relative;
+}
+
+.image-upload-btn:hover {
+  cursor: pointer;
+  border: 1px solid #aaa;
+}
+
+.camera {
+  position: absolute;
+  bottom: 5px;
+  left: 31px;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 1px 12px;
+  border-radius: 3px;
+}
+
+.image-upload-btn:hover .camera {
+  border: 1px solid #aaa;
 }
 
 // like buttons

@@ -38,62 +38,73 @@ module.exports = React.createClass({
     }
 
     var image;
-    if (this.state.image_url) {
-      image = (<img src={this.state.image_url} />);
+    if (this.state.imageUrl) {
+      image = (
+        <div className="form-image">
+          <img src={ this.state.imageUrl } />
+        </div>
+      );
     }
 
     return (
-      <div className="modal" onClick={this._cancel}>
-        <div className="modal-container group" onClick={this._stopPropogation}>
+      <div className="modal" onClick={ this._cancel }>
+        <div className="modal-container group" onClick={ this._stopPropogation }>
           <h2>Create Account</h2>
 
           <FormErrors messages={ this.state.errorMessages } />
 
-          <form onSubmit={this._submit} className="user-form">
-            <div className="form-image">
-              {image}
+          <form onSubmit={ this._submit } className="user-form group">
+            <label className="image-upload-btn">
+              { image }
+
+              <div className="camera">
+                <i className="fa fa-camera"> Image Upload</i>
+              </div>
+
+              <input className="hidden-file-upload" type="file" onChange={ this._imageUpload } />
+            </label>
+
+            <div className="form-fields">
+              <label htmlFor="email">Email<span>*</span></label>
+              <input
+                id="email"
+                type="text"
+                valueLink={ this.linkState('email') } />
+
+              <label htmlFor="password">Password <span>*</span></label>
+              <input
+                id="password"
+                type="password"
+                valueLink={ this.linkState('password') } />
+
+              <label htmlFor="display_name">Display Name<span>*</span></label>
+              <input
+                id="display_name"
+                type="text"
+                valueLink={ this.linkState('display_name') } />
+
+              <label htmlFor="fname">First Name</label>
+              <input
+                id="fname"
+                type="text"
+                valueLink={ this.linkState('fname') } />
+
+              <label htmlFor="lname">Last Name</label>
+              <input
+                id="lname"
+                type="text"
+                valueLink={ this.linkState('lname') } />
+
             </div>
-            <input type="file" onChange={this._imageUpload} />
-
-            <label htmlFor="email">Email<span>*</span></label>
-            <input
-              id="email"
-              type="text"
-              valueLink={this.linkState('email')} />
-
-            <label htmlFor="password">Password <span>*</span></label>
-            <input
-              id="password"
-              type="password"
-              valueLink={this.linkState('password')} />
-
-            <label htmlFor="display_name">Display Name<span>*</span></label>
-            <input
-              id="display_name"
-              type="text"
-              valueLink={this.linkState('display_name')} />
-
-            <label htmlFor="fname">First Name</label>
-            <input
-              id="fname"
-              type="text"
-              valueLink={this.linkState('fname')} />
-
-            <label htmlFor="lname">Last Name</label>
-            <input
-              id="lname"
-              type="text"
-              valueLink={this.linkState('lname')} />
 
             <input
               type="submit"
               className="hidden-submit"
               tabIndex="-1" />
-
           </form>
 
-          <button className="submit" onClick={this._submit}>Sign Up</button>
-          <button className="cancel" onClick={this._cancel}>Cancel</button>
+          <button className="submit" onClick={ this._submit }>Sign Up</button>
+          <button className="cancel" onClick={ this._cancel }>Cancel</button>
         </div>
       </div>
     );
@@ -110,13 +121,13 @@ module.exports = React.createClass({
     var file = e.currentTarget.files[0];
 
     reader.onloadend = function () {
-      this.setState({imageFile: file, imageUrl: reader.result});
+      this.setState({ imageFile: file, imageUrl: reader.result });
     }.bind(this);
 
     if (file) {
       reader.readAsDataURL(file);
     } else {
-      this.setState({imageFile: null, imageUrl: ""});
+      this.setState({ imageFile: null, imageUrl: "" });
     }
   },
 
