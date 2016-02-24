@@ -33,6 +33,18 @@ module.exports = React.createClass({
           {this._likeButton()}
         </figure>
 
+        { this._exploreInfo() }
+
+        <WaveSurfer track={track} type="hidden-wave" />
+      </li>
+    );
+  },
+
+  _exploreInfo: function () {
+    var track = this.props.track;
+
+    if (CurrentUserStore.isLoggedIn()) {
+      return(
         <section className="explore-info">
           <Link
             className="track-name"
@@ -46,10 +58,20 @@ module.exports = React.createClass({
             {track.display_name}
           </Link>
         </section>
+      );
+    } else {
+      return(
+        <section className="explore-info">
+          <p className="track-name">
+            {track.title}
+          </p>
 
-        <WaveSurfer track={track} type="hidden-wave" />
-      </li>
-    );
+          <p className="track-user">
+            {track.display_name}
+          </p>
+        </section>
+      );
+    }
   },
 
   _likeButton: function () {

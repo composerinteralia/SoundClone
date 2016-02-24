@@ -12,7 +12,7 @@ module.exports = {
         if (success) success();
       },
       error: function (data) {
-        FormActions.receiveMessages(["Username and password do not match"]);
+        FormActions.receiveMessages(["Username and password combination is incorrect"]);
         if (error) error();
       }
     });

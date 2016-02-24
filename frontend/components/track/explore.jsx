@@ -30,6 +30,10 @@ module.exports = React.createClass({
       <main className="content explore-content">
         {this.state.modal}
 
+          <header className="tracks-header">
+            <h2 className="tracks-title">Explore new sounds!</h2>
+          </header>
+
           <ul className="group">
             {tracks.map(function (track) {
               return <ExploreIndexItem key={track.id} track={track} />;

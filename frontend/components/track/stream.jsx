@@ -31,8 +31,11 @@ module.exports = React.createClass({
         {this.state.modal}
 
         <section className="tracks">
-          <h2>Stream</h2>
-          <p>Hear the latests posts from the people you are following</p>
+
+          <header className="tracks-header">
+            <h2 className="tracks-title">Stream</h2>
+            <p>Hear the latests posts from the people you follow</p>
+          </header>
 
           <ul className="tracks-list">
             {tracks.map(function (track) {

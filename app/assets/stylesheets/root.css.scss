@@ -581,8 +581,12 @@ wave {
 
 // tracks index
 
-//remove this later
-.tracks > h2 {
+.tracks-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tracks-title {
   font-weight: bold;
   font-size: 24px;
 }
@@ -614,7 +618,7 @@ wave {
   display: block;
 }
 
-.track-name:hover, .track-user:hover {
+a.track-name:hover, a.track-user:hover {
   color: #d60;
 }
 
@@ -689,7 +693,8 @@ wave {
 
 .explore-item {
   float: left;
-  padding: 20px 9.5px;
+  height: 210px;
+  width: 153px;
 }
 
 .explore-image {
@@ -838,7 +843,7 @@ wave {
   padding: 1px 15px;
 }
 
-.track-info:hover {
+a.track-info:hover {
   background: #aaa;
 }
 
@@ -855,7 +860,7 @@ wave {
   padding: 12px;
 }
 
-//
+// spinner
 
 .loader {
   font-size: 20px;

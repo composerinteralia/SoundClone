@@ -51,74 +51,99 @@ module.exports = React.createClass({
     var totalTime = PlayerStore.totalTime();
     var position = (350 / totalTime) * this.state.time;
 
-
-    var likeButton;
-    if (CurrentUserStore.isLoggedIn()) {
-      if (this.state.liked) {
-        likeButton =
-        <button
-          title="Unlike track"
-          className="unlike playbar-like"
-          onClick={this._onUnlike}>
-          <span className="heart">♥</span>
-        </button>;
-
-      } else {
-        likeButton =
-        <button
-          title="Like track"
-          className="like playbar-like"
-          onClick={this._onLike}>
-          <span className="heart">♥</span>
-        </button>;
-      }
-    }
-
     return (
       <footer className="playbar">
         <div className="playbar-body group">
 
           <div className="controls">
             <i className="fa fa-step-backward playback-button"
-              onClick={this._playPrev}></i>
+              onClick={ this._playPrev }></i>
 
-            {this._playPauseButton()}
+            { this._playPauseButton() }
 
             <i className="fa fa-step-forward playback-button"
-              onClick={this._playNext}></i>
+              onClick={ this._playNext }></i>
           </div>
 
           <div className="progress">
             <span className="elapsed">
-              {formatSecondsAsTime(this.state.time)}
+              { formatSecondsAsTime(this.state.time) }
             </span>
 
             <div className="progress-timeline">
               <div
                 className="progress-bar"
-                style={{'width': position + 'px' }}>
+                style={ { 'width': position + 'px' } }>
               </div>
             </div>
 
-            <span>{formatSecondsAsTime(totalTime)}</span>
+            <span>{ formatSecondsAsTime(totalTime) }</span>
           </div>
 
-          {likeButton}
-          <Link
-            to={"/tracks/" + track.id}
-            className="track-info group">
+          { this._likeButton() }
 
-            <figure className="playbar-art">
-              <img src={track.image_url}/>
-            </figure>
-
-            <p className="playbar-title">{track.title}</p>
-
-          </Link>
+          { this._trackInfo() }
 
         </div>
       </footer>
     );
+  },
+
+  _likeButton: function () {
+    if (CurrentUserStore.isLoggedIn()) {
+      if (this.state.liked) {
+        return (
+          <button
+            title="Unlike track"
+            className="unlike playbar-like"
+            onClick={this._onUnlike}>
+            <span className="heart">♥</span>
+          </button>
+        );
+
+      } else {
+        return (
+          <button
+            title="Like track"
+            className="like playbar-like"
+            onClick={this._onLike}>
+            <span className="heart">♥</span>
+          </button>
+        );
+      }
+    }
+  },
+
+  _trackInfo: function () {
+    var track = this.state.track;
+
+    if (CurrentUserStore.isLoggedIn()) {
+      return (
+        <Link
+          to={ "/tracks/" + track.id }
+          className="track-info group">
+
+          <figure className="playbar-art">
+            <img src={ track.image_url }/>
+          </figure>
+
+          <p className="playbar-title">{ track.title }</p>
+
+        </Link>
+      );
+    } else {
+      return (
+        <div className="track-info group">
+
+          <figure className="playbar-art">
+            <img src={ track.image_url }/>
+          </figure>
+
+          <p className="playbar-title">{ track.title }</p>
+
+        </div>
+      );
+    }
   },
 
   _onUnlike: function () {
