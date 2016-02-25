@@ -54,7 +54,7 @@ module.exports = React.createClass({
           <FormErrors messages={ this.state.errorMessages } />
 
           <form onSubmit={ this._submit } className="user-form group">
-            <label className="image-upload-btn">
+            <label className="image-upload-btn user-create-image">
               { image }
 
               <div className="camera">

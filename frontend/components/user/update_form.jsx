@@ -50,28 +50,35 @@ module.exports = React.createClass({
           <FormErrors messages={ this.state.errorMessages } />
 
           <form onSubmit={this._submit} className="user-form">
-            <div className="form-image">
-              {image}
+            <label className="image-upload-btn">
+              { image }
+
+              <div className="camera">
+                <i className="fa fa-camera"> Image Upload</i>
+              </div>
+
+              <input className="hidden-file-upload" type="file" onChange={ this._imageUpload } />
+            </label>
+
+            <div className="form-fields">
+              <label htmlFor="display_name">Display Name<span>*</span></label>
+              <input
+                id="display_name"
+                type="text"
+                valueLink={this.linkState('display_name')} />
+
+              <label htmlFor="fname">First Name</label>
+              <input
+                id="fname"
+                type="text"
+                valueLink={this.linkState('fname')} />
+
+              <label htmlFor="lname">Last Name</label>
+              <input
+                id="lname"
+                type="text"
+                valueLink={this.linkState('lname')} />
             </div>
-            <input type="file" onChange={this._imageUpload} />
-
-            <label htmlFor="display_name">Display Name<span>*</span></label>
-            <input
-              id="display_name"
-              type="text"
-              valueLink={this.linkState('display_name')} />
-
-            <label htmlFor="fname">First Name</label>
-            <input
-              id="fname"
-              type="text"
-              valueLink={this.linkState('fname')} />
-
-            <label htmlFor="lname">Last Name</label>
-            <input
-              id="lname"
-              type="text"
-              valueLink={this.linkState('lname')} />
 
             <input
               type="submit"

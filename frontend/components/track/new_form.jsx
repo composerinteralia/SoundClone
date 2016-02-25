@@ -49,25 +49,30 @@ module.exports = React.createClass({
           <FormErrors messages={ this.state.errorMessages } />
 
           <form onSubmit={this._submit} className="track-update-form">
-            <div className="form-image">
-              {image}
+            <label className="image-upload-btn">
+              { image }
+
+              <div className="camera">
+                <i className="fa fa-camera"> Image Upload</i>
+              </div>
+
+              <input className="hidden-file-upload" type="file" onChange={ this._imageUpload } />
+            </label>
+
+            <div className="form-fields">
+              <label htmlFor="title">Title <span>*</span></label>
+              <input
+                id="title"
+                type="text"
+                valueLink={this.linkState('title')}>
+              </input>
+
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                valueLink={this.linkState('description')}>
+              </textarea>
             </div>
-
-            <label htmlFor="track-art">Track Image</label>
-            <input id="track-art" type="file" onChange={this._imageUpload} />
-
-            <label htmlFor="title">Title <span>*</span></label>
-            <input
-              id="title"
-              type="text"
-              valueLink={this.linkState('title')}>
-            </input>
-
-            <label htmlFor="description">Description</label>
-            <textarea
-              id="description"
-              valueLink={this.linkState('description')}>
-            </textarea>
 
             <input
               type="submit"
