@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
   attr_reader :password
-  after_initialize :ensure_session_token
 
   has_attached_file :profile_image, default_url: "sheep.jpg"
   validates_attachment_content_type :profile_image,
                                     content_type: /\Aimage\/.*\Z/
 
-  validates :email, :display_name, :session_token, presence: true, uniqueness: true
+  validates :email, :display_name, presence: true, uniqueness: true
   validates_format_of :email, with: /@/
   validates :password, length: { minimum: 6, allow_nil: true }
 
@@ -21,6 +20,8 @@ class User < ActiveRecord::Base
 
   has_many :followings, class_name: "Follow", foreign_key: :followee_id, dependent: :destroy
   has_many :followers, through: :followings
+
+  has_many :sessions, dependent: :destroy
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
@@ -44,14 +45,6 @@ class User < ActiveRecord::Base
     )
   end
 
-  def self.generate_session_token
-    token = SecureRandom.urlsafe_base64
-    while (self.exists?(session_token: token))
-      token = SecureRandom.urlsafe_base64
-    end
-    token
-  end
-
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
@@ -59,16 +52,5 @@ class User < ActiveRecord::Base
 
   def valid_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
-  end
-
-  def reset_token!
-    self.session_token = self.class.generate_session_token
-    self.save!
-    session_token
-  end
-
-  private
-  def ensure_session_token
-    self.session_token ||= self.class.generate_session_token
   end
 end

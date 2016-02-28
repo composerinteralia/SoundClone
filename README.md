@@ -81,7 +81,7 @@ play: function (start, end) {
 * [ ] Notifications
 * [ ] Infinite scroll
 * [ ] Search
-* [ ] Multiple Sessions
+* [X] Multiple Sessions
 * [ ] Comments
 * [ ] Tags
 * [ ] Playlists
