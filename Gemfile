@@ -14,6 +14,7 @@ gem 'aws-sdk', '~> 1.6'
 gem 'figaro'
 gem 'omniauth-facebook'
 gem 'kaminari'
+gem 'scout_apm'
 
 group :production do
   gem 'rails_12factor'
