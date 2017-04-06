@@ -1,19 +1,19 @@
-#SoundClone
+# SoundClone
 
 SoundClone is a web application for sharing and listening to music. It was
  inspired by SoundCloud and built using Ruby on Rails, React.js, and wavesurfer.js.
 
 Explore and Listen at [sound-clone.com](http://www.sound-clone.com/)
 
-###Welcome View:
+### Welcome View:
 
 ![welcome]
 
-###Home View:
+### Home View:
 
 ![stream]
 
-###Technical Details:
+### Technical Details:
 * SoundClone shows waveform visualizations for each track using the waveform.js library. The audio decoding required for this is unbearably slow, so I implemented a [cache](./frontend/lib/cache.js) to store the wavesurfer objects (see the [player store](./frontend/stores/player.js)). Then I modified the wavesurfer.js library to include dismount and remount methods. The dismount method destroys the canvas waveform drawing (turning off associated event listeners in the process) while preserving the decoded AudioBuffer. The remount method allows for redrawing the canvas in a newly sized parent container (or avoiding redrawing altogether).
 
 ```
@@ -64,7 +64,7 @@ play: function (start, end) {
       ...
 ```
 
-###Features
+### Features
 * Sign up/in with email or Facebook
 * Stream shows your followers' most recent tracks
 * Explore shows a random sampling of tracks
@@ -76,7 +76,7 @@ play: function (start, end) {
 * Like tracks
 * Follow other users
 
-###To-Do:
+### To-Do:
 * [ ] Index views for likes, followers, and followees
 * [ ] Notifications
 * [ ] Infinite scroll
